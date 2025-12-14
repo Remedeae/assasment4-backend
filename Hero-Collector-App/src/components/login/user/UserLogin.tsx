@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function AdminLogin() {
+export default function UserLogin() {
   const [credentials, setCredentials] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -9,11 +9,11 @@ export default function AdminLogin() {
   return (
     <div>
       <div>
-        <label htmlFor="credentials">Admin name or Email</label>
+        <label htmlFor="credentials">Username or Email</label>
         <input
           type="text"
           id="credentials"
-          placeholder="Enter admin name or email"
+          placeholder="Enter username or email"
           value={credentials}
           onChange={(e) => setCredentials(e.target.value)}
           required

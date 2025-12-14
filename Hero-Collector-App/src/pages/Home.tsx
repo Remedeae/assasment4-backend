@@ -1,43 +1,18 @@
-//import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import NoLogin from "../components/login/noLogin";
 import AdminMenu from "../components/home/AdminMenu";
 import UserMenu from "../components/home/UserMenu";
+import { useLoggedInStatusStore } from "../storage/loginStore";
+import { useAdminStore } from "../storage/adminStore";
 
 export default function Home() {
-  /*   const [admin, setAdmin] = useState<boolean>(false);
-  const [user, setUser] = useState<boolean>(false);
+  const admin = useAdminStore((s) => s.adminStatus);
+  const loggedIn = useLoggedInStatusStore((s) => s.loggedInStatus);
 
-  useEffect(() => {
-    setAdmin(true);
-    setUser(true);
-  }, []); */
-
-  const admin: boolean = false;
-  const user: boolean = true;
-
-  if (!admin && !user) {
-    return (
-      <div>
-        <h2>You must login to view this page!</h2>
-        <button>
-          <Link to="/login">Go to login!</Link>
-        </button>
-      </div>
-    );
-  }
-
-  if (admin && !user) {
-    return (
-      <div>
-        <AdminMenu />
-      </div>
-    );
-  }
-  if (!admin && user) {
-    return (
-      <div>
-        <UserMenu />
-      </div>
-    );
-  }
+  return (
+    <div>
+      {!loggedIn && <NoLogin />}
+      {admin && <AdminMenu />}
+      {!admin && <UserMenu />}
+    </div>
+  );
 }

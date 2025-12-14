@@ -1,25 +1,11 @@
-import { Link } from "react-router-dom";
 import Game1 from "../components/games/Game1";
+import NoLogin from "../components/login/noLogin";
+import { useLoggedInStatusStore } from "../storage/loginStore";
+//import { useAdminStore } from "../storage/adminStore";
 
 export default function Game() {
-  const admin: boolean = false;
-  const user: boolean = true;
+  //const admin = useAdminStore((s) => s.adminStatus);
+  const loggedIn = useLoggedInStatusStore((s) => s.loggedInStatus);
 
-  if (!user) {
-    return (
-      <div>
-        <h2>You must login to view this page!</h2>
-        <button>
-          <Link to="/login">Go to login!</Link>
-        </button>
-      </div>
-    );
-  }
-  if (!admin && user) {
-    return (
-      <div>
-        <Game1 />
-      </div>
-    );
-  }
+  return !loggedIn ? <NoLogin /> : <Game1 />;
 }

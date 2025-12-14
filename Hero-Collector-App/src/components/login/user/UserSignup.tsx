@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-export default function AdminSignup() {
-  const [adminName, setAdminName] = useState<string>("");
+export default function UserSignup() {
+  const [userName, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [email, setEmail] = useState<string>("");
 
@@ -10,13 +10,13 @@ export default function AdminSignup() {
   return (
     <div>
       <div>
-        <label htmlFor="adminName">Admin name</label>
+        <label htmlFor="username">Username</label>
         <input
           type="text"
-          id="adminName"
-          placeholder="Enter admin name"
-          value={adminName}
-          onChange={(e) => setAdminName(e.target.value)}
+          id="username"
+          placeholder="Enter username"
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
           required
         />
         <label htmlFor="email">Password</label>

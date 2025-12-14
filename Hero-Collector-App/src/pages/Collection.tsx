@@ -1,44 +1,18 @@
-import { Link } from "react-router-dom";
+import NoLogin from "../components/login/noLogin";
 import AdminPlayerCollection from "../components/collection/admin/AdminPlayerCollection";
 import PlayerCollection from "../components/collection/user/PlayerCollection";
+import { useAdminStore } from "../storage/adminStore";
+import { useLoggedInStatusStore } from "../storage/loginStore";
 
 export default function Collection() {
-  //import { useEffect, useState } from "react";
+  const admin = useAdminStore((s) => s.adminStatus);
+  const loggedIn = useLoggedInStatusStore((s) => s.loggedInStatus);
 
-  /*   const [admin, setAdmin] = useState<boolean>(false);
-  const [user, setUser] = useState<boolean>(false);
-
-  useEffect(() => {
-    setAdmin(true);
-    setUser(true);
-  }, []); */
-
-  const admin: boolean = false;
-  const user: boolean = true;
-
-  if (!admin && !user) {
-    return (
-      <div>
-        <h2>You must login to view this page!</h2>
-        <button>
-          <Link to="/login">Go to login!</Link>
-        </button>
-      </div>
-    );
-  }
-
-  if (admin && !user) {
-    return (
-      <div>
-        <AdminPlayerCollection />
-      </div>
-    );
-  }
-  if (!admin && user) {
-    return (
-      <div>
-        <PlayerCollection />
-      </div>
-    );
-  }
+  return (
+    <div>
+      {!loggedIn && <NoLogin />}
+      {admin && <AdminPlayerCollection />}
+      {!admin && <PlayerCollection />}
+    </div>
+  );
 }
