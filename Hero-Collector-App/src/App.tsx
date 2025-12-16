@@ -6,6 +6,7 @@ import Footer from "./components/globals/Footer";
 import Collection from "./pages/Collection";
 import Game from "./pages/Game";
 import SignUp from "./pages/SignUp";
+import GameItems from "./pages/GameItems";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/collection" element={<Collection />} />
           <Route path="/game" element={<Game />} />
+          <Route path="/gameitems" element={<GameItems />} />
         </Routes>
         <Footer />
       </BrowserRouter>

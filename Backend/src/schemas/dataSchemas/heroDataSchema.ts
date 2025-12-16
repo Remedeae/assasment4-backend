@@ -13,12 +13,13 @@ export type HeroTraits = {
   spellcaster: boolean;
   spellSchool?: string;
   special?: string[];
-  combat?: string;
+  combat?: string[];
 };
 
 export type Hero = {
   id: string;
   name: string;
+  image: string;
   description: HeroDescription;
   traits: HeroTraits;
   stats: StatBlock;
