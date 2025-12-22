@@ -1,10 +1,9 @@
-import type { Spell } from "./generalGamedataSchema";
 import type { Item } from "./generalGamedataSchema";
 
 export type PlayerHero = {
   heroId: string;
-  spells: Spell[];
-  equipment: Item[];
+  spellIds: string[];
+  equipmentIds: string[];
 };
 
 export type Player = {
@@ -16,5 +15,5 @@ export type Player = {
     items: Item[];
   };
   levelsClear: string[]; //names/ids for cleared levels - flags system???
-  team: number[]; //number in the collection/heroes array that are selected
+  team: string[]; //heroId in the collection/heroes array that are selected
 };
