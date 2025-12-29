@@ -1,9 +1,9 @@
 import { create } from "zustand";
-import type { Player } from "../../../Backend/src/schemas/dataSchemas/playerSchema.ts";
+import type { PlayerOutput } from "../../../Shared/types/types";
 
 type ActiveUserStore = {
-  userData: Player | null;
-  setUserData: (userData: Player | null) => void;
+  userData: PlayerOutput | null;
+  setUserData: (userData: PlayerOutput | null) => void;
 };
 
 export const useActiveUserStore = create<ActiveUserStore>((set) => ({

@@ -1,23 +1,21 @@
-import type { Hero } from "../../../../../Backend/src/schemas/dataSchemas/heroDataSchema.ts";
-import type { Spell } from "../../../../../Backend/src/schemas/dataSchemas/generalGamedataSchema.ts";
+import type { FullPlayerHeroOutput } from "../../../../../Shared/types/types.ts";
 import HeroCard from "../cards/HeroCard.tsx";
 
 export default function AllHeroes() {
-  const heroes: Hero[] = [];
-  const spells: Spell[] = [];
+  const heroes: FullPlayerHeroOutput[] = [];
 
   return (
     <div>
       <ul>
         {heroes?.map((h) => {
-          const heroSpells =
-            h.traits.spellcaster && h.traits.spellSchool
-              ? spells.filter((s) => s.type === h.traits.spellSchool)
-              : [];
           return (
-            <li key={h.id}>
+            <li key={h.hero.id}>
               {}
-              <HeroCard hero={h} knownSpells={heroSpells} />
+              <HeroCard
+                hero={h.hero}
+                spells={h.spells}
+                equipment={h.equipment}
+              />
             </li>
           );
         })}

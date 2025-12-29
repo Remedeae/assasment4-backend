@@ -1,8 +1,8 @@
-import type { Spell } from "../../../../../Backend/src/schemas/dataSchemas/generalGamedataSchema";
+import type { FullSpellOutput } from "../../../../../Shared/types/types";
 import SpellCard from "../cards/SpellCard";
 
 export default function AllSpells() {
-  const spells: Spell[] = [];
+  const spells: FullSpellOutput[] = [];
   return (
     <ul>
       {spells.length > 0 &&
@@ -11,7 +11,8 @@ export default function AllSpells() {
             <SpellCard
               display={true}
               name={s.name}
-              type={s.type}
+              school={s.school}
+              schoolType={s.schoolType}
               description={s.description}
             />
           </li>

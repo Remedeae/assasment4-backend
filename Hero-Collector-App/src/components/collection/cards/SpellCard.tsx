@@ -1,6 +1,6 @@
-import type { Spell } from "../../../../../Backend/src/schemas/dataSchemas/generalGamedataSchema";
+import type { FullSpellOutput } from "../../../../../Shared/types/types";
 
-type SpellProp = Omit<Spell, "id"> & {
+type SpellProp = Omit<FullSpellOutput, "id"> & {
   display: boolean;
 };
 
@@ -9,7 +9,9 @@ export default function SpellCard(props: SpellProp) {
   return (
     <ul>
       <li>Name: {props.name}</li>
-      <li>Type: {props.type}</li>
+      <li>
+        Type: {props.school} - {props.schoolType}
+      </li>
       <li>Description: {props.description}</li>
     </ul>
   );

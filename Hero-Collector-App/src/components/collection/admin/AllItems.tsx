@@ -1,8 +1,8 @@
-import type { Item } from "../../../../../Backend/src/schemas/dataSchemas/generalGamedataSchema";
+import type { ItemOutput } from "../../../../../Shared/types/types";
 import ItemCard from "../cards/ItemCard";
 
 export default function AllItems() {
-  const items: Item[] = [];
+  const items: ItemOutput[] = [];
   return (
     <ul>
       {items.length > 0 &&

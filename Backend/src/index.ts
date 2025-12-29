@@ -1,4 +1,6 @@
+import "dotenv/config";
 import express from "express";
+import connectDB from "../config/db";
 import cors from "cors";
 import type { CorsOptions } from "cors";
 import { errorHandler } from "./middleware/errorHandler";
@@ -21,6 +23,8 @@ const corsOptions: CorsOptions = {
 
 const PORT = 3000;
 const app = express();
+
+connectDB();
 
 app.use(express.json());
 app.use(cors(corsOptions));

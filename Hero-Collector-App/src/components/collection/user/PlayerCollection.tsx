@@ -1,28 +1,21 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import MiniHeroCard from "../cards/MiniHeroCard";
-import type { Hero } from "../../../../../Backend/src/schemas/dataSchemas/heroDataSchema";
+import type { FullPlayerHeroOutput } from "../../../../../Shared/types/types";
 import HeroCard from "../cards/HeroCard";
-import type {
-  Item,
-  Spell,
-} from "../../../../../Backend/src/schemas/dataSchemas/generalGamedataSchema";
 
-type PlayerHero = {
-  hero: Hero;
-  spellsKnown: Spell[];
-  equipment: Item[];
-};
 type UserId = {
   userId: string;
 };
 
 export default function PlayerCollection(props: UserId) {
-  const heroes: PlayerHero[] = [];
+  const heroes: FullPlayerHeroOutput[] = [];
   const team: string[] = [];
   const [search, setSearch] = useState<string>("");
   const [displayHeroId, setDisplayHeroId] = useState<string>(heroes[0].hero.id);
   const displayHero = heroes.find((h) => h.hero.id === displayHeroId);
+
+  const placeholderPortray: string = "cat";
 
   const fetchData = async () => {
     await props.userId;
@@ -55,7 +48,10 @@ export default function PlayerCollection(props: UserId) {
             )
             .map((h) => (
               <li key={h.hero.id} onClick={() => setDisplayHeroId(h.hero.id)}>
-                <MiniHeroCard name={h.hero.name} image={h.hero.image} />
+                <MiniHeroCard
+                  name={h.hero.name}
+                  image={h.hero.image ?? placeholderPortray}
+                />
               </li>
             ))}
         </ul>
@@ -64,7 +60,8 @@ export default function PlayerCollection(props: UserId) {
         {displayHero && (
           <HeroCard
             hero={displayHero.hero}
-            knownSpells={displayHero.spellsKnown}
+            spells={displayHero.spells}
+            equipment={displayHero.equipment}
           />
         )}
       </div>
@@ -76,7 +73,10 @@ export default function PlayerCollection(props: UserId) {
               .filter((h) => team.includes(h.hero.id))
               .map((t) => (
                 <li key={t.hero.id}>
-                  <MiniHeroCard name={t.hero.name} image={t.hero.image} />
+                  <MiniHeroCard
+                    name={t.hero.name}
+                    image={t.hero.image || placeholderPortray}
+                  />
                 </li>
               ))}
           </ul>

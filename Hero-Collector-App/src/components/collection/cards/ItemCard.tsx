@@ -1,6 +1,6 @@
-import type { Item } from "../../../../../Backend/src/schemas/dataSchemas/generalGamedataSchema";
+import type { ItemOutput } from "../../../../../Shared/types/types";
 
-type ItemCard = Omit<Item, "id"> & {
+type ItemCard = Omit<ItemOutput, "id"> & {
   display: boolean;
 };
 
