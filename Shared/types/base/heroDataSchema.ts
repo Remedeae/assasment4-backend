@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { StatBlockSchema } from "./GamedataSchema";
+import { StatBlockSchema } from "./generalGamedataSchema";
 
 const HeroDescriptionSchema = z.object({
   looks: z.string(),

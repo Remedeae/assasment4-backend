@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { regex, z } from "zod";
 
 const StatSchema = z.number().min(0).max(10);
 
@@ -11,15 +11,19 @@ export const StatBlockSchema = z.object({
 
 export const ItemSchema = z.object({
   name: z.string(),
-  type: z.string(),
+  type: z.array(z.string()),
   description: z.string().optional(),
-  modifier: z
+  modifier: z.string().optional(),
+  tier: z.number().min(0).max(3).optional(),
+  equipHand: z
     .string()
-    .regex(/^[+-]\s(99|[1-9][0-9]?)$/, {
-      message:
-        "Modifier must be of format '+ n' or '- n' where n is between 1 and 99",
-    })
+    .regex(/^(Main|Two|Any|Off)-hand$/)
     .optional(),
+  weapontype: z
+    .enum(["melee", "versatile", "thrown", "ranged", "magic"])
+    .optional(),
+  price: z.number().positive().optional(),
+  quantity: z.number().default(1),
 });
 
 export const SpeelSchoolTypeSchema = z.object({

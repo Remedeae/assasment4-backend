@@ -1,6 +1,6 @@
 import "dotenv/config";
 import express from "express";
-import connectDB from "../config/db";
+import connectDB from "./mongoDB/db";
 import cors from "cors";
 import type { CorsOptions } from "cors";
 import { errorHandler } from "./middleware/errorHandler";

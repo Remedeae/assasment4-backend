@@ -1,0 +1,81 @@
+name,equipHand,weapontype,modifier,description,type,tier,price,quantity
+Axe,Main-hand,melee, +2 melee brawn.,,weapon|tool,1,20
+Spear,Main-hand,versatile,+2 melee brawn. Extra +1 melee brawn defend vs enemies wielding daggers.,,weapon,1,20
+Dagger,Any-hand,versatile,+1 melee brawn. +1 ranged brawn attack.,Easy to hide.,weapon,1,20
+Sword,Main-hand,melee,+2 melee brawn. Extra +1 melee brawn attack vs unarmored.,,weapon,2,20
+Mace,Any-hand,melee,+2 melee brawn attacking,,weapon,1,20
+Pickaxe,Two-hand,melee,+2 melee brawn.,,weapon|tool,2,20
+Sledgehammer,Two-hand,melee,+2 melee brawn.,,weapon|tool,2,20
+Heavy Crowbar,Two-hand,melee,+2 melee brawn.,,weapon|tool,2,20
+Heavy Shovel,Two-hand,melee,+2 melee brawn.,,weapon|tool,2,20
+Throwing Dagger,Main-hand,thrown,+2 ranged brawn attack.,,weapon,2,20,3
+Javelin,Main-hand,versatile,+1 melee brawn. +3 ranged brawn attack.,,weapon,2,20
+Shield,Off-hand,melee.,+2 brawn defend. +1 melee brawn fight back.,,weapon,2,20
+Scaled armor,,,7 AV.,"The wearer cannot flee, hide, sneak, or swim, and makes a lot of noise. A wearer spends 1 extra speed on their first move on their turn. If not worn, it occupies 4 inventory slots.",armor,2,50
+Claymore,Two-hand, melee,+3 melee brawn. Extra +1 melee brawn attack vs unarmored.,Light armor block checks have disadvantage.,weapon,3,20
+Greataxe,Two-hand,melee,+3 melee brawn. +1 ranged brawn defend.,Light armor block checks have disadvantage,weapon,3,20
+Pike,Two-hand,melee,+2 melee brawn. Extra +2 melee brawn defend and fight back.,,weapon,3,20
+Shuriken,Any-hand,thrown,+1 ranged brawn attack.,Causes bleeding. Easy to hide.,weapon,3,20,3
+Buckler,Off-hand,melee.,+2 melee brawn defend and fight back. +1 ranged brawn defend.,,weapon,3,20
+Cuirass,,,8 AV.,"The wearer cannot flee, hide, sneak, or swim, and makes a lot of noise. A wearer spends 1 extra speed on their first move on their turn. If not worn, it occupies 4 inventory slots.",armor,3,50
+Sling,Main-hand,ranged,+1 ranged brawn attack.,Ammunition is found everywhere and infinite.,weapon,1,10
+Staff,Two-hand,melee,+1 melee brawn. +1 ranged brawn defend.,,weapon,1,10
+Heavy furs,,,3 AV,"The wearer cannot swim. If not worn, it occupies 2 inventory slots.",armor,1,25
+Bow,Two-hand,ranged,+3 ranged brawn attack. +1 ranged brawn fight back.,Requires an arrow to attack or fight back.,weapon,2,10
+Leather armor,,,4 AV,"The wearer cannot swim. If not worn, it occupies 2 inventory slots.",armor,2,25
+Crossbow,Two-hand,ranged,+3 ranged brawn attack. +1 ranged brawn fight back.,Requires an arrow to attack or fight back.,weapon,3,10
+Brigandine,,,5 AV,"The wearer cannot swim. If not worn, it occupies 2 inventory slots.",armor,3,25
+Wizards staff,Two-hand,magic,+1 magic. +1 brawn defend and fight back.,,weapon,1,20
+Wand,Main-hand,magic,+1 magic attack and fight back.,,weapon,1,20
+Holy symbol,Main-hand,magic,+2 magic defend.,,weapon,1,20
+Talisman,,,4 MAV,,protection,2,30
+Health Potion,,,,Restores 1 life if applied to a wounded character directly after combat.,potion|consumable,1,10
+Strength Potion,,,+1 brawn, Lasts for 1 hour or until the next combat ends. Will increase strength for Gambit purposes.,potion|consumable,1,10
+Magic Potion,,,+1 magic, Lasts for 1 hour or until the next combat ends. Will increase magic knowledge for Gambit purposes.,potion|consumable,1,10
+Stamina Potion,,,,Drink during combat to have advantage to all rolls to catch breath.,potion|consumable,1,10
+Antidote,,,,"Heals any of the following maladies: poison, nausea, and redeye.",potion|consumable,1,10
+Protect gem,,,+1 AV or MAV,"Allows the user to increase their AV or MAV, lasting for 1 hour or until the end of the next combat.",gem|consumable,1,10
+Fire gem,,,,Allows the user to clash with an enemy as a magic ranged fire attack. The ranged attack does not need line of sight.,gem|consumable,2,20
+Frost gem,,,,Allows the user to clash with an enemy as a magic ranged cold attack. The ranged attack does not need line of sight.,gem|consumable,2,20
+Soul gem,,,,Allows the user to clash with an enemy as a magic ranged spirit attack. The ranged attack does not need line of sight.,gem|consumable,2,20
+Rage gem,,,,Allows the user to clash with an enemy as a magic ranged primal attack. The ranged attack does not need line of sight.,gem|consumable,2,20
+Liquid bravery,,,,Makes the drinker immune to fear and terror for 1 hour or until the next combat ends.,potion|consumable,2,30
+Grappling hook,,,,,utility,,5
+Rope,,,,10 meters of rope,utility,,5
+Glass continers,,,,Kit of 3 vials and 3 bottles,container,,5
+String and bells,,,,20 meters of string and five small bells,utility,,5
+Rope ladder,,,,A 5-meter-long rope ladder,utility,,5
+Flint and steel,,,,A flint and steel firestarter,utility,,5
+Waterskin,,,,A collapsible 5-liter waterskin,utility,,5
+Mirror,,,,A small metal mirror,utility,,5
+Iron spikes,,,,A set of 50 iron spikes,utility|consumable,,5,50
+Hammer,,,,A carpenters hammer,utility|tool,,5
+Lantern,,,,,utility,,5
+Lantern oil,,,,Oil for lantern (burns for 24 hours),utility|consumable,,5
+Tourches,,,,4 torches (lasting 24 hours total).,utility|consumable,,5,4
+Chalk,,,,A pouch with 5 pieces of chalk,utility|consumable,,5,5
+Writing tools,,,,"A roll of parchment with ink, quill, and vat",utility,,5
+Fishing kit,,,,"A fishing kit with line, hook, and bait",utility,,5
+Wooden stakes,,,,A set of 5 wooden stakes,utility,,5,5
+Rubber gloves,,,,A pair of heavy-duty rubber gloves,utility,,5
+Crowbar,,,,,utility,,5
+Sewing kit,,,,"A compact sewing kit with needles, thread, and a small pair scissors",utility,,5
+Whistle,,,,,utility,,5
+Hand drill,,,,A hand drill for drilling wood,utility|tool,,5
+Bag of marbles,,,,,utility|entertainment,,5
+Leather satchel,,,,A waterproof leather satchel. Increases inventory space by 1.,container,,5
+Blankets,,,,A set of two warm blankets,utility,,5,2
+Rations,,,,A set of 10 rations,consumable,,5,10
+Quiver,,,,A quiver with 20 arrows,container,,5
+Sleeping bag,,,,,utility,,5
+Medical pouch,,,,,utility,,5
+Shovel,,,,,tool,,5
+Bagdes,,,,A set of 5 bandages,utility,,5,5
+Loot bag,,,,A loot bag. The loot bag can store any amount of treasure found in the dungeon.,container,,5
+Animal trap,,,,A small animal trap.,utility,,5
+Cooking set,,,,,utility,,5
+Alchemy set,,,,,utility,,5
+Lockpicks,,,,,utility,,5
+Canary bird,,,,A caged canary,utility,,5
+Alchemist's satchel.,,,,"4 potions and/or gems may be stored in the satchel, only occupying 1 inventory space total.",container,,5
+Backpack,,,,"Up to 6 items can be stored in the backpack. In combat, the wearer suffers -2 to and Clash while wearing the backpack, which can be dropped by spending 2 speed. Items in the backpack can only be accessed by spending 3 speed per item, when it is unequipped.",container,,5
