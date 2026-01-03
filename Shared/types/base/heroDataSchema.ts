@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { StatBlockSchema } from "./generalGamedataSchema";
+import { StatBlockSchema, spellSchool } from "./generalGamedataSchema";
 
 const HeroDescriptionSchema = z.object({
   looks: z.string(),
@@ -11,7 +11,7 @@ const HeroDescriptionSchema = z.object({
 
 const HeroTraitsSchema = z.object({
   spellcaster: z.boolean(),
-  spellSchoolId: z.string().optional(),
+  spellSchool: z.enum(spellSchool).optional(),
   special: z.array(z.string()).optional(),
   combat: z.array(z.string()).optional(),
 });

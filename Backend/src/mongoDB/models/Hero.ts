@@ -16,7 +16,7 @@ const HeroMongoSchema = new Schema({
   traits: new Schema(
     {
       spellcaster: { type: Boolean, required: true },
-      spellSchoolId: { type: String },
+      spellSchool: { type: String },
       special: { type: [String], default: [] },
       combat: { type: [String], default: [] },
     },

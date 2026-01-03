@@ -1,6 +1,22 @@
-import { regex, z } from "zod";
+import { z } from "zod";
 
 const StatSchema = z.number().min(0).max(10);
+export const equipHand = ["Main-hand", "Off-hand", "Two-hand", "Any-hand"];
+export const weaponType = ["melee", "versatile", "thrown", "ranged", "magic"];
+
+export const spellSchool = [
+  "fire",
+  "frost",
+  "water",
+  "earth",
+  "arcane",
+  "shaman",
+  "heretic",
+  "miracle",
+  "goblin",
+  "shadow",
+];
+export const spellType = ["fire", "cold", "primal", "spirit"];
 
 export const StatBlockSchema = z.object({
   brawn: StatSchema,
@@ -15,28 +31,15 @@ export const ItemSchema = z.object({
   description: z.string().optional(),
   modifier: z.string().optional(),
   tier: z.number().min(0).max(3).optional(),
-  equipHand: z
-    .string()
-    .regex(/^(Main|Two|Any|Off)-hand$/)
-    .optional(),
-  weapontype: z
-    .enum(["melee", "versatile", "thrown", "ranged", "magic"])
-    .optional(),
+  equipHand: z.enum(equipHand).optional(),
+  weapontype: z.enum(weaponType).optional(),
   price: z.number().positive().optional(),
   quantity: z.number().default(1),
 });
 
-export const SpeelSchoolTypeSchema = z.object({
-  name: z.string().min(1),
-});
-
-export const SpellSchoolSchema = z.object({
-  name: z.string().min(1),
-  typeId: z.string(),
-});
-
 export const SpellSchema = z.object({
   name: z.string(),
-  schoolId: z.string(),
+  school: z.enum(spellSchool),
+  type: z.enum(spellType),
   description: z.string().optional(),
 });

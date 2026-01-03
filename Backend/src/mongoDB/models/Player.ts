@@ -9,7 +9,7 @@ const PlayerHeroMongoSchema = new Schema({
 const PlayerMongoSchema = new Schema({
   userName: { type: String, required: true },
   email: { type: String, required: true },
-  collection: new Schema({
+  inventory: new Schema({
     heroes: { type: [String], default: [] },
     items: { type: [String], default: [] },
   }),

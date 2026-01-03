@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ItemSchema } from "./GamedataSchema";
+import { ItemSchema } from "./generalGamedataSchema";
 
 export const PlayerHeroSchema = z.object({
   heroId: z.string(),
@@ -10,10 +10,10 @@ export const PlayerHeroSchema = z.object({
 export const PlayerSchema = z.object({
   userName: z.string(),
   email: z.string(),
-  collection: z.object({
-    heroes: z.array(PlayerHeroSchema),
-    items: z.array(ItemSchema),
+  inventory: z.object({
+    heroes: z.array(z.string()),
+    itemsIds: z.array(z.string()),
   }),
   levelsClear: z.array(z.string()), //names/ids for cleared levels - flags system???
-  team: z.array(z.string()), //heroId in the collection/heroes array that are selected
+  team: z.array(z.string()), //heroId in the inventory/heroes array that are selected
 });

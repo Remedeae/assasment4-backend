@@ -9,7 +9,7 @@ import allUserRoutes from "./routes/admin/allUsersRoutes";
 import heroRoutes from "./routes/admin/heroRoutes";
 import itemRoutes from "./routes/admin/itemRoutes";
 import spellRoutes from "./routes/admin/spellRoutes";
-import adminUserRoutes from "./routes/admin/userRountes";
+import adminUserRoutes from "./routes/admin/userRoutes";
 import adminSignUpRoutes from "./routes/admin/signUpRoutes";
 
 import playGameRoutes from "./routes/user/playGameRoutes";
