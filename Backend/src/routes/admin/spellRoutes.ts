@@ -4,6 +4,7 @@ import { OutputSpell } from "../../../../Shared/types/output";
 import { validateData, errMsg } from "../../middleware/validatorHelpes";
 import z from "zod";
 import { SpellSchema } from "../../../../Shared/types/base/generalGamedataSchema";
+import { updateById } from "../helpers/helpers";
 
 const router = Router();
 
@@ -23,12 +24,11 @@ router.get("", async (req, res, next) => {
 });
 
 //post spell
-router.post("/", async (req, res, next) => {
+router.post("", async (req, res, next) => {
   try {
     const validatedBody = validateData(req.body, SpellSchema, errMsg[3]);
-    const newSpell = new SpellModel(validatedBody);
-    await newSpell.save();
-    res.status(200).send(`Successfully saved: ${newSpell}`);
+    validatedBody ?? (await SpellModel.create(validatedBody));
+    res.status(200).send(`Successfully created: ${validatedBody}`);
   } catch (error) {
     next(error);
   }
@@ -54,13 +54,13 @@ router.delete("/:id", async (req, res, next) => {
 router.put("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const validatedBody = validateData(req.body, SpellSchema, errMsg[3]);
-    const updatedSpell = await SpellModel.findByIdAndUpdate(id, validatedBody, {
-      new: true,
-    });
-    if (!updatedSpell) {
-      res.status(404).send({ error: "Spell not found." });
-    }
+    const updatedSpell = await updateById(
+      id,
+      "Spell",
+      req.body,
+      SpellSchema,
+      SpellModel
+    );
     res
       .status(200)
       .send({ message: `Spell successfully updated to : ${updatedSpell}` });

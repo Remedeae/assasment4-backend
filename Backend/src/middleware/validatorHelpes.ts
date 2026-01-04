@@ -4,7 +4,7 @@ export const validateData = <S extends z.ZodTypeAny>(
   data: unknown,
   dataSchema: S,
   errMsg: string | undefined
-) => {
+): z.infer<S> => {
   const valitedData = dataSchema.safeParse(data);
   if (!valitedData.success) {
     throw new Error(`${errMsg}, Error:${valitedData.error}`);

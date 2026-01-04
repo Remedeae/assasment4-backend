@@ -30,7 +30,7 @@ const HeroMongoSchema = new Schema({
       lives: { type: Number, required: true },
       speed: { type: Number, required: true },
     },
-    { _id: false }
+    { _id: false, required: true }
   ),
   startingEquipment: { type: [String], default: [] },
 });

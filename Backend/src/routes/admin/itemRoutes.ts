@@ -4,6 +4,7 @@ import { OutputItem } from "../../../../Shared/types/output";
 import { validateData, errMsg } from "../../middleware/validatorHelpes";
 import z from "zod";
 import { ItemSchema } from "../../../../Shared/types/base/generalGamedataSchema";
+import { updateById } from "../helpers/helpers";
 
 const router = Router();
 
@@ -19,12 +20,11 @@ router.get("", async (req, res, next) => {
 });
 
 //post item
-router.post("/", async (req, res, next) => {
+router.post("", async (req, res, next) => {
   try {
     const validatedBody = validateData(req.body, ItemSchema, errMsg[3]);
-    const newItem = new ItemModel(validatedBody);
-    await newItem.save();
-    res.status(200).send(`Successfully saved: ${newItem}`);
+    validatedBody ?? (await ItemModel.create(validatedBody));
+    res.status(200).send(`Successfully saved: ${validatedBody}`);
   } catch (error) {
     next(error);
   }
@@ -50,13 +50,13 @@ router.delete("/:id", async (req, res, next) => {
 router.put("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const validatedBody = validateData(req.body, ItemSchema, errMsg[3]);
-    const updatedItem = await ItemModel.findByIdAndUpdate(id, validatedBody, {
-      new: true,
-    });
-    if (!updatedItem) {
-      res.status(404).send({ error: "Item not found." });
-    }
+    const updatedItem = await updateById(
+      id,
+      "Item",
+      req.body,
+      ItemSchema,
+      ItemModel
+    );
     res
       .status(200)
       .send({ message: `Item successfully updated to : ${updatedItem}` });
