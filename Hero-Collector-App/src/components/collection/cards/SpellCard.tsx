@@ -1,4 +1,4 @@
-import type { FullSpellOutput } from "../../../../../Shared/types/types";
+import type { FullSpellOutput } from "../../../types/types";
 
 type SpellProp = Omit<FullSpellOutput, "id"> & {
   display: boolean;

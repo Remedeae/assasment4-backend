@@ -27,7 +27,9 @@ export default function AdminLogin() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button onClick={handleLogin}>Login</button>
+        <button onClick={handleLogin}>
+          <a href="http://localhost:3000/login">Login</a>
+        </button>
       </div>
     </div>
   );

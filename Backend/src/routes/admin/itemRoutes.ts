@@ -4,14 +4,14 @@ import { OutputItem } from "../../../../Shared/types/output";
 import { validateData, errMsg } from "../../middleware/validatorHelpes";
 import z from "zod";
 import { ItemSchema } from "../../../../Shared/types/base/generalGamedataSchema";
-import { updateById } from "../helpers/helpers";
+import { deleteByID, updateById } from "../helpers/helpers";
 
 const router = Router();
 
 //get all items
 router.get("", async (req, res, next) => {
   try {
-    const items = await ItemModel.find();
+    const items = await ItemModel.find().lean();
     const validatedItems = validateData(items, z.array(OutputItem), errMsg[0]);
     res.status(200).send(validatedItems);
   } catch (error) {
@@ -34,10 +34,7 @@ router.post("", async (req, res, next) => {
 router.delete("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const deletedItem = await ItemModel.findByIdAndDelete(id);
-    if (!deletedItem) {
-      res.status(404).json({ error: "Item not found" });
-    }
+    const deletedItem = await deleteByID(id, "Item", ItemModel);
     res
       .status(200)
       .send({ message: `Item ${deletedItem?.name} successfully deleted.` });

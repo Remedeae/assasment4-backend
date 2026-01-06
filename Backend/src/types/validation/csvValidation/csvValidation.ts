@@ -5,7 +5,7 @@ import {
   weaponType,
   spellSchool,
   spellType,
-} from "../base/generalGamedataSchema";
+} from "../../../../../Shared/types/base/generalGamedataSchema";
 
 const arraySplitter: string = "|";
 

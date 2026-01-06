@@ -1,11 +1,22 @@
 import { errMsg, validateData } from "../../middleware/validatorHelpes";
-import type { PlayerHeroInput } from "../../../../Shared/types/types";
-import { HeroModel } from "../../mongoDB/models/Hero";
-import { SpellModel } from "../../mongoDB/models/GameData";
-import { PlayerHeroSchema } from "../../../../Shared/types/base/playerSchema";
+import { HttpError } from "../../middleware/errorHandler";
+
 import type mongoose from "mongoose";
-import { Model, Document } from "mongoose";
-import { z, ZodObject } from "zod";
+import { Model, Types } from "mongoose";
+import { HeroModel } from "../../mongoDB/models/Hero";
+import { SpellModel, ItemModel } from "../../mongoDB/models/GameData";
+import { PlayerModel, PlayerHeroModel } from "../../mongoDB/models/Player";
+
+import {
+  OutputFullPlayerHero,
+  OutputItem,
+} from "../../../../Shared/types/output";
+import type {
+  PlayerHeroInput,
+  PlayerOutput,
+} from "../../../../Shared/types/types";
+import { PlayerHeroSchema } from "../../../../Shared/types/base/playerSchema";
+import { ZodObject } from "zod";
 
 export const constructPlayerHero = async (
   heroId: string,
@@ -13,7 +24,7 @@ export const constructPlayerHero = async (
 ) => {
   const heroExists = await HeroModel.exists({ _id: heroId });
   if (!heroExists) {
-    throw new Error(`Hero with id ${heroId} does noe exsist`);
+    throw new HttpError(404, `Hero with id ${heroId} does noe exsist`, null);
   }
   const heroSpellItems = await HeroModel.findById(heroId)
     .select("startingEquipment traits.spellSchool name -_id")
@@ -37,6 +48,38 @@ export const constructPlayerHero = async (
   return validatedHero;
 };
 
+export const hydratePlayerHeroes = async (user: PlayerOutput) => {
+  const playerHeroIds: string[] = user.inventory.heroes;
+  const objectIds = playerHeroIds.map((id) => new Types.ObjectId(id));
+  const heroes = await PlayerHeroModel.find({
+    _id: { $in: objectIds },
+  }).lean();
+  const fullHeroes = await Promise.all(
+    heroes.map(async (h) => {
+      const [hero, spells, equipment] = await Promise.all([
+        HeroModel.findOne({ id: h.heroId }).lean(),
+        SpellModel.find({ id: { $in: h.spellIds } }).lean(),
+        ItemModel.find({ id: { $in: h.equipmentIds } }).lean(),
+      ]);
+      return { hero, spells, equipment };
+    })
+  );
+  const validatedFullHeroes = validateData(
+    fullHeroes,
+    OutputFullPlayerHero,
+    errMsg[0]
+  );
+  return validatedFullHeroes;
+};
+
+export const hydrateItems = async (user: PlayerOutput) => {
+  const itemIds: string[] = user.inventory.itemsIds;
+  const objectIds = itemIds.map((id) => new Types.ObjectId(id));
+  const items = await ItemModel.find({ _id: { $in: objectIds } }).lean();
+  const validatedItems = validateData(items, OutputItem, errMsg[0]);
+  return validatedItems;
+};
+
 export const updateById = async <S extends ZodObject<any>>(
   id: string,
   type: string,
@@ -51,8 +94,35 @@ export const updateById = async <S extends ZodObject<any>>(
     { new: true, lean: true }
   );
   if (!updated) {
-    throw new Error(`${type} with id ${id} not found.`);
+    throw new HttpError(404, `${type} with id ${id} not found.`, null);
   }
 
   return updated;
+};
+
+export const deleteByID = async (
+  id: string,
+  type: string,
+  Model: Model<any>
+) => {
+  const deleted = await Model.findByIdAndDelete(id, { lean: true });
+  if (!deleted) {
+    throw new HttpError(404, `${type} with ${id} not found`, null);
+  }
+  return deleted;
+};
+
+export const adminStatusCheck = async (id: string, isAdmin: boolean) => {
+  const check = await PlayerModel.exists({
+    _id: id,
+    admin: isAdmin,
+  });
+  const adminStatus = isAdmin ? " an admin" : "a user";
+  if (!check) {
+    throw new HttpError(
+      403,
+      `User is ${adminStatus}, you do not have permission to edit that.`,
+      null
+    );
+  }
 };

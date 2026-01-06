@@ -4,14 +4,14 @@ import { OutputSpell } from "../../../../Shared/types/output";
 import { validateData, errMsg } from "../../middleware/validatorHelpes";
 import z from "zod";
 import { SpellSchema } from "../../../../Shared/types/base/generalGamedataSchema";
-import { updateById } from "../helpers/helpers";
+import { deleteByID, updateById } from "../helpers/helpers";
 
 const router = Router();
 
 //get all spells
 router.get("", async (req, res, next) => {
   try {
-    const spells = await SpellModel.find();
+    const spells = await SpellModel.find().lean();
     const validatedSpells = validateData(
       spells,
       z.array(OutputSpell),
@@ -38,10 +38,7 @@ router.post("", async (req, res, next) => {
 router.delete("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const deletedSpell = await SpellModel.findByIdAndDelete(id);
-    if (!deletedSpell) {
-      res.status(404).json({ error: "Spell not found" });
-    }
+    const deletedSpell = await deleteByID(id, "Spell", SpellModel);
     res
       .status(200)
       .send({ message: `Spell ${deletedSpell?.name} successfully deleted.` });

@@ -1,7 +1,13 @@
 import { z } from "zod";
-import { ItemSchema, SpellSchema } from "./base/generalGamedataSchema";
-import { HeroSchema } from "./base/heroDataSchema";
-import { PlayerSchema, PlayerHeroSchema } from "./base/playerSchema";
+import {
+  ItemSchema,
+  SpellSchema,
+} from "../../../Shared/types/base/generalGamedataSchema";
+import { HeroSchema } from "../../../Shared/types/base/heroDataSchema";
+import {
+  PlayerSchema,
+  PlayerHeroSchema,
+} from "../../../Shared/types/base/playerSchema";
 import * as Output from "./output";
 
 export type ItemInput = z.infer<typeof ItemSchema>;

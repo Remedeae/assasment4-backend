@@ -1,4 +1,4 @@
-import type { FullPlayerHeroOutput } from "../../../../../Shared/types/types.ts";
+import type { FullPlayerHeroOutput } from "../../../types/types.ts";
 import SpellCard from "../cards/SpellCard.tsx";
 import ItemCard from "../cards/ItemCard.tsx";
 import { useState } from "react";

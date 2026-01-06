@@ -1,19 +1,22 @@
 import { Router } from "express";
 import mongoose from "mongoose";
-import { PlayerHeroModel, PlayerModel } from "../../mongoDB/models/Player";
-import { errMsg, validateData } from "../../middleware/validatorHelpes";
+
 import {
-  OutputFullPlayerHero,
-  OutputPlayer,
-} from "../../../../Shared/types/output";
-import { Types } from "mongoose";
-import { HeroModel } from "../../mongoDB/models/Hero";
-import { SpellModel, ItemModel } from "../../mongoDB/models/GameData";
+  constructPlayerHero,
+  deleteByID,
+  hydratePlayerHeroes,
+  updateById,
+} from "../helpers/helpers";
+import { errMsg, validateData } from "../../middleware/validatorHelpes";
+
+import { PlayerHeroModel, PlayerModel } from "../../mongoDB/models/Player";
+import { ItemModel } from "../../mongoDB/models/GameData";
+
 import {
   PlayerHeroSchema,
   PlayerSchema,
 } from "../../../../Shared/types/base/playerSchema";
-import { constructPlayerHero, updateById } from "../helpers/helpers";
+import { OutputPlayer } from "../../../../Shared/types/output";
 
 const router = Router();
 
@@ -21,7 +24,7 @@ const router = Router();
 router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const user = await PlayerModel.findById(id);
+    const user = await PlayerModel.findById(id).lean();
     if (!user) {
       res.status(404).send("User not found");
     }
@@ -36,37 +39,13 @@ router.get("/:id", async (req, res, next) => {
 router.get("/heroes/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const user = await PlayerModel.findById(id);
+    const user = await PlayerModel.findById(id).lean();
     if (!user) {
       res.status(404).send("User not found");
     }
-    const validatedUser = OutputPlayer.safeParse(user);
-    if (!validatedUser.success) {
-      return res
-        .status(500)
-        .send({ message: errMsg[0], error: validatedUser.error });
-    }
-    const playerHeroIds: string[] = validatedUser.data.inventory.heroes;
-    const objectIds = playerHeroIds.map((id) => new Types.ObjectId(id));
-    const heroes = await PlayerHeroModel.find({
-      _id: { $in: objectIds },
-    }).lean();
-    const fullHeroes = await Promise.all(
-      heroes.map(async (h) => {
-        const [hero, spells, equipment] = await Promise.all([
-          HeroModel.findOne({ id: h.heroId }).lean(),
-          SpellModel.find({ id: { $in: h.spellIds } }).lean(),
-          ItemModel.find({ id: { $in: h.equipmentIds } }).lean(),
-        ]);
-        return { hero, spells, equipment };
-      })
-    );
-    const validatedFullHeroes = validateData(
-      fullHeroes,
-      OutputFullPlayerHero,
-      errMsg[0]
-    );
-    res.status(200).send(validatedFullHeroes);
+    const validatedUser = validateData(user, OutputPlayer, errMsg[0]);
+    const fullHeroes = await hydratePlayerHeroes(validatedUser);
+    res.status(200).send(fullHeroes);
   } catch (error) {
     next(error);
   }
@@ -87,7 +66,7 @@ router.post("/addHero/:userId/:heroId", async (req, res, next) => {
       userId,
       { $push: { "inventory.heroes": createdHero._id } },
       { session }
-    );
+    ).lean();
 
     await session.commitTransaction();
     session.endSession();
@@ -113,7 +92,7 @@ router.put("/addItem/:userId/:itemId", async (req, res, next) => {
       {
         $push: { "inventory.items": itemId },
       },
-      { runValidators: true }
+      { runValidators: true, lean: true }
     );
     if (!updated) {
       return res.status(404).send(`User ${userId} not found`);
@@ -138,12 +117,7 @@ router.put("editUser/:id", async (req, res, next) => {
 router.delete("/deleteHero/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const deletedHero = await PlayerHeroModel.findByIdAndDelete(id, {
-      lean: true,
-    });
-    if (!deletedHero) {
-      res.status(404).json({ error: "Hero not found" });
-    }
+    const deletedHero = await deleteByID(id, "Hero", PlayerHeroModel);
     res
       .status(200)
       .send({ message: `Player hero id: ${id} successfully deleted.` });

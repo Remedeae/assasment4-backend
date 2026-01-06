@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const csvNumber = (schema: z.ZodNumber) =>
-  z.preprocess((v) => (v === "" ? undefined : Number(v)), schema);
+  z.preprocess((v) => Number(v), schema);
 export const csvNumberOptional = (schema: z.ZodNumber) =>
   z.preprocess((v) => (v === "" ? undefined : Number(v)), schema.optional());
 export const csvNumberDefault = (schema: z.ZodNumber, def: number) =>

@@ -7,7 +7,7 @@ import { parseCSVRows } from "./validateCsv";
 import {
   SpellCsvSchema,
   ItemCsvSchema,
-} from "../../../../Shared/types/csvValidation/csvValidation";
+} from "../../types/validation/csvValidation/csvValidation";
 
 const seed = async () => {
   try {

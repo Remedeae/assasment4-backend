@@ -1,8 +1,11 @@
 import "dotenv/config";
 import express from "express";
+import pkg from "express-openid-connect";
 import connectDB from "./mongoDB/db";
 import cors from "cors";
 import type { CorsOptions } from "cors";
+
+import { authMiddleware, requiresAdmin } from "./middleware/auth/auth";
 import { errorHandler } from "./middleware/errorHandler";
 
 import allUserRoutes from "./routes/admin/allUsersRoutes";
@@ -21,24 +24,35 @@ const corsOptions: CorsOptions = {
   methods: ["GET", "POST", "PUT", "DELETE"],
 };
 
-const PORT = 3000;
+const PORT = process.env.PORT;
 const app = express();
+const { requiresAuth } = pkg;
 
 connectDB();
 
+app.use(authMiddleware);
 app.use(express.json());
 app.use(cors(corsOptions));
 
-app.use("/home/admin", allUserRoutes);
-app.use("/gameitems/heroes", heroRoutes);
-app.use("/gameitems/items", itemRoutes);
-app.use("/gameitems/spells", spellRoutes);
-app.use("/collection/admin", adminUserRoutes);
-app.use("/signup/admin", adminSignUpRoutes);
+app.get("/loggedUser", async (req, res, next) => {
+  try {
+    res.send(req.oidc.user);
+  } catch (error) {
+    next(error);
+  }
+});
 
-app.use("/game", playGameRoutes);
-app.use("/user", userRoutes);
+app.use("/home/admin", requiresAuth(), requiresAdmin, allUserRoutes);
+app.use("/gameitems/heroes", requiresAuth(), requiresAdmin, heroRoutes);
+app.use("/gameitems/items", requiresAuth(), requiresAdmin, itemRoutes);
+app.use("/gameitems/spells", requiresAuth(), requiresAdmin, spellRoutes);
+app.use("/collection/admin", requiresAuth(), requiresAdmin, adminUserRoutes);
+
+app.use("/signup/admin", adminSignUpRoutes);
 app.use("/signup/user", userSignUpRoutes);
+
+app.use("/game", requiresAuth(), playGameRoutes);
+app.use("/user", requiresAuth(), userRoutes);
 
 app.use(errorHandler);
 app.listen(PORT, () => {

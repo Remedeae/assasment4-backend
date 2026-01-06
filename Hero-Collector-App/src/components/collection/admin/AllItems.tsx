@@ -1,4 +1,4 @@
-import type { ItemOutput } from "../../../../../Shared/types/types";
+import type { ItemOutput } from "../../../types/types";
 import ItemCard from "../cards/ItemCard";
 
 export default function AllItems() {

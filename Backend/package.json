@@ -17,6 +17,7 @@
     "csv-parse": "^6.1.0",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
+    "express-openid-connect": "^2.19.3",
     "mongodb": "^7.0.0",
     "mongoose": "^9.0.2",
     "zod": "^4.3.4"

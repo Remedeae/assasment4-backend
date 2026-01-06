@@ -43,5 +43,9 @@
     "moduleDetection": "force",
     "skipLibCheck": true
   },
-  "include": ["src/**/*"]
+  "include": [
+    "src/**/*",
+    "../Shared/types/output.ts",
+    "src/types/validation/csvValidation"
+  ]
 }

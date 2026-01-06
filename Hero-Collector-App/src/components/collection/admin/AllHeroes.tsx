@@ -1,4 +1,4 @@
-import type { FullPlayerHeroOutput } from "../../../../../Shared/types/types.ts";
+import type { FullPlayerHeroOutput } from "../../../types/types.ts";
 import HeroCard from "../cards/HeroCard.tsx";
 
 export default function AllHeroes() {

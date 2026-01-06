@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import MiniHeroCard from "../cards/MiniHeroCard";
-import type { FullPlayerHeroOutput } from "../../../../../Shared/types/types";
+import type { FullPlayerHeroOutput } from "../../../types/types";
 import HeroCard from "../cards/HeroCard";
 
 type UserId = {
