@@ -13,13 +13,16 @@ export const OutputSpell = SpellSchema.extend({
 
 export const OutputHero = HeroSchema.extend({
   id: z.string(),
+  createdAt: z.date(),
 });
 
 export const OutputPlayer = PlayerSchema.extend({
   id: z.string(),
+  createdAt: z.date(),
 });
 export const OutputPlayerHero = PlayerHeroSchema.extend({
   id: z.string(),
+  createdAt: z.date(),
 });
 export const OutputFullPlayerHero = z.object({
   hero: OutputHero,

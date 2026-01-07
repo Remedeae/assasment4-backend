@@ -6,27 +6,33 @@ import Footer from "./components/globals/Footer";
 import Collection from "./pages/Collection";
 import Game from "./pages/Game";
 import GameItems from "./pages/GameItems";
+import Users from "./pages/Users";
 
-import { useAuthStore } from "./storage/authStore";
 import { useEffect } from "react";
-import { api } from "../api/axios";
+import { useAuthStore } from "./storage/authStore";
+import { useAdminToggle } from "./storage/adminToggleStore";
 import type { LoggedUserResponse } from "./types/storageTypes";
+import { api } from "../api/axios";
 
 function App() {
   const setAuth = useAuthStore((s) => s.setAuth);
   const clearAuth = useAuthStore((s) => s.clearAuth);
+  const setAdmin = useAdminToggle((s) => s.setIsAdmin);
 
   useEffect(() => {
     const checkAuth = async () => {
       try {
         const res = await api<LoggedUserResponse>("get", "/loggedUser");
+        if (res.user.roles?.includes("admin")) {
+          setAdmin(true);
+        }
         setAuth(res.user);
       } catch {
         clearAuth();
       }
     };
     checkAuth();
-  }, [setAuth, clearAuth]);
+  }, [setAuth, clearAuth, setAdmin]);
 
   return (
     <>
@@ -38,6 +44,7 @@ function App() {
           <Route path="/collection" element={<Collection />} />
           <Route path="/game" element={<Game />} />
           <Route path="/gameitems" element={<GameItems />} />
+          <Route path="/users" element={<Users />} />
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -1,18 +1,18 @@
-import NoLogin from "../components/login/noLogin";
-import AdminMenu from "../components/home/AdminMenu";
+import NoLogin from "../components/globals/noLogin";
+import AdminMenu from "./Users";
 import UserMenu from "../components/home/UserMenu";
-import { useLoggedInStatusStore } from "../storage/authStore";
-import { useAdminStore } from "../storage/adminStore";
+import { useAuthStore } from "../storage/authStore";
+import { useAdminToggle } from "../storage/adminToggleStore";
 
 export default function Home() {
-  const admin = useAdminStore((s) => s.adminStatus);
-  const loggedIn = useLoggedInStatusStore((s) => s.loggedInStatus);
+  const isAdmin = useAdminToggle((s) => s.isAdmin);
+  const isLoggedIn = useAuthStore((s) => s.isAuthenticated);
 
   return (
     <div>
-      {!loggedIn && <NoLogin />}
-      {admin && <AdminMenu />}
-      {!admin && <UserMenu />}
+      {!isLoggedIn && <NoLogin />}
+      {isAdmin && <AdminMenu />}
+      {!isAdmin && <UserMenu />}
     </div>
   );
 }

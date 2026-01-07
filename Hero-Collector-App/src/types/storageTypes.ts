@@ -16,3 +16,8 @@ export type AuthStore = {
   setAuth: (user: LoggedUser | null) => void;
   clearAuth: () => void;
 };
+//---------------------------
+export type AdminToggle = {
+  isAdmin: boolean;
+  setIsAdmin: (isAdmin: boolean) => void;
+};

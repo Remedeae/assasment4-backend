@@ -25,3 +25,4 @@ export default function Nav() {
     </div>
   );
 }
+... //update with new pathing!

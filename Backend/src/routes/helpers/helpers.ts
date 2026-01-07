@@ -24,10 +24,10 @@ export const constructPlayerHero = async (
 ) => {
   const heroExists = await HeroModel.exists({ _id: heroId });
   if (!heroExists) {
-    throw new HttpError(404, `Hero with id ${heroId} does noe exsist`, null);
+    throw new HttpError(404, `Hero with id ${heroId} does not exsist`, null);
   }
   const heroSpellItems = await HeroModel.findById(heroId)
-    .select("startingEquipment traits.spellSchool name -_id")
+    .select("startingEquipment traits.spellSchool createdAt name -_id")
     .lean()
     .session(session);
   const spells = heroSpellItems?.traits?.spellSchool
@@ -43,7 +43,11 @@ export const constructPlayerHero = async (
     : [];
   const spellIds = spells.map((s) => s._id.toString());
 
-  const hero: PlayerHeroInput = { heroId, equipmentIds, spellIds };
+  const hero: PlayerHeroInput = {
+    heroId,
+    equipmentIds,
+    spellIds,
+  };
   const validatedHero = validateData(hero, PlayerHeroSchema, errMsg[3]);
   return validatedHero;
 };

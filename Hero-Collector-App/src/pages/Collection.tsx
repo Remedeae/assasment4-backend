@@ -1,4 +1,4 @@
-import NoLogin from "../components/login/noLogin";
+import NoLogin from "../components/globals/noLogin";
 import PlayerCollection from "../components/collection/user/PlayerCollection";
 import { useAdminStore } from "../storage/adminStore";
 import { useLoggedInStatusStore } from "../storage/authStore";

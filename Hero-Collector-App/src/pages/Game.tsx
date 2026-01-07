@@ -1,5 +1,5 @@
 import Game1 from "../components/games/Game1";
-import NoLogin from "../components/login/noLogin";
+import NoLogin from "../components/globals/noLogin";
 import { useLoggedInStatusStore } from "../storage/authStore";
 //import { useAdminStore } from "../storage/adminStore";
 

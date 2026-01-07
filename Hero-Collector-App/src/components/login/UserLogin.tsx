@@ -1,4 +1,4 @@
-import LoginButton from "../globals/login/LoginButton";
+import LoginButton from "../globals/buttons/LoginButton";
 
 export default function UserLogin() {
   return (
