@@ -12,7 +12,12 @@ const config = {
   secret: env.SECRET,
   baseURL: env.BASEURL,
   clientID: env.CLIENT_ID,
+  clientSecret: env.CLIENT_SECRET,
   issuerBaseURL: env.ISSUE_BASE_URL,
+  authorizationParams: {
+    response_type: "code",
+    response_mode: "query",
+  },
 };
 
 export const authMiddleware = auth(config);
@@ -22,9 +27,7 @@ export const requiresAdmin = (
   res: Response,
   next: NextFunction
 ) => {
-  const roles = req.oidc.user?.["https://remedeae-hero-collector"] as
-    | string[]
-    | undefined;
+  const roles = req.oidc.user?.["https://hero-collector.dev/roles"] ?? [];
   if (!roles?.includes("admin")) {
     return next(
       new HttpError(

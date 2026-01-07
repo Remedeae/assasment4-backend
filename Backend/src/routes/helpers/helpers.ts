@@ -112,7 +112,7 @@ export const deleteByID = async (
   return deleted;
 };
 
-export const adminStatusCheck = async (id: string, isAdmin: boolean) => {
+/* export const adminStatusCheck = async (id: string, isAdmin: boolean) => {
   const check = await PlayerModel.exists({
     _id: id,
     admin: isAdmin,
@@ -126,3 +126,4 @@ export const adminStatusCheck = async (id: string, isAdmin: boolean) => {
     );
   }
 };
+ */

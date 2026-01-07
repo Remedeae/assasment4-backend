@@ -1,20 +1,19 @@
 import { Link } from "react-router-dom";
-import { useAdminStore } from "../../../storage/adminStore";
-import { useLoggedInStatusStore } from "../../../storage/loginStore";
+import { useAuthStore } from "../../../storage/authStore";
+import type { LoggedUser } from "../../../types/storageTypes";
 
 export default function Nav() {
-  const adminStatus = useAdminStore((s) => s.adminStatus);
-  const loggedIn = useLoggedInStatusStore((s) => s.loggedInStatus);
+  const user: LoggedUser | null = useAuthStore((s) => s.user);
 
-  if (!loggedIn) {
+  if (!user) {
     return null;
   }
   return (
     <div>
-      {!adminStatus ? (
+      {!user?.roles?.includes("admin") ? (
         <div>
           <Link to="/home">Home</Link>
-          <Link to="/collection">Collection</Link>
+          <Link to="/collection">Game</Link>
           <Link to="/game">Play</Link>
         </div>
       ) : (

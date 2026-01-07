@@ -33,6 +33,7 @@ const HeroMongoSchema = new Schema({
     { _id: false, required: true }
   ),
   startingEquipment: { type: [String], default: [] },
+  createdAt: { type: Date, default: Date.now },
 });
 
 export const HeroModel = mongoose.model("Hero", HeroMongoSchema);

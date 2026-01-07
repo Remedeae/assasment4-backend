@@ -1,5 +1,4 @@
 import mongoose, { Schema } from "mongoose";
-import { lowercase, required } from "zod/mini";
 
 const PlayerHeroMongoSchema = new Schema({
   heroId: {
@@ -11,9 +10,11 @@ const PlayerHeroMongoSchema = new Schema({
   },
   spellIds: { type: [String], default: [] },
   equipmentIds: { type: [String], default: [] },
+  createdAt: { type: Date, default: Date.now },
 });
 
 const PlayerMongoSchema = new Schema({
+  auth0Id: { type: String, required: true },
   userName: {
     type: String,
     required: true,
@@ -21,7 +22,6 @@ const PlayerMongoSchema = new Schema({
     lowercase: true,
     trim: true,
   },
-  admin: { type: Boolean, required: true, default: false },
   email: { type: String, required: true },
   inventory: new Schema(
     {
@@ -32,6 +32,7 @@ const PlayerMongoSchema = new Schema({
   ),
   levelsClear: { type: [String], default: [] },
   team: { type: [String], default: [] },
+  createdAt: { type: Date, default: Date.now },
 });
 
 export const PlayerHeroModel = mongoose.model(

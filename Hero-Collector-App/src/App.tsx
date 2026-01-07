@@ -5,10 +5,29 @@ import Header from "./components/globals/Header";
 import Footer from "./components/globals/Footer";
 import Collection from "./pages/Collection";
 import Game from "./pages/Game";
-import SignUp from "./pages/SignUp";
 import GameItems from "./pages/GameItems";
 
+import { useAuthStore } from "./storage/authStore";
+import { useEffect } from "react";
+import { api } from "../api/axios";
+import type { LoggedUserResponse } from "./types/storageTypes";
+
 function App() {
+  const setAuth = useAuthStore((s) => s.setAuth);
+  const clearAuth = useAuthStore((s) => s.clearAuth);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const res = await api<LoggedUserResponse>("get", "/loggedUser");
+        setAuth(res.user);
+      } catch {
+        clearAuth();
+      }
+    };
+    checkAuth();
+  }, [setAuth, clearAuth]);
+
   return (
     <>
       <BrowserRouter>
@@ -16,7 +35,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/signup" element={<SignUp />} />
           <Route path="/collection" element={<Collection />} />
           <Route path="/game" element={<Game />} />
           <Route path="/gameitems" element={<GameItems />} />

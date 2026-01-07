@@ -1,7 +1,7 @@
 import NoLogin from "../components/login/noLogin";
 import PlayerCollection from "../components/collection/user/PlayerCollection";
 import { useAdminStore } from "../storage/adminStore";
-import { useLoggedInStatusStore } from "../storage/loginStore";
+import { useLoggedInStatusStore } from "../storage/authStore";
 import { useActiveUserStore } from "../storage/activeUserStore";
 import { useParams } from "react-router-dom";
 

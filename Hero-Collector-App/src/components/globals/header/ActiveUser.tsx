@@ -1,12 +1,11 @@
-import { useAdminStore } from "../../../storage/adminStore";
-import { useLoggedInStatusStore } from "../../../storage/loginStore";
+import { useAuthStore } from "../../../storage/authStore";
+import type { LoggedUser } from "../../../types/storageTypes";
 
 export default function ActiveUser() {
-  const adminStatus = useAdminStore((s) => s.adminStatus);
-  const loggedInStatus = useLoggedInStatusStore((s) => s.loggedInStatus);
+  const user: LoggedUser | null = useAuthStore((s) => s.user);
 
-  const displayLoggedIn = loggedInStatus ? "Logged in" : "Logged out";
-  const displayAccess = adminStatus ? "Admin" : "User";
+  const displayLoggedIn = user?.userName ?? "Logged out";
+  const displayAccess = user?.roles?.includes("admin") ? "Admin" : null;
 
   return (
     <div>

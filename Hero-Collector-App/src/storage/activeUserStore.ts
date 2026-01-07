@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { PlayerOutput } from "../types/types";
+import type { PlayerOutput } from "../../../Shared/types/types";
 
 type ActiveUserStore = {
   userData: PlayerOutput | null;

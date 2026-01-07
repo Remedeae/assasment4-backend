@@ -23,4 +23,5 @@ export const HeroSchema = z.object({
   traits: HeroTraitsSchema,
   stats: StatBlockSchema,
   startingEquipment: z.array(z.string()),
+  createdAt: z.date(),
 });

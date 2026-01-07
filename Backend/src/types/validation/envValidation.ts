@@ -6,5 +6,7 @@ export const envSchema = z.object({
   BASEURL: z.url(),
   PORT: z.coerce.number().positive(),
   CLIENT_ID: z.string().min(1),
+  CLIENT_SECRET: z.string().min(1),
   ISSUE_BASE_URL: z.url(),
+  AUTH0_ACTION_SECRET: z.string(),
 });

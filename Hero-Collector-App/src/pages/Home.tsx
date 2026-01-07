@@ -1,7 +1,7 @@
 import NoLogin from "../components/login/noLogin";
 import AdminMenu from "../components/home/AdminMenu";
 import UserMenu from "../components/home/UserMenu";
-import { useLoggedInStatusStore } from "../storage/loginStore";
+import { useLoggedInStatusStore } from "../storage/authStore";
 import { useAdminStore } from "../storage/adminStore";
 
 export default function Home() {

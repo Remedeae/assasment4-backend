@@ -4,7 +4,7 @@ import { errMsg, validateData } from "../../middleware/validatorHelpes";
 import { HttpError } from "../../middleware/errorHandler";
 import { OutputPlayer } from "../../../../Shared/types/output";
 import {
-  adminStatusCheck,
+  //adminStatusCheck,
   deleteByID,
   hydrateItems,
   hydratePlayerHeroes,
@@ -40,7 +40,7 @@ router.get("/:credentials/:full", async (req, res, next) => {
 });
 
 //delete user by ID
-router.delete("/:id", async (req, res, next) => {
+/* router.delete("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const isUser = await PlayerModel.exists({
@@ -61,13 +61,13 @@ router.delete("/:id", async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-});
+}); */
 
 //update user by ID
-router.put("/:id", async (req, res, next) => {
+/* router.put("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    adminStatusCheck(id, false);
+    //adminStatusCheck(id, false);
     const updatedUser = await updateById(
       id,
       "User",
@@ -79,6 +79,6 @@ router.put("/:id", async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-});
+}); */
 
 export default router;
