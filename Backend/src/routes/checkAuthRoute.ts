@@ -10,6 +10,7 @@ router.get("", async (req, res, next) => {
       userName: rawUser?.nickName ?? rawUser?.name,
       roles: rawUser?.email,
       email: rawUser?.["https://hero-collector.dev/roles"],
+      auth0Id: rawUser?.sub,
     });
     res.status(200).send({
       isAuthenticated: true,

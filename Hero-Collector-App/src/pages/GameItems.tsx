@@ -1,10 +1,20 @@
 import { useState } from "react";
-import AllHeroes from "../components/collection/admin/AllHeroes";
-import AllItems from "../components/collection/admin/AllItems";
-import AllSpells from "../components/collection/admin/AllSpells";
+import { useAuthStore } from "../storage/authStore";
+import AllHeroes from "../components/gameItems/AllHeroes";
+import AllItems from "../components/gameItems/AllItems";
+import AllSpells from "../components/gameItems/AllSpells";
 
 export default function GameItems() {
+  const user = useAuthStore((s) => s.user?.roles);
   const [itemTypeDisplay, setItemTypeDisplay] = useState<number>(0);
+
+  if (!user?.includes("admin")) {
+    return (
+      <div>
+        <h1>401: Unauthorized</h1>
+      </div>
+    );
+  }
   return (
     <div>
       <div>

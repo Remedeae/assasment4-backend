@@ -12,11 +12,12 @@ import {
   OutputItem,
 } from "../../../../Shared/types/output";
 import type {
+  HeroOutput,
   PlayerHeroInput,
   PlayerOutput,
 } from "../../../../Shared/types/types";
 import { PlayerHeroSchema } from "../../../../Shared/types/base/playerSchema";
-import { ZodObject } from "zod";
+import { z, ZodObject } from "zod";
 
 export const constructPlayerHero = async (
   heroId: string,
@@ -52,6 +53,24 @@ export const constructPlayerHero = async (
   return validatedHero;
 };
 
+export const hydrateHeroes = async (heroes: HeroOutput[]) => {
+  const fullHeroes = await Promise.all(
+    heroes.map(async (h) => {
+      const spells = h.traits.spellSchool
+        ? await SpellModel.find({ school: h.traits.spellSchool })
+        : [];
+      const items = ItemModel.find({ id: { $in: h.startingEquipment } });
+      return { hero: h, spells, items };
+    })
+  );
+  const validatedFullHeroes = validateData(
+    fullHeroes,
+    OutputFullPlayerHero,
+    errMsg[0]
+  );
+  return validatedFullHeroes;
+};
+
 export const hydratePlayerHeroes = async (user: PlayerOutput) => {
   const playerHeroIds: string[] = user.inventory.heroes;
   const objectIds = playerHeroIds.map((id) => new Types.ObjectId(id));
@@ -80,7 +99,7 @@ export const hydrateItems = async (user: PlayerOutput) => {
   const itemIds: string[] = user.inventory.itemsIds;
   const objectIds = itemIds.map((id) => new Types.ObjectId(id));
   const items = await ItemModel.find({ _id: { $in: objectIds } }).lean();
-  const validatedItems = validateData(items, OutputItem, errMsg[0]);
+  const validatedItems = validateData(items, z.array(OutputItem), errMsg[0]);
   return validatedItems;
 };
 

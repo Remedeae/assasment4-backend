@@ -10,19 +10,15 @@ export default function Nav() {
   }
   return (
     <div>
-      {!user?.roles?.includes("admin") ? (
-        <div>
-          <Link to="/home">Home</Link>
-          <Link to="/collection">Game</Link>
-          <Link to="/game">Play</Link>
-        </div>
-      ) : (
-        <div>
-          <Link to="/home">Users</Link>
+      <Link to="/home">Home</Link>
+      <Link to={`/collection/${user.auth0Id}`}>Game</Link>
+      <Link to="/game">Play</Link>
+      {user?.roles?.includes("admin") && (
+        <>
+          <Link to="/users">Users</Link>
           <Link to="/gameitems">Heroes, Spells and Items</Link>
-        </div>
+        </>
       )}
     </div>
   );
 }
-... //update with new pathing!

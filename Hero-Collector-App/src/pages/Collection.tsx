@@ -1,22 +1,26 @@
 import NoLogin from "../components/globals/noLogin";
 import PlayerCollection from "../components/collection/user/PlayerCollection";
-import { useAdminStore } from "../storage/adminStore";
-import { useLoggedInStatusStore } from "../storage/authStore";
-import { useActiveUserStore } from "../storage/activeUserStore";
+import { useAdminToggle } from "../storage/adminToggleStore";
+import { useAuthStore } from "../storage/authStore";
 import { useParams } from "react-router-dom";
 
 export default function Collection() {
-  const admin = useAdminStore((s) => s.adminStatus);
-  const loggedIn = useLoggedInStatusStore((s) => s.loggedInStatus);
-  const user = useActiveUserStore((s) => s.userData);
+  const auth0user = useAuthStore((s) => s.user);
 
-  const { userIdParam } = useParams();
+  const isLocalAdmin = useAdminToggle((s) => s.isAdmin);
+  const isTrueAdmin: boolean = auth0user?.roles?.includes("admin") ?? false;
+
+  const { auth0Id } = useParams();
+  const isViewingOtherUser = auth0Id && auth0Id !== auth0user?.auth0Id;
 
   return (
     <div>
-      {!loggedIn && <NoLogin />}
-      {admin && userIdParam && <PlayerCollection userId={userIdParam} />}
-      {!admin && user && <PlayerCollection userId={user?.id} />}
+      {!auth0user && <NoLogin />}
+      {!isTrueAdmin && isViewingOtherUser && <h1>401: Unauthorized</h1>}
+      {!isLocalAdmin && auth0user?.auth0Id && (
+        <PlayerCollection auth0Id={auth0user?.auth0Id} />
+      )}
+      {isTrueAdmin && auth0Id && <PlayerCollection auth0Id={auth0Id} />}
     </div>
   );
 }

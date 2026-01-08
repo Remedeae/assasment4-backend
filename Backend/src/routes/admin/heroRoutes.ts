@@ -4,7 +4,7 @@ import { errMsg, validateData } from "../../middleware/validatorHelpes";
 import { OutputHero } from "../../../../Shared/types/output";
 import z from "zod";
 import { HeroSchema } from "../../../../Shared/types/base/heroDataSchema";
-import { deleteByID, updateById } from "../helpers/helpers";
+import { deleteByID, hydrateHeroes, updateById } from "../helpers/helpers";
 
 const router = Router();
 
@@ -17,6 +17,7 @@ router.get("", async (req, res, next) => {
       z.array(OutputHero),
       errMsg[3]
     );
+    const fullHeroes = hydrateHeroes(validatedHeroes);
     res.status(200).send(validatedHeroes);
   } catch (error) {
     next(error);

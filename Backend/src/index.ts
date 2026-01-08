@@ -39,7 +39,7 @@ app.use(cors(corsOptions));
 app.use("/signup/user", signUpRoute);
 app.get("/loggedUser", requiresAuth(), checkAuthRoute);
 
-app.use("/home/admin", requiresAuth(), requiresAdmin, allUserRoutes);
+app.use("/allUsers", requiresAuth(), requiresAdmin, allUserRoutes);
 app.use("/gameitems/heroes", requiresAuth(), requiresAdmin, heroRoutes);
 app.use("/gameitems/items", requiresAuth(), requiresAdmin, itemRoutes);
 app.use("/gameitems/spells", requiresAuth(), requiresAdmin, spellRoutes);

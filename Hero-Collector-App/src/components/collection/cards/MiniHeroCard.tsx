@@ -1,3 +1,5 @@
+import placeholderImg from "../../../assets/user.png";
+
 type HeroCardProps = {
   name: string;
   image: string;
@@ -6,7 +8,10 @@ type HeroCardProps = {
 export default function MiniHeroCard(props: HeroCardProps) {
   return (
     <>
-      <img src={props.image} alt={`Portray of ${props.name}`} />
+      <img
+        src={props.image ?? placeholderImg}
+        alt={`Portray of ${props.name}`}
+      />
       <h5>Name: {props.name}</h5>
     </>
   );

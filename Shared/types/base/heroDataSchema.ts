@@ -11,14 +11,14 @@ const HeroDescriptionSchema = z.object({
 
 const HeroTraitsSchema = z.object({
   spellcaster: z.boolean(),
-  spellSchool: z.enum(spellSchool).optional(),
-  special: z.array(z.string()).optional(),
-  combat: z.array(z.string()).optional(),
+  spellSchool: z.enum(spellSchool).optional().nullable(),
+  special: z.array(z.string()).optional().nullable(),
+  combat: z.array(z.string()).optional().nullable(),
 });
 
 export const HeroSchema = z.object({
   name: z.string(),
-  image: z.string().optional(),
+  image: z.string().optional().nullable(),
   description: HeroDescriptionSchema,
   traits: HeroTraitsSchema,
   stats: StatBlockSchema,

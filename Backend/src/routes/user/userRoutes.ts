@@ -2,7 +2,10 @@ import { Router } from "express";
 import { PlayerModel } from "../../mongoDB/models/Player";
 import { errMsg, validateData } from "../../middleware/validatorHelpes";
 import { HttpError } from "../../middleware/errorHandler";
-import { OutputPlayer } from "../../../../Shared/types/output";
+import {
+  OutputFullPlayer,
+  OutputPlayer,
+} from "../../../../Shared/types/output";
 import {
   //adminStatusCheck,
   deleteByID,
@@ -15,15 +18,13 @@ import { csvBoolean } from "../../types/validation/csvValidation/csvHelpers";
 
 const router = Router();
 
-//get user by username or email
-router.get("/:credentials/:full", async (req, res, next) => {
+//get user by auth0Id
+router.get("/:auth0Id/:full", async (req, res, next) => {
   try {
-    const cred = req.params.credentials.toLowerCase();
+    const auth0Id = req.params.auth0Id;
     const full = req.params.full.toLowerCase();
     const validateFull = validateData(full, csvBoolean, errMsg[2]);
-    const user = await PlayerModel.findOne({
-      $or: [{ userName: cred }, { email: cred }],
-    }).lean();
+    const user = await PlayerModel.findOne({ auth0Id }).lean();
     const validatedUser = validateData(user, OutputPlayer, errMsg[0]);
     if (!validateFull) {
       res.status(200).send(validatedUser);
@@ -31,9 +32,12 @@ router.get("/:credentials/:full", async (req, res, next) => {
     }
     const fullHeroes = await hydratePlayerHeroes(validatedUser);
     const inventoryItems = await hydrateItems(validatedUser);
-    res
-      .status(200)
-      .send({ user: validatedUser, heroes: fullHeroes, items: inventoryItems });
+    const validatedFullUser = validateData(
+      { user: validatedUser, heroes: fullHeroes, items: inventoryItems },
+      OutputFullPlayer,
+      errMsg[0]
+    );
+    res.status(200).send(validatedFullUser);
   } catch (error) {
     next(error);
   }

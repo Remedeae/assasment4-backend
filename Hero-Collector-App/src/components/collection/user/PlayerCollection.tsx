@@ -1,27 +1,43 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { api } from "../../../../api/axios";
+
 import MiniHeroCard from "../cards/MiniHeroCard";
-import type { FullPlayerHeroOutput } from "../../../types/types";
+import {
+  //ItemOutput,
+  type FullPlayerHeroOutput,
+  type PlayerOutput,
+  type FullPlayerOutput,
+} from "../../../../../Shared/types/types";
 import HeroCard from "../cards/HeroCard";
 
-type UserId = {
-  userId: string;
+type ID = {
+  auth0Id?: string;
 };
 
-export default function PlayerCollection(props: UserId) {
-  const heroes: FullPlayerHeroOutput[] = [];
-  const team: string[] = [];
+export default function PlayerCollection(auth0Id: ID) {
+  const [user, setUser] = useState<PlayerOutput | null>(null);
+  const [heroes, setHeroes] = useState<FullPlayerHeroOutput[]>([]);
+  //const [items, setItems] = useState<ItemOutput[]>([]);
+  const [displayHeroId, setDisplayHeroId] = useState<string>(heroes[0].id);
+  const displayHero = heroes.find((h) => h.id === displayHeroId);
+
   const [search, setSearch] = useState<string>("");
-  const [displayHeroId, setDisplayHeroId] = useState<string>(heroes[0].hero.id);
-  const displayHero = heroes.find((h) => h.hero.id === displayHeroId);
 
   const placeholderPortray: string = "cat";
 
-  const fetchData = async () => {
-    await props.userId;
-  };
-
-  fetchData(); //mockups for api calls
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await api<FullPlayerOutput>(
+        "get",
+        `/user/${auth0Id}/full`
+      );
+      setUser(response.user);
+      setHeroes(response.heroes);
+      //setItems(response.items);
+    };
+    fetchData();
+  }, [auth0Id]);
 
   return (
     <div>
@@ -67,10 +83,10 @@ export default function PlayerCollection(props: UserId) {
       </div>
       <div>
         <h2>Team</h2>
-        {team.length > 0 && (
+        {user && user?.team.length > 0 && (
           <ul>
             {heroes
-              .filter((h) => team.includes(h.hero.id))
+              .filter((h) => user.team.includes(h.hero.id))
               .map((t) => (
                 <li key={t.hero.id}>
                   <MiniHeroCard

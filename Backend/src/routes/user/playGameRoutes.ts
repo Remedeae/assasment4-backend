@@ -7,13 +7,13 @@ import { HttpError } from "../../middleware/errorHandler";
 
 const router = Router();
 
-//post random reward hero to player by ID
-router.post("/:userId", async (req, res, next) => {
+//post random reward hero to player by auth0Id
+router.post("/:auth0Id", async (req, res, next) => {
   try {
     const session = await mongoose.startSession();
     session.startTransaction();
     try {
-      const { userId } = req.params;
+      const { auth0Id } = req.params;
       const heroes = await HeroModel.find()
         .select("name _id")
         .lean()
@@ -36,8 +36,8 @@ router.post("/:userId", async (req, res, next) => {
       const createdHero = new PlayerHeroModel(hero);
       await createdHero.save({ session });
 
-      await PlayerModel.findByIdAndUpdate(
-        userId,
+      await PlayerModel.findOneAndUpdate(
+        { auth0Id },
         { $push: { "inventory.heroes": createdHero._id } },
         { session }
       );

@@ -12,9 +12,11 @@ export type SpellOutput = z.infer<typeof Output.OutputSpell>;
 
 export type HeroInput = z.infer<typeof HeroSchema>;
 export type HeroOutput = z.infer<typeof Output.OutputHero>;
+export type FullHeroOutput = z.infer<typeof Output.OutputFullHero>;
 
 export type PlayerInput = z.infer<typeof PlayerSchema>;
 export type PlayerOutput = z.infer<typeof Output.OutputPlayer>;
+export type FullPlayerOutput = z.infer<typeof Output.OutputFullPlayer>;
 
 export type PlayerHeroInput = z.infer<typeof PlayerHeroSchema>;
 export type PlayerHeroOutput = z.infer<typeof Output.OutputPlayerHero>;

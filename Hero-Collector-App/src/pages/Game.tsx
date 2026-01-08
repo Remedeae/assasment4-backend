@@ -1,11 +1,9 @@
 import Game1 from "../components/games/Game1";
 import NoLogin from "../components/globals/noLogin";
-import { useLoggedInStatusStore } from "../storage/authStore";
-//import { useAdminStore } from "../storage/adminStore";
+import { useAuthStore } from "../storage/authStore";
 
 export default function Game() {
-  //const admin = useAdminStore((s) => s.adminStatus);
-  const loggedIn = useLoggedInStatusStore((s) => s.loggedInStatus);
+  const loggedIn = useAuthStore((s) => s.isAuthenticated);
 
   return !loggedIn ? <NoLogin /> : <Game1 />;
 }

@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
+import { useAuthStore } from "../../storage/authStore";
+import { api } from "../../../api/axios";
 
 export default function Game1() {
+  const auth0Id = useAuthStore((s) => s.user?.auth0Id);
+
   const numberRandomiser = () => Math.floor(Math.random() * 9) + 2;
   const [goal, setGoal] = useState<number>(() => numberRandomiser());
 
@@ -10,7 +14,7 @@ export default function Game1() {
   const timerStatusMsg: string = timerStatus ? "START" : "RESTART";
 
   useEffect(() => {
-    let i: number;
+    let i: ReturnType<typeof setInterval> | undefined;
     if (timerStatus) {
       i = setInterval(() => {
         setTimePlayed((t) => t + 1);
@@ -19,13 +23,10 @@ export default function Game1() {
     return () => clearInterval(i);
   }, [timerStatus]);
 
-  const fetchReward = () => {};
   const getReward = async () => {
     try {
-      const reward = await fetchReward();
-      setWinnerStatus(
-        `Congratulations, you won! ${reward} has been added to your collection. Press restart to play again!`
-      );
+      const reward = await api<string>("post", `/game/${auth0Id}`);
+      setWinnerStatus(reward);
     } catch (error) {
       console.log(error);
     }
@@ -48,6 +49,10 @@ export default function Game1() {
       );
     }
   };
+
+  if (!auth0Id) {
+    return <h1>No user ID detected, please make sure you're logged in.</h1>;
+  }
   return (
     <div>
       <h1>Counter match!</h1>

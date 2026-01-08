@@ -41,7 +41,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/collection" element={<Collection />} />
+          <Route path="/collection/:auth0Id" element={<Collection />} />
           <Route path="/game" element={<Game />} />
           <Route path="/gameitems" element={<GameItems />} />
           <Route path="/users" element={<Users />} />

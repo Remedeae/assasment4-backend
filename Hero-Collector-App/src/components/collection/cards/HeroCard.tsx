@@ -1,19 +1,19 @@
-import type { FullPlayerHeroOutput } from "../../../types/types.ts";
+import type { FullPlayerHeroOutput } from "../../../../../Shared/types/types.ts";
 import SpellCard from "../cards/SpellCard.tsx";
 import ItemCard from "../cards/ItemCard.tsx";
 import { useState } from "react";
 
-export default function HeroCard({
-  hero,
-  spells,
-  equipment,
-}: FullPlayerHeroOutput) {
+import placeholderImg from "../../../assets/user.png";
+
+type HeroCardProp = Omit<FullPlayerHeroOutput, "id" | "createdAt">;
+
+export default function HeroCard({ hero, spells, equipment }: HeroCardProp) {
   const [hoverItemId, setHoverItemId] = useState<string | null>(null);
 
   return (
     <>
       <h5>Name: {hero.name}</h5>
-      <img src={hero.image} alt={`Portray of ${hero.name}`} />
+      <img src={hero.image ?? placeholderImg} alt={`Portray of ${hero.name}`} />
       <h5 className="statblock">
         Brawn: {hero.stats.brawn} | Magic: {hero.stats.magic} | Lives:{" "}
         {hero.stats.lives} | Speed: {hero.stats.speed}
@@ -70,7 +70,7 @@ export default function HeroCard({
                     display={hoverItemId === s.id}
                     name={s.name}
                     school={s.school}
-                    schoolType={s.schoolType}
+                    type={s.type}
                     description={s.description}
                   />
                 </li>
@@ -89,13 +89,7 @@ export default function HeroCard({
               onMouseLeave={() => setHoverItemId(null)}
             >
               {e.name}
-              <ItemCard
-                display={hoverItemId === e.id}
-                name={e.name}
-                type={e.type}
-                description={e.description}
-                modifier={e.modifier}
-              />
+              <ItemCard item={e} display={hoverItemId === e.id} />
             </li>
           ))}
         </ul>

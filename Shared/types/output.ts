@@ -28,4 +28,17 @@ export const OutputFullPlayerHero = z.object({
   hero: OutputHero,
   spells: z.array(OutputSpell),
   equipment: z.array(OutputItem),
+  id: z.string(),
+  createdAt: z.date(),
+});
+
+export const OutputFullPlayer = z.object({
+  user: OutputPlayer,
+  heroes: z.array(OutputFullPlayerHero),
+  items: z.array(OutputItem),
+});
+export const OutputFullHero = z.object({
+  hero: OutputHero,
+  spells: z.array(OutputSpell),
+  equipment: z.array(OutputItem),
 });

@@ -1,6 +1,6 @@
-import type { FullSpellOutput } from "../../../types/types";
+import type { SpellOutput } from "../../../../../Shared/types/types";
 
-type SpellProp = Omit<FullSpellOutput, "id"> & {
+type SpellProp = Omit<SpellOutput, "id"> & {
   display: boolean;
 };
 
@@ -10,7 +10,7 @@ export default function SpellCard(props: SpellProp) {
     <ul>
       <li>Name: {props.name}</li>
       <li>
-        Type: {props.school} - {props.schoolType}
+        Type: {props.school} - {props.type}
       </li>
       <li>Description: {props.description}</li>
     </ul>
