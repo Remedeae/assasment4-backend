@@ -2,7 +2,7 @@ import { Router } from "express";
 import { HeroModel } from "../../mongoDB/models/Hero";
 import { errMsg, validateData } from "../../middleware/validatorHelpes";
 import { OutputHero } from "../../../../Shared/types/output";
-import z from "zod";
+import z from "../../../../Shared/node_modules/zod";
 import { HeroSchema } from "../../../../Shared/types/base/heroDataSchema";
 import { deleteByID, hydrateHeroes, updateById } from "../helpers/helpers";
 

@@ -4,13 +4,15 @@ import type { Request, Response, NextFunction } from "express";
 import { envSchema } from "../../types/validation/envValidation";
 import { HttpError } from "../errorHandler";
 
+import { backendURL } from "../../../../Shared/variables/url";
+
 export const env = envSchema.parse(process.env);
 
 const config = {
   authRequired: false,
   auth0Logout: true,
   secret: env.SECRET,
-  baseURL: env.BASEURL,
+  baseURL: backendURL,
   clientID: env.CLIENT_ID,
   clientSecret: env.CLIENT_SECRET,
   issuerBaseURL: env.ISSUE_BASE_URL,

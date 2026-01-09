@@ -17,7 +17,7 @@ import type {
   PlayerOutput,
 } from "../../../../Shared/types/types";
 import { PlayerHeroSchema } from "../../../../Shared/types/base/playerSchema";
-import { z, ZodObject } from "zod";
+import { z, ZodObject } from "../../../../Shared/node_modules/zod";
 
 export const constructPlayerHero = async (
   heroId: string,

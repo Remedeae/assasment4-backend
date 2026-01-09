@@ -1,4 +1,4 @@
-import z from "zod";
+import z from "../../../Shared/node_modules/zod";
 import { HttpError } from "./errorHandler";
 
 type ErrorReturnSchema = {

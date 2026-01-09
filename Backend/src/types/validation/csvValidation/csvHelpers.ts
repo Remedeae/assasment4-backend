@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "../../../../../Shared/node_modules/zod";
 
 export const csvNumber = (schema: z.ZodNumber) =>
   z.preprocess((v) => Number(v), schema);
@@ -23,8 +23,8 @@ export const csvStringOptional = z.preprocess(
     typeof v === "string" && v.trim() === ""
       ? undefined
       : typeof v === "string"
-      ? v.trim()
-      : v,
+        ? v.trim()
+        : v,
   z.string().optional()
 );
 export const csvEnumOptional = (values: string[]) =>

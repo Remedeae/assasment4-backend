@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useAuthStore } from "../storage/authStore";
-import AllHeroes from "../components/gameItems/AllHeroes";
-import AllItems from "../components/gameItems/AllItems";
-import AllSpells from "../components/gameItems/AllSpells";
+import AllHeroes from "../components/pages/gameItems/AllHeroes";
+import AllItems from "../components/pages/gameItems/AllItems";
+import AllSpells from "../components/pages/gameItems/AllSpells";
 
 export default function GameItems() {
   const user = useAuthStore((s) => s.user?.roles);

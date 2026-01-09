@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { api } from "../../../api/axios.ts";
+import { api } from "../../../../api/axios.ts";
 
-import type { FullHeroOutput } from "../../../../Shared/types/types.ts";
+import type { FullHeroOutput } from "../../../../../Shared/types/types.ts";
 import HeroCard from "../collection/cards/HeroCard.tsx";
 
 export default function AllHeroes() {

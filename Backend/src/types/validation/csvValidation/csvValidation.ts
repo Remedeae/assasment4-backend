@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "../../../../../Shared/node_modules/zod";
 import * as h from "./csvHelpers";
 import {
   equipHand,

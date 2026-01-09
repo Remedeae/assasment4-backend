@@ -1,9 +1,9 @@
-import type { FullPlayerHeroOutput } from "../../../../../Shared/types/types.ts";
+import type { FullPlayerHeroOutput } from "../../../../../../Shared/types/types.ts";
 import SpellCard from "../cards/SpellCard.tsx";
 import ItemCard from "../cards/ItemCard.tsx";
 import { useState } from "react";
 
-import placeholderImg from "../../../assets/user.png";
+import placeholderImg from "../../../../assets/user.png";
 
 type HeroCardProp = Omit<FullPlayerHeroOutput, "id" | "createdAt">;
 

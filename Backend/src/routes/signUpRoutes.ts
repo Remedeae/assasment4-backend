@@ -6,27 +6,14 @@ import { PlayerModel } from "../mongoDB/models/Player";
 const router = Router();
 
 //post new user
-router.post(
-  "",
-  (req, res, next) => {
-    const authHeader = req.headers.authorization;
-    if (
-      !authHeader ||
-      authHeader !== `Bearer ${process.env.AUTH0_ACTION_SECRET}`
-    ) {
-      return res.status(401).send("Unauthorized");
-    }
-    next();
-  },
-  async (req, res, next) => {
-    try {
-      const validatedUser = validateData(req.body, PlayerSchema, errMsg[3]);
-      const newUser = await PlayerModel.create(validatedUser);
-      res.status(200).send(`User ${newUser?.userName} successfully created`);
-    } catch (error) {
-      next(error);
-    }
+router.post("", async (req, res, next) => {
+  try {
+    const validatedUser = validateData(req.body, PlayerSchema, errMsg[3]);
+    const newUser = await PlayerModel.create(validatedUser);
+    res.status(200).send(`User ${newUser?.userName} successfully created`);
+  } catch (error) {
+    next(error);
   }
-);
+});
 
 export default router;

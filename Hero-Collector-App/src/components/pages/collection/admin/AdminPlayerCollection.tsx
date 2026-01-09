@@ -5,7 +5,7 @@ export default function AdminPlayerCollection() {
   const [userId] = useState<string>("1");
   return (
     <div>
-      <PlayerCollection userId={userId} />
+      <PlayerCollection auth0Id={userId} />
     </div>
   );
 }

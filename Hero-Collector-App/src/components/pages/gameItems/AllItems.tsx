@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { api } from "../../../api/axios";
+import { api } from "../../../../api/axios";
 
-import type { ItemOutput } from "../../../../Shared/types/types";
+import type { ItemOutput } from "../../../../../Shared/types/types";
 import ItemCard from "../collection/cards/ItemCard";
 
 export default function AllItems() {

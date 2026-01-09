@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useAuthStore } from "../../storage/authStore";
-import { api } from "../../../api/axios";
+import { useAuthStore } from "../../../storage/authStore";
+import { api } from "../../../../api/axios";
 
 export default function Game1() {
   const auth0Id = useAuthStore((s) => s.user?.auth0Id);

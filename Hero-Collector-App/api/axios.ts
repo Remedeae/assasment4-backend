@@ -1,6 +1,6 @@
 import axios, { type Method } from "axios";
-import { baseURL } from "../../Shared/auth/urls";
 import { HttpError } from "../../Backend/src/middleware/errorHandler";
+import { backendURL } from "../../Shared/variables/url";
 
 export const api = async <T>(
   method: Method,
@@ -10,7 +10,7 @@ export const api = async <T>(
   try {
     const response = await axios({
       method,
-      url: `${baseURL}${url}`,
+      url: `${backendURL}${url}`,
       data: body,
       withCredentials: true,
     });

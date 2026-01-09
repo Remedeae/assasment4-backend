@@ -1,4 +1,4 @@
-import type { ItemOutput } from "../../../../../Shared/types/types";
+import type { ItemOutput } from "../../../../../../Shared/types/types";
 
 type ItemCard = {
   item: Omit<ItemOutput, "id">;

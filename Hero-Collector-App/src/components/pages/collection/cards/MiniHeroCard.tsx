@@ -1,4 +1,4 @@
-import placeholderImg from "../../../assets/user.png";
+import placeholderImg from "../../../../assets/user.png";
 
 type HeroCardProps = {
   name: string;

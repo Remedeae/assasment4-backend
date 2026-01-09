@@ -1,5 +1,5 @@
 import { Router } from "express";
-import z from "zod";
+import z from "../../../../Shared/node_modules/zod";
 
 import { HttpError } from "../../middleware/errorHandler";
 import { errMsg, validateData } from "../../middleware/validatorHelpes";

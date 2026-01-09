@@ -2,7 +2,7 @@ import { Router } from "express";
 import { ItemModel } from "../../mongoDB/models/GameData";
 import { OutputItem } from "../../../../Shared/types/output";
 import { validateData, errMsg } from "../../middleware/validatorHelpes";
-import z from "zod";
+import z from "../../../../Shared/node_modules/zod";
 import { ItemSchema } from "../../../../Shared/types/base/generalGamedataSchema";
 import { deleteByID, updateById } from "../helpers/helpers";
 

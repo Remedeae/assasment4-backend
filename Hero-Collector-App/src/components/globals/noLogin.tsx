@@ -5,7 +5,7 @@ export default function NoLogin() {
     <div>
       <h2>You must login to view this page!</h2>
       <button>
-        <Link to="/login">Go to login!</Link>
+        <Link to="/">Go to login!</Link>
       </button>
     </div>
   );

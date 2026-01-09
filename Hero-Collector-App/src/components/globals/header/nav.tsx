@@ -11,7 +11,7 @@ export default function Nav() {
   return (
     <div>
       <Link to="/home">Home</Link>
-      <Link to={`/collection/${user.auth0Id}`}>Game</Link>
+      <Link to={`/collection/${user.auth0Id}`}>Collection</Link>
       <Link to="/game">Play</Link>
       {user?.roles?.includes("admin") && (
         <>

@@ -1,4 +1,4 @@
-import Game1 from "../components/games/Game1";
+import Game1 from "../components/pages/games/Game1";
 import NoLogin from "../components/globals/noLogin";
 import { useAuthStore } from "../storage/authStore";
 

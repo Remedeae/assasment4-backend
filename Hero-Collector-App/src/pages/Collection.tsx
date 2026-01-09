@@ -1,5 +1,5 @@
 import NoLogin from "../components/globals/noLogin";
-import PlayerCollection from "../components/collection/user/PlayerCollection";
+import PlayerCollection from "../components/pages/collection/user/PlayerCollection";
 import { useAdminToggle } from "../storage/adminToggleStore";
 import { useAuthStore } from "../storage/authStore";
 import { useParams } from "react-router-dom";
@@ -13,9 +13,15 @@ export default function Collection() {
   const { auth0Id } = useParams();
   const isViewingOtherUser = auth0Id && auth0Id !== auth0user?.auth0Id;
 
+  if (!auth0user) {
+    return (
+      <>
+        <NoLogin />
+      </>
+    );
+  }
   return (
     <div>
-      {!auth0user && <NoLogin />}
       {!isTrueAdmin && isViewingOtherUser && <h1>401: Unauthorized</h1>}
       {!isLocalAdmin && auth0user?.auth0Id && (
         <PlayerCollection auth0Id={auth0user?.auth0Id} />

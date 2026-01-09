@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
-import { ZodError } from "zod";
+import { ZodError } from "../../../Shared/node_modules/zod";
 
 export const formatZodError = (err: ZodError) => {
   return err.issues.map((issue) => ({

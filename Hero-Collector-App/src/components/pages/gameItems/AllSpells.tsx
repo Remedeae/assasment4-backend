@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { api } from "../../../api/axios";
+import { api } from "../../../../api/axios";
 
-import type { SpellOutput } from "../../../../Shared/types/types";
+import type { SpellOutput } from "../../../../../Shared/types/types";
 import SpellCard from "../collection/cards/SpellCard";
 
 export default function AllSpells() {

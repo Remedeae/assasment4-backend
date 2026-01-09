@@ -11,7 +11,7 @@ export default function Header() {
     <div>
       <Nav />
       <ActiveUser />
-      {!user?.includes("admin") ? (
+      {user?.includes("admin") ? (
         <button onClick={() => setIsAdmin(!isAdmin)}>
           Swap to {!isAdmin && "Admin"}
           {isAdmin && "User"} view

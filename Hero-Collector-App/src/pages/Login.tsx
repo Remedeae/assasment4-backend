@@ -1,4 +1,4 @@
-import UserLogin from "../components/login/UserLogin";
+import UserLogin from "../components/pages/login/UserLogin";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useAuthStore } from "../storage/authStore";
@@ -9,6 +9,7 @@ export default function Login() {
 
   useEffect(() => {
     if (loggedIn) navigate("/home");
+    //console.log(loggedIn);
   }, [loggedIn, navigate]);
 
   return (

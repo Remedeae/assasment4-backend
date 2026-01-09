@@ -20,24 +20,29 @@ import checkAuthRoute from "./routes/checkAuthRoute";
 import playGameRoutes from "./routes/user/playGameRoutes";
 import userRoutes from "./routes/user/userRoutes";
 
+import { PORT, frontendURL } from "../../Shared/variables/url";
+
 const corsOptions: CorsOptions = {
-  origin: ["http://localhost:5173"],
+  origin: [frontendURL],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 };
 
-const PORT = process.env.PORT;
 const app = express();
 const { requiresAuth } = pkg;
 
 connectDB();
+
+app.get("/", (req, res) => {
+  res.redirect("http://localhost:5173/home");
+});
 
 app.use(authMiddleware);
 app.use(express.json());
 app.use(cors(corsOptions));
 
 app.use("/signup/user", signUpRoute);
-app.get("/loggedUser", requiresAuth(), checkAuthRoute);
+app.use("/loggedUser", requiresAuth(), checkAuthRoute);
 
 app.use("/allUsers", requiresAuth(), requiresAdmin, allUserRoutes);
 app.use("/gameitems/heroes", requiresAuth(), requiresAdmin, heroRoutes);

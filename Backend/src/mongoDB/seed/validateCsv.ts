@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "../../../../Shared/node_modules/zod";
 
 export const parseCSVRows = <T>(schema: z.ZodSchema<T>, rows: unknown[]) => {
   const valid: T[] = [];

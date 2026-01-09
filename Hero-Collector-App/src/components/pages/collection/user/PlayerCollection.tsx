@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { api } from "../../../../api/axios";
+import { api } from "../../../../../api/axios";
 
 import MiniHeroCard from "../cards/MiniHeroCard";
 import {
@@ -8,7 +8,7 @@ import {
   type FullPlayerHeroOutput,
   type PlayerOutput,
   type FullPlayerOutput,
-} from "../../../../../Shared/types/types";
+} from "../../../../../../Shared/types/types";
 import HeroCard from "../cards/HeroCard";
 
 type ID = {
