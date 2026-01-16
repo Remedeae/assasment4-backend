@@ -23,10 +23,10 @@ function App() {
     const checkAuth = async () => {
       try {
         const res = await api<LoggedUserResponse>("get", "/loggedUser");
-        if (res.user.roles?.includes("admin")) {
+        if (res.user?.roles?.some((r) => r.toLowerCase() === "admin")) {
           setAdmin(true);
         }
-        setAuth(res.user);
+        setAuth(res);
       } catch {
         clearAuth();
       }

@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { HeroModel } from "../../mongoDB/models/Hero";
 import { errMsg, validateData } from "../../middleware/validatorHelpes";
-import { OutputHero } from "../../../../Shared/types/output";
+import { BOutputHero } from "../../types/validation/mongoOutput";
 import z from "../../../../Shared/node_modules/zod";
 import { HeroSchema } from "../../../../Shared/types/base/heroDataSchema";
 import { deleteByID, hydrateHeroes, updateById } from "../helpers/helpers";
@@ -14,11 +14,11 @@ router.get("", async (req, res, next) => {
     const heroes = await HeroModel.find().lean();
     const validatedHeroes = validateData(
       heroes,
-      z.array(OutputHero),
+      z.array(BOutputHero),
       errMsg[3]
     );
     const fullHeroes = hydrateHeroes(validatedHeroes);
-    res.status(200).send(validatedHeroes);
+    res.status(200).send(fullHeroes);
   } catch (error) {
     next(error);
   }

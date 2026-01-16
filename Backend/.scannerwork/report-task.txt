@@ -1,0 +1,6 @@
+projectKey=hero-collector-backend
+serverUrl=http://localhost:9000
+serverVersion=26.1.0.118079
+dashboardUrl=http://localhost:9000/dashboard?id=hero-collector-backend
+ceTaskId=89e10ec9-4e41-4726-acb3-688be4118266
+ceTaskUrl=http://localhost:9000/api/ce/task?id=89e10ec9-4e41-4726-acb3-688be4118266

@@ -4,16 +4,17 @@ import type { LoggedUserSchema } from "../../../Shared/types/authRes";
 export type LoggedUser = z.infer<typeof LoggedUserSchema>;
 
 export type LoggedUserResponse = {
-  user: LoggedUser;
+  user: LoggedUser | null;
   isAuthenticated: boolean;
 };
 
 export type AuthStore = {
   user: LoggedUser | null;
+  isTrueAdmin: boolean;
   isAuthenticated: boolean;
   isLoading: boolean;
 
-  setAuth: (user: LoggedUser | null) => void;
+  setAuth: (data: LoggedUserResponse) => void;
   clearAuth: () => void;
 };
 //---------------------------

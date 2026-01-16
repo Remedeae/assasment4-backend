@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { useAuthStore } from "../storage/authStore";
 import AllHeroes from "../components/pages/gameItems/AllHeroes";
 import AllItems from "../components/pages/gameItems/AllItems";
 import AllSpells from "../components/pages/gameItems/AllSpells";
+import { useAdminToggle } from "../storage/adminToggleStore";
 
 export default function GameItems() {
-  const user = useAuthStore((s) => s.user?.roles);
+  const isLocalAdmin = useAdminToggle((s) => s.isAdmin);
   const [itemTypeDisplay, setItemTypeDisplay] = useState<number>(0);
 
-  if (!user?.includes("admin")) {
+  if (!isLocalAdmin) {
     return (
       <div>
         <h1>401: Unauthorized</h1>

@@ -1,21 +1,23 @@
 import { Router } from "express";
 import { LoggedUserSchema } from "../../../Shared/types/authRes";
+import { HttpError } from "../middleware/errorHandler";
 
 const router = Router();
 
 router.get("", async (req, res, next) => {
   try {
-    const rawUser = req.oidc.user;
-    console.log(req.oidc.accessToken?.token_type);
-    const formattedUser = LoggedUserSchema.parse({
-      userName: rawUser?.userName,
-      email: rawUser?.email,
-      roles: rawUser?.["https://hero-collector.dev/roles"],
-      auth0Id: rawUser?.sub,
-    });
-    const isAuthenticated = formattedUser ? true : false;
-    res.status(200).send({ isAuthenticated, user: formattedUser });
-    //console.log(response);
+    const isAuthenticated = req.oidc.isAuthenticated();
+    if (isAuthenticated) {
+      const rawUser = req.oidc.user;
+      const formattedUser = LoggedUserSchema.parse({
+        userName: rawUser?.nickname.split(/[._]/)[0],
+        email: rawUser?.email,
+        roles: rawUser?.["https://remedeae-hero-collector/roles"],
+        auth0Id: rawUser?.sub,
+      });
+      res.status(200).send({ isAuthenticated, user: formattedUser });
+    }
+    throw new HttpError(401, "Not authenticated", null);
   } catch (error) {
     next(error);
   }

@@ -29,8 +29,9 @@ export const requiresAdmin = (
   res: Response,
   next: NextFunction
 ) => {
-  const roles = req.oidc.user?.["https://hero-collector.dev/roles"] ?? [];
-  if (!roles?.includes("admin")) {
+  const roles: string[] | null =
+    req.oidc.user?.["https://remedeae-hero-collector/roles"] ?? [];
+  if (!roles?.some((r) => r.toLowerCase() === "admin")) {
     return next(
       new HttpError(
         403,

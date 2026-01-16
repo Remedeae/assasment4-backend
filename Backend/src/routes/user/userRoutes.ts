@@ -3,9 +3,9 @@ import { PlayerModel } from "../../mongoDB/models/Player";
 import { errMsg, validateData } from "../../middleware/validatorHelpes";
 import { HttpError } from "../../middleware/errorHandler";
 import {
-  OutputFullPlayer,
-  OutputPlayer,
-} from "../../../../Shared/types/output";
+  BOutputFullPlayer,
+  BOutputPlayer,
+} from "../../types/validation/mongoOutput";
 import {
   //adminStatusCheck,
   deleteByID,
@@ -25,7 +25,7 @@ router.get("/:auth0Id/:full", async (req, res, next) => {
     const full = req.params.full.toLowerCase();
     const validateFull = validateData(full, csvBoolean, errMsg[2]);
     const user = await PlayerModel.findOne({ auth0Id }).lean();
-    const validatedUser = validateData(user, OutputPlayer, errMsg[0]);
+    const validatedUser = validateData(user, BOutputPlayer, errMsg[0]);
     if (!validateFull) {
       res.status(200).send(validatedUser);
       return;
@@ -34,7 +34,7 @@ router.get("/:auth0Id/:full", async (req, res, next) => {
     const inventoryItems = await hydrateItems(validatedUser);
     const validatedFullUser = validateData(
       { user: validatedUser, heroes: fullHeroes, items: inventoryItems },
-      OutputFullPlayer,
+      BOutputFullPlayer,
       errMsg[0]
     );
     res.status(200).send(validatedFullUser);

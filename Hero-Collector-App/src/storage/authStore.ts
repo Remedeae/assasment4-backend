@@ -1,15 +1,17 @@
 import { create } from "zustand";
-import type { AuthStore } from "../types/storageTypes";
+import type { AuthStore, LoggedUserResponse } from "../types/storageTypes";
 
 export const useAuthStore = create<AuthStore>((set) => ({
   user: null,
+  isTrueAdmin: false,
   isAuthenticated: false,
   isLoading: true,
 
-  setAuth: (user) =>
+  setAuth: ({ user, isAuthenticated }: LoggedUserResponse) =>
     set({
       user,
-      isAuthenticated: !user,
+      isAuthenticated,
+      isTrueAdmin: user?.roles?.some((r) => r.toLowerCase() === "admin"),
       isLoading: false,
     }),
 
@@ -17,6 +19,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
     set({
       user: null,
       isAuthenticated: false,
+      isTrueAdmin: false,
       isLoading: false,
     }),
 }));

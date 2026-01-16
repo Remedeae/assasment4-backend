@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { SpellModel } from "../../mongoDB/models/GameData";
-import { OutputSpell } from "../../../../Shared/types/output";
+import { BOutputSpell } from "../../types/validation/mongoOutput";
 import { validateData, errMsg } from "../../middleware/validatorHelpes";
 import z from "../../../../Shared/node_modules/zod";
 import { SpellSchema } from "../../../../Shared/types/base/generalGamedataSchema";
@@ -14,7 +14,7 @@ router.get("", async (req, res, next) => {
     const spells = await SpellModel.find().lean();
     const validatedSpells = validateData(
       spells,
-      z.array(OutputSpell),
+      z.array(BOutputSpell),
       errMsg[0]
     );
     res.status(200).send(validatedSpells);

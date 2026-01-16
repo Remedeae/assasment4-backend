@@ -7,7 +7,7 @@ import { deleteByID, updateById } from "../helpers/helpers";
 
 import { PlayerModel } from "../../mongoDB/models/Player";
 
-import { OutputPlayer } from "../../../../Shared/types/output";
+import { BOutputPlayer } from "../../types/validation/mongoOutput";
 import { PlayerSchema } from "../../../../Shared/types/base/playerSchema";
 
 const router = Router();
@@ -18,7 +18,7 @@ router.get("", async (req, res, next) => {
     const users = await PlayerModel.find().lean();
     const validatedUsers = validateData(
       users,
-      z.array(OutputPlayer),
+      z.array(BOutputPlayer),
       errMsg[0]
     );
     res.send(200).send(validatedUsers);

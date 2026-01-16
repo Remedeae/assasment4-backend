@@ -1,0 +1,6 @@
+services:
+  sonarqube:
+    image: sonarqube
+    container_name: mysonarqube
+    ports:
+      - "9000:9000"

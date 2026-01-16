@@ -3,32 +3,34 @@ import { ItemSchema, SpellSchema } from "./base/generalGamedataSchema";
 import { HeroSchema } from "./base/heroDataSchema";
 import { PlayerSchema, PlayerHeroSchema } from "./base/playerSchema";
 
+const mongoIdSchema = z.string().regex(/^[0-9a-fA-F]{24}$/, "Invalid ObjectId");
+
 export const OutputItem = ItemSchema.extend({
-  id: z.string(),
+  _id: mongoIdSchema,
 });
 
 export const OutputSpell = SpellSchema.extend({
-  id: z.string(),
+  _id: mongoIdSchema,
 });
 
 export const OutputHero = HeroSchema.extend({
-  id: z.string(),
+  _id: mongoIdSchema,
   createdAt: z.date(),
 });
 
 export const OutputPlayer = PlayerSchema.extend({
-  id: z.string(),
+  _id: mongoIdSchema,
   createdAt: z.date(),
 });
 export const OutputPlayerHero = PlayerHeroSchema.extend({
-  id: z.string(),
+  _id: mongoIdSchema,
   createdAt: z.date(),
 });
 export const OutputFullPlayerHero = z.object({
   hero: OutputHero,
   spells: z.array(OutputSpell),
   equipment: z.array(OutputItem),
-  id: z.string(),
+  _id: mongoIdSchema,
   createdAt: z.date(),
 });
 

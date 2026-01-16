@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { ItemModel } from "../../mongoDB/models/GameData";
-import { OutputItem } from "../../../../Shared/types/output";
+import { BOutputItem } from "../../types/validation/mongoOutput";
 import { validateData, errMsg } from "../../middleware/validatorHelpes";
 import z from "../../../../Shared/node_modules/zod";
 import { ItemSchema } from "../../../../Shared/types/base/generalGamedataSchema";
@@ -12,7 +12,7 @@ const router = Router();
 router.get("", async (req, res, next) => {
   try {
     const items = await ItemModel.find().lean();
-    const validatedItems = validateData(items, z.array(OutputItem), errMsg[0]);
+    const validatedItems = validateData(items, z.array(BOutputItem), errMsg[0]);
     res.status(200).send(validatedItems);
   } catch (error) {
     next(error);

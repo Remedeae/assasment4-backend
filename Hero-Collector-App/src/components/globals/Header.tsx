@@ -3,7 +3,7 @@ import Nav from "./header/nav";
 import { useAdminToggle } from "../../storage/adminToggleStore";
 import { useAuthStore } from "../../storage/authStore";
 export default function Header() {
-  const user = useAuthStore((s) => s.user?.roles);
+  const isTrueAdmin = useAuthStore((s) => s.isTrueAdmin);
   const isAdmin = useAdminToggle((s) => s.isAdmin);
   const setIsAdmin = useAdminToggle((s) => s.setIsAdmin);
 
@@ -11,7 +11,7 @@ export default function Header() {
     <div>
       <Nav />
       <ActiveUser />
-      {user?.includes("admin") ? (
+      {isTrueAdmin ? (
         <button onClick={() => setIsAdmin(!isAdmin)}>
           Swap to {!isAdmin && "Admin"}
           {isAdmin && "User"} view

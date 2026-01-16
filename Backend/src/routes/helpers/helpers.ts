@@ -5,20 +5,15 @@ import type mongoose from "mongoose";
 import { Model, Types } from "mongoose";
 import { HeroModel } from "../../mongoDB/models/Hero";
 import { SpellModel, ItemModel } from "../../mongoDB/models/GameData";
-import { PlayerModel, PlayerHeroModel } from "../../mongoDB/models/Player";
+import { PlayerHeroModel } from "../../mongoDB/models/Player";
 
-import {
-  OutputFullPlayerHero,
-  OutputItem,
-} from "../../../../Shared/types/output";
-import type {
-  HeroOutput,
-  PlayerHeroInput,
-  PlayerOutput,
-} from "../../../../Shared/types/types";
+import * as zodOutput from "../../types/validation/mongoOutput";
+import * as tsoutput from "../../types/validation/mongoOutput";
+import * as tsinput from "../../../../Shared/types/types";
 import { PlayerHeroSchema } from "../../../../Shared/types/base/playerSchema";
 import { z, ZodObject } from "../../../../Shared/node_modules/zod";
 
+//constructs a Player hero from heroId ready for posting
 export const constructPlayerHero = async (
   heroId: string,
   session: mongoose.ClientSession
@@ -44,7 +39,7 @@ export const constructPlayerHero = async (
     : [];
   const spellIds = spells.map((s) => s._id.toString());
 
-  const hero: PlayerHeroInput = {
+  const hero: tsinput.PlayerHeroInput = {
     heroId,
     equipmentIds,
     spellIds,
@@ -53,7 +48,8 @@ export const constructPlayerHero = async (
   return validatedHero;
 };
 
-export const hydrateHeroes = async (heroes: HeroOutput[]) => {
+//Adds spells and items from the heroes known spelltype and startingequipment (item Ids)
+export const hydrateHeroes = async (heroes: tsoutput.BHeroOutput[]) => {
   const fullHeroes = await Promise.all(
     heroes.map(async (h) => {
       const spells = h.traits.spellSchool
@@ -65,13 +61,14 @@ export const hydrateHeroes = async (heroes: HeroOutput[]) => {
   );
   const validatedFullHeroes = validateData(
     fullHeroes,
-    OutputFullPlayerHero,
+    z.array(zodOutput.BOutputFullPlayerHero),
     errMsg[0]
   );
   return validatedFullHeroes;
 };
 
-export const hydratePlayerHeroes = async (user: PlayerOutput) => {
+//Adds spells and items to a player hero based on items/spells array
+export const hydratePlayerHeroes = async (user: tsoutput.BPlayerOutput) => {
   const playerHeroIds: string[] = user.inventory.heroes;
   const objectIds = playerHeroIds.map((id) => new Types.ObjectId(id));
   const heroes = await PlayerHeroModel.find({
@@ -89,20 +86,26 @@ export const hydratePlayerHeroes = async (user: PlayerOutput) => {
   );
   const validatedFullHeroes = validateData(
     fullHeroes,
-    OutputFullPlayerHero,
+    z.array(zodOutput.BOutputFullPlayerHero),
     errMsg[0]
   );
   return validatedFullHeroes;
 };
 
-export const hydrateItems = async (user: PlayerOutput) => {
+//adds items from the item Ids in player inventory
+export const hydrateItems = async (user: tsoutput.BPlayerOutput) => {
   const itemIds: string[] = user.inventory.itemsIds;
   const objectIds = itemIds.map((id) => new Types.ObjectId(id));
   const items = await ItemModel.find({ _id: { $in: objectIds } }).lean();
-  const validatedItems = validateData(items, z.array(OutputItem), errMsg[0]);
+  const validatedItems = validateData(
+    items,
+    z.array(zodOutput.BOutputItem),
+    errMsg[0]
+  );
   return validatedItems;
 };
 
+//content for a PUT function that validates and updates a DB entry based on mongoDB id
 export const updateById = async <S extends ZodObject<any>>(
   id: string,
   type: string,
@@ -123,6 +126,7 @@ export const updateById = async <S extends ZodObject<any>>(
   return updated;
 };
 
+//content for a DELETE function that deletes a DB entry based on mongoDB id
 export const deleteByID = async (
   id: string,
   type: string,

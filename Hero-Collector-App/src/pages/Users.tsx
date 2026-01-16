@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import userAvatar from "../assets/user.png";
 import { useNavigate } from "react-router-dom";
 
-export default function AdminMenu() {
+export default function User() {
   const user = useAuthStore((s) => s.user?.roles);
   const [users, setUsers] = useState<PlayerOutput[] | null>(null);
   const navigate = useNavigate();

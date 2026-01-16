@@ -16,7 +16,7 @@ import {
   PlayerHeroSchema,
   PlayerSchema,
 } from "../../../../Shared/types/base/playerSchema";
-import { OutputPlayer } from "../../../../Shared/types/output";
+import { BOutputPlayer } from "../../types/validation/mongoOutput";
 
 const router = Router();
 
@@ -28,7 +28,7 @@ router.get("/:id", async (req, res, next) => {
     if (!user) {
       res.status(404).send("User not found");
     }
-    const validatedUser = validateData(user, OutputPlayer, errMsg[0]);
+    const validatedUser = validateData(user, BOutputPlayer, errMsg[0]);
     res.status(200).send(validatedUser);
   } catch (error) {
     next(error);
@@ -43,7 +43,7 @@ router.get("/heroes/:id", async (req, res, next) => {
     if (!user) {
       res.status(404).send("User not found");
     }
-    const validatedUser = validateData(user, OutputPlayer, errMsg[0]);
+    const validatedUser = validateData(user, BOutputPlayer, errMsg[0]);
     const fullHeroes = await hydratePlayerHeroes(validatedUser);
     res.status(200).send(fullHeroes);
   } catch (error) {
