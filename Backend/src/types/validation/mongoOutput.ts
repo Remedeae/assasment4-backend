@@ -2,10 +2,10 @@ import { z } from "../../../../Shared/node_modules/zod";
 import * as gameitems from "../../../../Shared/types/base/generalGamedataSchema";
 import * as hero from "../../../../Shared/types/base/heroDataSchema";
 import * as player from "../../../../Shared/types/base/playerSchema";
-import { Types } from "mongoose";
+import { isValidObjectId, Types } from "mongoose";
 
-const mongoIdSchema = z.string().refine((v) => Types.ObjectId.isValid(v), {
-  message: "Invalid MongoDb Object",
+const mongoIdSchema = z.custom<Types.ObjectId>((v) => isValidObjectId(v), {
+  message: "Invalid ObjectId",
 });
 
 export const BOutputItem = gameitems.ItemSchema.extend({

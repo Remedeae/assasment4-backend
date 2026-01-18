@@ -19,6 +19,29 @@ router.get("", async (req, res, next) => {
   }
 });
 
+//get item types
+router.get("/types", async (req, res, next) => {
+  try {
+    const rawTypes = await ItemModel.find().select("type -_id").lean();
+    const validtedTypes = validateData(
+      rawTypes,
+      z.array(
+        z.object({
+          type: z.array(z.string()),
+        })
+      ),
+      errMsg[0]
+    );
+    const types = validtedTypes
+      .map((t) => t.type)
+      .flat()
+      .filter((t, i, self) => i === self.indexOf(t));
+    res.status(200).send(types);
+  } catch (error) {
+    next(error);
+  }
+});
+
 //post item
 router.post("", async (req, res, next) => {
   try {

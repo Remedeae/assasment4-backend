@@ -2,6 +2,7 @@ import { useAuthStore } from "../../../storage/authStore";
 import type { LoggedUser } from "../../../types/storageTypes";
 import LoginButton from "../buttons/LoginButton";
 import LogoutButton from "../buttons/LogoutButton";
+import { firstLetterToUpperCase } from "../../../formatters/textFormatters";
 
 export default function ActiveUser() {
   const user: LoggedUser | null = useAuthStore((s) => s.user);
@@ -13,8 +14,7 @@ export default function ActiveUser() {
   return (
     <div>
       <h2>
-        {displayAccess}{" "}
-        {displayLoggedIn.charAt(0).toUpperCase() + displayLoggedIn.slice(1)}
+        {displayAccess} {firstLetterToUpperCase(displayLoggedIn)}
       </h2>
       {user ? <LogoutButton /> : <LoginButton />}
     </div>

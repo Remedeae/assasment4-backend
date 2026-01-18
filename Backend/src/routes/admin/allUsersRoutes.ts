@@ -21,7 +21,7 @@ router.get("", async (req, res, next) => {
       z.array(BOutputPlayer),
       errMsg[0]
     );
-    res.send(200).send(validatedUsers);
+    res.status(200).send(validatedUsers);
   } catch (error) {
     next(error);
   }

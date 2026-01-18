@@ -19,8 +19,8 @@ export default function PlayerCollection(auth0Id: ID) {
   const [user, setUser] = useState<PlayerOutput | null>(null);
   const [heroes, setHeroes] = useState<FullPlayerHeroOutput[]>([]);
   //const [items, setItems] = useState<ItemOutput[]>([]);
-  const [displayHeroId, setDisplayHeroId] = useState<string>(heroes[0].id);
-  const displayHero = heroes.find((h) => h.id === displayHeroId);
+  const [displayHeroId, setDisplayHeroId] = useState<string>(heroes[0]._id);
+  const displayHero = heroes.find((h) => h._id === displayHeroId);
 
   const [search, setSearch] = useState<string>("");
 
@@ -63,7 +63,7 @@ export default function PlayerCollection(auth0Id: ID) {
               h.hero.name.toLowerCase().includes(search.toLowerCase())
             )
             .map((h) => (
-              <li key={h.hero.id} onClick={() => setDisplayHeroId(h.hero.id)}>
+              <li key={h.hero._id} onClick={() => setDisplayHeroId(h.hero._id)}>
                 <MiniHeroCard
                   name={h.hero.name}
                   image={h.hero.image ?? placeholderPortray}
@@ -86,9 +86,9 @@ export default function PlayerCollection(auth0Id: ID) {
         {user && user?.team.length > 0 && (
           <ul>
             {heroes
-              .filter((h) => user.team.includes(h.hero.id))
+              .filter((h) => user.team.includes(h.hero._id))
               .map((t) => (
-                <li key={t.hero.id}>
+                <li key={t.hero._id}>
                   <MiniHeroCard
                     name={t.hero.name}
                     image={t.hero.image || placeholderPortray}

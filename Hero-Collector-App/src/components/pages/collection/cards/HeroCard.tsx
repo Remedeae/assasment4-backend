@@ -5,7 +5,7 @@ import { useState } from "react";
 
 import placeholderImg from "../../../../assets/user.png";
 
-type HeroCardProp = Omit<FullPlayerHeroOutput, "id" | "createdAt">;
+type HeroCardProp = Omit<FullPlayerHeroOutput, "_id" | "createdAt">;
 
 export default function HeroCard({ hero, spells, equipment }: HeroCardProp) {
   const [hoverItemId, setHoverItemId] = useState<string | null>(null);
@@ -61,13 +61,13 @@ export default function HeroCard({ hero, spells, equipment }: HeroCardProp) {
             <ul>
               {spells.map((s) => (
                 <li
-                  key={s.id}
-                  onMouseEnter={() => setHoverItemId(s.id)}
+                  key={s._id}
+                  onMouseEnter={() => setHoverItemId(s._id)}
                   onMouseLeave={() => setHoverItemId(null)}
                 >
                   {s.name}
                   <SpellCard
-                    display={hoverItemId === s.id}
+                    display={hoverItemId === s._id}
                     name={s.name}
                     school={s.school}
                     type={s.type}
@@ -84,12 +84,12 @@ export default function HeroCard({ hero, spells, equipment }: HeroCardProp) {
         <ul>
           {equipment.map((e) => (
             <li
-              key={e.id}
-              onMouseEnter={() => setHoverItemId(e.id)}
+              key={e._id}
+              onMouseEnter={() => setHoverItemId(e._id)}
               onMouseLeave={() => setHoverItemId(null)}
             >
               {e.name}
-              <ItemCard item={e} display={hoverItemId === e.id} />
+              <ItemCard item={e} display={hoverItemId === e._id} />
             </li>
           ))}
         </ul>

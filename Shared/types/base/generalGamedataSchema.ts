@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 const StatSchema = z.number().min(0).max(10);
+
 export const equipHand = ["Main-hand", "Off-hand", "Two-hand", "Any-hand"];
 export const weaponType = ["melee", "versatile", "thrown", "ranged", "magic"];
 

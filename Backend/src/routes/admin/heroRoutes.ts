@@ -17,7 +17,7 @@ router.get("", async (req, res, next) => {
       z.array(BOutputHero),
       errMsg[3]
     );
-    const fullHeroes = hydrateHeroes(validatedHeroes);
+    const fullHeroes = await hydrateHeroes(validatedHeroes);
     res.status(200).send(fullHeroes);
   } catch (error) {
     next(error);

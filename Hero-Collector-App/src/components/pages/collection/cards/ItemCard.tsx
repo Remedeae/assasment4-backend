@@ -10,7 +10,7 @@ export default function ItemCard({ item, display }: ItemCard) {
 
   return (
     <ul>
-      <li>Name: {item.name}</li>
+      <li>{item.name}</li>
       <li>
         Tier:{item.tier && ` ${item.tier}`}
         {item.equipHand && ` ${item.equipHand}`}
