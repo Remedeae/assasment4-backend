@@ -6,6 +6,7 @@ import {
   spellSchool,
   spellType,
 } from "../../../../../Shared/types/base/generalGamedataSchema";
+import { title } from "process";
 
 const arraySplitter: string = "|";
 
@@ -54,6 +55,7 @@ const HeroTraitsCsvSchema = z.object({
 
 export const HeroCsvSchema = z.object({
   name: z.string(),
+  title: z.string(),
   image: h.csvStringOptional,
   description: HeroDescriptionCsvSchema,
   traits: HeroTraitsCsvSchema,

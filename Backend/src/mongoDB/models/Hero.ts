@@ -2,6 +2,7 @@ import mongoose, { Schema } from "mongoose";
 
 const HeroMongoSchema = new Schema({
   name: { type: String, required: true },
+  title: { type: String, required: true },
   image: { type: String },
   description: new Schema(
     {
@@ -11,7 +12,7 @@ const HeroMongoSchema = new Schema({
       likes: { type: String, required: true },
       dislikes: { type: String, required: true },
     },
-    { _id: false }
+    { _id: false },
   ),
   traits: new Schema(
     {
@@ -20,7 +21,7 @@ const HeroMongoSchema = new Schema({
       special: { type: [String], default: [] },
       combat: { type: [String], default: [] },
     },
-    { required: true, _id: false }
+    { required: true, _id: false },
   ),
 
   stats: new Schema(
@@ -30,7 +31,7 @@ const HeroMongoSchema = new Schema({
       lives: { type: Number, required: true },
       speed: { type: Number, required: true },
     },
-    { _id: false, required: true }
+    { _id: false, required: true },
   ),
   startingEquipment: { type: [String], default: [] },
   createdAt: { type: Date, default: Date.now },

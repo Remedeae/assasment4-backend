@@ -15,7 +15,7 @@ router.get("", async (req, res, next) => {
     const validatedHeroes = validateData(
       heroes,
       z.array(BOutputHero),
-      errMsg[3]
+      errMsg[3],
     );
     const fullHeroes = await hydrateHeroes(validatedHeroes);
     res.status(200).send(fullHeroes);
@@ -28,7 +28,7 @@ router.get("", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     const validatedBody = validateData(req.body, HeroSchema, errMsg[0]);
-    const newHero = validatedBody ?? (await HeroModel.create(validatedBody));
+    const newHero = await HeroModel.create(validatedBody);
     res.status(200).send(`Successfully created: ${newHero.name}`);
   } catch (error) {
     next(error);

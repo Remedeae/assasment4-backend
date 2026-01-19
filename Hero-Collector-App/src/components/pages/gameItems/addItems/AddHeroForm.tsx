@@ -16,6 +16,7 @@ export default function AddHeroForm({
 
   const [hero, setHero] = useState<HeroInput>({
     name: "",
+    title: "",
     image: null,
     description: {
       looks: "",
@@ -103,6 +104,19 @@ export default function AddHeroForm({
             setHero((prev) => ({
               ...prev,
               name: e.target.value,
+            }))
+          }
+        />
+        <label htmlFor="title">Title</label>
+        <input
+          type="text"
+          id="title"
+          placeholder="Enter the heros title/archetype"
+          value={hero.title}
+          onChange={(e) =>
+            setHero((prev) => ({
+              ...prev,
+              title: e.target.value,
             }))
           }
         />

@@ -12,16 +12,17 @@ const HeroDescriptionSchema = z.object({
 
 const HeroTraitsSchema = z.object({
   spellcaster: z.boolean(),
-  spellSchool: z.enum(spellSchool).optional().nullable(),
-  special: z.array(z.string()).optional().nullable(),
-  combat: z.array(z.string()).optional().nullable(),
+  spellSchool: z.enum(spellSchool).nullable().default(null),
+  special: z.array(z.string()).default([]),
+  combat: z.array(z.string()).default([]),
 });
 
 export const HeroSchema = z.object({
   name: z.string(),
-  image: z.string().optional().nullable(),
+  title: z.string(),
+  image: z.string().nullable().default(null),
   description: HeroDescriptionSchema,
   traits: HeroTraitsSchema,
   stats: StatBlockSchema,
-  startingEquipment: z.array(mongoIdSchema),
+  startingEquipment: z.array(mongoIdSchema).default([]),
 });

@@ -27,8 +27,8 @@ router.get("", async (req, res, next) => {
 router.post("", async (req, res, next) => {
   try {
     const validatedBody = validateData(req.body, SpellSchema, errMsg[3]);
-    validatedBody ?? (await SpellModel.create(validatedBody));
-    res.status(200).send(`Successfully created: ${validatedBody.name}`);
+    const createdSpell = await SpellModel.create(validatedBody);
+    res.status(200).send(`Successfully created: ${createdSpell.name}`);
   } catch (error) {
     next(error);
   }

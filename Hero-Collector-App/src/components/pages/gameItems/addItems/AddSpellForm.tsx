@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { SpellInput } from "../../../../../../Shared/types/types";
 import {
   spellSchool,
@@ -15,8 +15,8 @@ export default function AddSpellForm({
 }) {
   const [spell, setSpell] = useState<SpellInput>({
     name: "",
-    school: "",
-    type: "",
+    school: spellSchool[0],
+    type: spellType[0],
     description: null,
   });
   const [postSuccess, setPostSuccess] = useState<string | null>(null);
@@ -28,6 +28,10 @@ export default function AddSpellForm({
       displayFormFalse();
     }, 1500);
   };
+
+  useEffect(() => {
+    console.log(spell);
+  }, [spell]);
 
   return (
     <div>
@@ -53,12 +57,14 @@ export default function AddSpellForm({
           onChange={(e) =>
             setSpell((prev) => ({
               ...prev,
-              school: e.target.value.toLowerCase(),
+              school: e.target.value,
             }))
           }
         >
           {spellSchool.map((s) => (
-            <option key={s}>{firstLetterToUpperCase(s)}</option>
+            <option key={s} value={s}>
+              {firstLetterToUpperCase(s)}
+            </option>
           ))}
         </select>
 
@@ -69,12 +75,14 @@ export default function AddSpellForm({
           onChange={(e) =>
             setSpell((prev) => ({
               ...prev,
-              type: e.target.value.toLowerCase(),
+              type: e.target.value,
             }))
           }
         >
           {spellType.map((t) => (
-            <option key={t}>{firstLetterToUpperCase(t)}</option>
+            <option key={t} value={t}>
+              {firstLetterToUpperCase(t)}
+            </option>
           ))}
         </select>
 
