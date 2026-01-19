@@ -15,7 +15,7 @@ router.get("", async (req, res, next) => {
     const validatedSpells = validateData(
       spells,
       z.array(BOutputSpell),
-      errMsg[0]
+      errMsg[0],
     );
     res.status(200).send(validatedSpells);
   } catch (error) {
@@ -56,7 +56,7 @@ router.put("/:id", async (req, res, next) => {
       "Spell",
       req.body,
       SpellSchema,
-      SpellModel
+      SpellModel,
     );
     res
       .status(200)

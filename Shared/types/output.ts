@@ -2,8 +2,7 @@ import { z } from "zod";
 import { ItemSchema, SpellSchema } from "./base/generalGamedataSchema";
 import { HeroSchema } from "./base/heroDataSchema";
 import { PlayerSchema, PlayerHeroSchema } from "./base/playerSchema";
-
-const mongoIdSchema = z.string().regex(/^[0-9a-fA-F]{24}$/, "Invalid ObjectId");
+import { mongoIdSchema } from "./base/mongoId";
 
 export const OutputItem = ItemSchema.extend({
   _id: mongoIdSchema,

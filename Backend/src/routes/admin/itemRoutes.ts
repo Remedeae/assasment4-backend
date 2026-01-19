@@ -28,9 +28,9 @@ router.get("/types", async (req, res, next) => {
       z.array(
         z.object({
           type: z.array(z.string()),
-        })
+        }),
       ),
-      errMsg[0]
+      errMsg[0],
     );
     const types = validtedTypes
       .map((t) => t.type)
@@ -75,7 +75,7 @@ router.put("/:id", async (req, res, next) => {
       "Item",
       req.body,
       ItemSchema,
-      ItemModel
+      ItemModel,
     );
     res
       .status(200)

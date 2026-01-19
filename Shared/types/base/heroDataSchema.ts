@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { StatBlockSchema, spellSchool } from "./generalGamedataSchema";
+import { mongoIdSchema } from "./mongoId";
 
 const HeroDescriptionSchema = z.object({
   looks: z.string(),
@@ -22,5 +23,5 @@ export const HeroSchema = z.object({
   description: HeroDescriptionSchema,
   traits: HeroTraitsSchema,
   stats: StatBlockSchema,
-  startingEquipment: z.array(z.string()),
+  startingEquipment: z.array(mongoIdSchema),
 });

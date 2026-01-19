@@ -36,7 +36,11 @@ export default function GameItems() {
         >{`Add new ${itemTypeDisplay}`}</button>
       )}
       {itemTypeDisplay === "heroes" &&
-        (displayForm ? <AddHeroForm /> : <AllHeroes />)}
+        (displayForm ? (
+          <AddHeroForm displayFormFalse={() => setDisplayForm(false)} />
+        ) : (
+          <AllHeroes />
+        ))}
       {itemTypeDisplay === "items" &&
         (displayForm ? (
           <AddItemForm displayFormFalse={() => setDisplayForm(false)} />
