@@ -24,7 +24,7 @@ router.get("/:auth0Id/:full", async (req, res, next) => {
     const auth0Id = req.params.auth0Id;
     const full = req.params.full.toLowerCase();
     const validateFull = validateData(full, csvBoolean, errMsg[2]);
-    const user = await PlayerModel.findOne({ auth0Id }).lean();
+    const user = await PlayerModel.findOne({ auth0Id });
     const validatedUser = validateData(user, BOutputPlayer, errMsg[0]);
     if (!validateFull) {
       res.status(200).send(validatedUser);
@@ -35,7 +35,7 @@ router.get("/:auth0Id/:full", async (req, res, next) => {
     const validatedFullUser = validateData(
       { user: validatedUser, heroes: fullHeroes, items: inventoryItems },
       BOutputFullPlayer,
-      errMsg[0]
+      errMsg[0],
     );
     res.status(200).send(validatedFullUser);
   } catch (error) {

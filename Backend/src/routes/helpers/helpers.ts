@@ -16,7 +16,7 @@ import { z, ZodObject } from "../../../../Shared/node_modules/zod";
 //constructs a Player hero from heroId ready for posting
 export const constructPlayerHero = async (
   heroId: string,
-  session: mongoose.ClientSession
+  session: mongoose.ClientSession,
 ) => {
   const heroExists = await HeroModel.exists({ _id: heroId });
   if (!heroExists) {
@@ -24,14 +24,12 @@ export const constructPlayerHero = async (
   }
   const heroSpellItems = await HeroModel.findById(heroId)
     .select("startingEquipment traits.spellSchool createdAt name -_id")
-    .lean()
     .session(session);
   const spells = heroSpellItems?.traits?.spellSchool
     ? await SpellModel.find({
         school: { $in: [heroSpellItems?.traits?.spellSchool] },
       })
         .select("_id")
-        .lean()
         .session(session)
     : [];
   const equipmentIds = heroSpellItems?.startingEquipment
@@ -57,12 +55,12 @@ export const hydrateHeroes = async (heroes: tsoutput.BHeroOutput[]) => {
         : [];
       const items = ItemModel.find({ id: { $in: h.startingEquipment } });
       return { hero: h, spells, items };
-    })
+    }),
   );
   const validatedFullHeroes = validateData(
     fullHeroes,
     z.array(zodOutput.BOutputFullPlayerHero),
-    errMsg[0]
+    errMsg[0],
   );
   return validatedFullHeroes;
 };
@@ -73,21 +71,21 @@ export const hydratePlayerHeroes = async (user: tsoutput.BPlayerOutput) => {
   const objectIds = playerHeroIds.map((id) => new Types.ObjectId(id));
   const heroes = await PlayerHeroModel.find({
     _id: { $in: objectIds },
-  }).lean();
+  });
   const fullHeroes = await Promise.all(
     heroes.map(async (h) => {
       const [hero, spells, equipment] = await Promise.all([
-        HeroModel.findOne({ id: h.heroId }).lean(),
-        SpellModel.find({ id: { $in: h.spellIds } }).lean(),
-        ItemModel.find({ id: { $in: h.equipmentIds } }).lean(),
+        HeroModel.findOne({ id: h.heroId }),
+        SpellModel.find({ id: { $in: h.spellIds } }),
+        ItemModel.find({ id: { $in: h.equipmentIds } }),
       ]);
       return { hero, spells, equipment };
-    })
+    }),
   );
   const validatedFullHeroes = validateData(
     fullHeroes,
     z.array(zodOutput.BOutputFullPlayerHero),
-    errMsg[0]
+    errMsg[0],
   );
   return validatedFullHeroes;
 };
@@ -96,11 +94,11 @@ export const hydratePlayerHeroes = async (user: tsoutput.BPlayerOutput) => {
 export const hydrateItems = async (user: tsoutput.BPlayerOutput) => {
   const itemIds: string[] = user.inventory.itemsIds;
   const objectIds = itemIds.map((id) => new Types.ObjectId(id));
-  const items = await ItemModel.find({ _id: { $in: objectIds } }).lean();
+  const items = await ItemModel.find({ _id: { $in: objectIds } });
   const validatedItems = validateData(
     items,
     z.array(zodOutput.BOutputItem),
-    errMsg[0]
+    errMsg[0],
   );
   return validatedItems;
 };
@@ -111,13 +109,13 @@ export const updateById = async <S extends ZodObject<any>>(
   type: string,
   body: unknown,
   schema: S,
-  Model: Model<any>
+  Model: Model<any>,
 ) => {
   const validatedBody = validateData(body, schema, errMsg[3]);
   const updated = await Model.findByIdAndUpdate(
     id,
     { $set: validatedBody },
-    { new: true, lean: true }
+    { new: true },
   );
   if (!updated) {
     throw new HttpError(404, `${type} with id ${id} not found.`, null);
@@ -130,9 +128,9 @@ export const updateById = async <S extends ZodObject<any>>(
 export const deleteByID = async (
   id: string,
   type: string,
-  Model: Model<any>
+  Model: Model<any>,
 ) => {
-  const deleted = await Model.findByIdAndDelete(id, { lean: true });
+  const deleted = await Model.findByIdAndDelete(id);
   if (!deleted) {
     throw new HttpError(404, `${type} with ${id} not found`, null);
   }

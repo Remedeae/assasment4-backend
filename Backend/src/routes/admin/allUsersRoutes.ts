@@ -15,11 +15,11 @@ const router = Router();
 //get all users
 router.get("", async (req, res, next) => {
   try {
-    const users = await PlayerModel.find().lean();
+    const users = await PlayerModel.find();
     const validatedUsers = validateData(
       users,
       z.array(BOutputPlayer),
-      errMsg[0]
+      errMsg[0],
     );
     res.status(200).send(validatedUsers);
   } catch (error) {
@@ -31,18 +31,15 @@ router.get("", async (req, res, next) => {
 router.delete("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const user = await PlayerModel.findById(id).lean();
+    const user = await PlayerModel.findById(id);
     if (!user) {
       throw new HttpError(404, "User not found", null);
     }
 
     const deleted = await deleteByID(id, "User", PlayerModel);
-    const adminStatus = deleted?.admin ? "Admin" : "User";
     res
       .status(200)
-      .send(
-        `${adminStatus} ${deleted?.userName} with id: ${id} successfully deleted`
-      );
+      .send(`User ${deleted?.userName} with id: ${id} successfully deleted`);
   } catch (error) {
     next(error);
   }
@@ -57,14 +54,11 @@ router.put("/:id", async (req, res, next) => {
       "User",
       req.body,
       PlayerSchema,
-      PlayerModel
+      PlayerModel,
     );
-    const adminStatus = updatedUser.admin ? "Admin" : "User";
     res
       .status(200)
-      .send(
-        `${adminStatus} ${updatedUser?.userName} has successfully been updated.`
-      );
+      .send(`User ${updatedUser?.userName} has successfully been updated.`);
   } catch (error) {
     next(error);
   }

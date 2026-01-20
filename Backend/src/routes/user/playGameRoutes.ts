@@ -14,10 +14,7 @@ router.post("/:auth0Id", async (req, res, next) => {
     session.startTransaction();
     try {
       const { auth0Id } = req.params;
-      const heroes = await HeroModel.find()
-        .select("name _id")
-        .lean()
-        .session(session);
+      const heroes = await HeroModel.find().select("name _id").session(session);
 
       if (heroes.length === 0) {
         throw new HttpError(400, "Error fetching hero IDs.", null);
@@ -30,7 +27,7 @@ router.post("/:auth0Id", async (req, res, next) => {
       }
       const hero = await constructPlayerHero(
         heroTypeDoc._id.toString(),
-        session
+        session,
       );
 
       const createdHero = new PlayerHeroModel(hero);
@@ -39,7 +36,7 @@ router.post("/:auth0Id", async (req, res, next) => {
       await PlayerModel.findOneAndUpdate(
         { auth0Id },
         { $push: { "inventory.heroes": createdHero._id } },
-        { session }
+        { session },
       );
 
       await session.commitTransaction();
@@ -48,7 +45,7 @@ router.post("/:auth0Id", async (req, res, next) => {
       res
         .status(200)
         .send(
-          `Congratulations, you have been awarded with ${heroTypeDoc.name.toString()}`
+          `Congratulations, you have been awarded with ${heroTypeDoc.name.toString()}`,
         );
     } catch (error) {
       next(error);

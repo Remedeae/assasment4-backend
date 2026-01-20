@@ -4,8 +4,6 @@ const PlayerHeroMongoSchema = new Schema({
   heroId: {
     type: String,
     required: true,
-    unique: true,
-    lowercase: true,
     trim: true,
   },
   spellIds: { type: [String], default: [] },
@@ -28,7 +26,7 @@ const PlayerMongoSchema = new Schema({
       heroes: { type: [String], default: [] },
       items: { type: [String], default: [] },
     },
-    { _id: false }
+    { _id: false },
   ),
   levelsClear: { type: [String], default: [] },
   team: { type: [String], default: [] },
@@ -37,6 +35,6 @@ const PlayerMongoSchema = new Schema({
 
 export const PlayerHeroModel = mongoose.model(
   "PlayerHero",
-  PlayerHeroMongoSchema
+  PlayerHeroMongoSchema,
 );
 export const PlayerModel = mongoose.model("Player", PlayerMongoSchema);

@@ -11,7 +11,7 @@ const router = Router();
 //get all heroes
 router.get("", async (req, res, next) => {
   try {
-    const heroes = await HeroModel.find().lean();
+    const heroes = await HeroModel.find();
     const validatedHeroes = validateData(
       heroes,
       z.array(BOutputHero),

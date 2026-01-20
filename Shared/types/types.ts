@@ -1,23 +1,21 @@
 import { z } from "zod";
-import { ItemSchema, SpellSchema } from "./base/generalGamedataSchema";
-import { HeroSchema } from "./base/heroDataSchema";
-import { PlayerSchema, PlayerHeroSchema } from "./base/playerSchema";
-import * as Output from "./output";
+import * as ip from "./input";
+import * as op from "./output";
 
-export type ItemInput = z.infer<typeof ItemSchema>;
-export type ItemOutput = z.infer<typeof Output.OutputItem>;
+export type ItemInput = z.infer<typeof ip.InputItem>;
+export type ItemOutput = z.infer<typeof op.OutputItem>;
 
-export type SpellInput = z.infer<typeof SpellSchema>;
-export type SpellOutput = z.infer<typeof Output.OutputSpell>;
+export type SpellInput = z.infer<typeof ip.InputSpell>;
+export type SpellOutput = z.infer<typeof op.OutputSpell>;
 
-export type HeroInput = z.infer<typeof HeroSchema>;
-export type HeroOutput = z.infer<typeof Output.OutputHero>;
-export type FullHeroOutput = z.infer<typeof Output.OutputFullHero>;
+export type HeroInput = z.infer<typeof ip.InputHero>;
+export type HeroOutput = z.infer<typeof op.OutputHero>;
+export type FullHeroOutput = z.infer<typeof op.OutputFullHero>;
 
-export type PlayerInput = z.infer<typeof PlayerSchema>;
-export type PlayerOutput = z.infer<typeof Output.OutputPlayer>;
-export type FullPlayerOutput = z.infer<typeof Output.OutputFullPlayer>;
+export type PlayerInput = z.infer<typeof ip.InputPlayer>;
+export type PlayerOutput = z.infer<typeof op.OutputPlayer>;
+export type FullPlayerOutput = z.infer<typeof op.OutputFullPlayer>;
 
-export type PlayerHeroInput = z.infer<typeof PlayerHeroSchema>;
-export type PlayerHeroOutput = z.infer<typeof Output.OutputPlayerHero>;
-export type FullPlayerHeroOutput = z.infer<typeof Output.OutputFullPlayerHero>;
+export type PlayerHeroInput = z.infer<typeof ip.InputPlayerHero>;
+export type PlayerHeroOutput = z.infer<typeof op.OutputPlayerHero>;
+export type FullPlayerHeroOutput = z.infer<typeof op.OutputFullPlayerHero>;

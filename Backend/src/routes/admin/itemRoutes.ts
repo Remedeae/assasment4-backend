@@ -11,7 +11,7 @@ const router = Router();
 //get all items
 router.get("", async (req, res, next) => {
   try {
-    const items = await ItemModel.find().lean();
+    const items = await ItemModel.find();
     const validatedItems = validateData(items, z.array(BOutputItem), errMsg[0]);
     res.status(200).send(validatedItems);
   } catch (error) {
@@ -22,7 +22,7 @@ router.get("", async (req, res, next) => {
 //get item types
 router.get("/types", async (req, res, next) => {
   try {
-    const rawTypes = await ItemModel.find().select("type -_id").lean();
+    const rawTypes = await ItemModel.find().select("type -_id");
     const validtedTypes = validateData(
       rawTypes,
       z.array(
@@ -46,8 +46,8 @@ router.get("/types", async (req, res, next) => {
 router.post("", async (req, res, next) => {
   try {
     const validatedBody = validateData(req.body, ItemSchema, errMsg[3]);
-    validatedBody ?? (await ItemModel.create(validatedBody));
-    res.status(200).send(`Successfully saved: ${validatedBody}`);
+    const createdItem = await ItemModel.create(validatedBody);
+    res.status(200).send(`Successfully saved: ${createdItem}`);
   } catch (error) {
     next(error);
   }

@@ -12,7 +12,7 @@ const HeroMongoSchema = new Schema({
       likes: { type: String, required: true },
       dislikes: { type: String, required: true },
     },
-    { _id: false },
+    { required: true, _id: false },
   ),
   traits: new Schema(
     {
@@ -31,7 +31,7 @@ const HeroMongoSchema = new Schema({
       lives: { type: Number, required: true },
       speed: { type: Number, required: true },
     },
-    { _id: false, required: true },
+    { required: true, _id: false },
   ),
   startingEquipment: { type: [String], default: [] },
   createdAt: { type: Date, default: Date.now },

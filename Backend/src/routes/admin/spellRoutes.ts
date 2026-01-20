@@ -11,7 +11,7 @@ const router = Router();
 //get all spells
 router.get("", async (req, res, next) => {
   try {
-    const spells = await SpellModel.find().lean();
+    const spells = await SpellModel.find();
     const validatedSpells = validateData(
       spells,
       z.array(BOutputSpell),

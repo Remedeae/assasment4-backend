@@ -24,7 +24,7 @@ const router = Router();
 router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const user = await PlayerModel.findById(id).lean();
+    const user = await PlayerModel.findById(id);
     if (!user) {
       res.status(404).send("User not found");
     }
@@ -39,7 +39,7 @@ router.get("/:id", async (req, res, next) => {
 router.get("/heroes/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const user = await PlayerModel.findById(id).lean();
+    const user = await PlayerModel.findById(id);
     if (!user) {
       res.status(404).send("User not found");
     }
@@ -62,18 +62,20 @@ router.post("/addHero/:userId/:heroId", async (req, res, next) => {
     const createdHero = new PlayerHeroModel(hero);
     await createdHero.save({ session });
 
-    await PlayerModel.findByIdAndUpdate(
+    const user = await PlayerModel.findByIdAndUpdate(
       userId,
       { $push: { "inventory.heroes": createdHero._id } },
-      { session }
-    ).lean();
+      { session },
+    );
 
     await session.commitTransaction();
     session.endSession();
 
     res
       .status(200)
-      .send(`Hero added successfully to the user ${userId}'s roster`);
+      .send(
+        `${createdHero.heroId} added successfully to the user ${user?.userName}'s roster`,
+      );
   } catch (error) {
     next(error);
   }
@@ -92,7 +94,7 @@ router.put("/addItem/:userId/:itemId", async (req, res, next) => {
       {
         $push: { "inventory.items": itemId },
       },
-      { runValidators: true, lean: true }
+      { runValidators: true },
     );
     if (!updated) {
       return res.status(404).send(`User ${userId} not found`);
