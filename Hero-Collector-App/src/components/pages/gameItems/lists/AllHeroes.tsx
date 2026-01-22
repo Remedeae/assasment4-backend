@@ -12,7 +12,7 @@ export default function AllHeroes() {
       setHeroes(response ?? []);
     };
     fetchHeroes();
-  }, [heroes]);
+  }, []);
 
   return (
     <>

@@ -44,6 +44,7 @@ export default function AddHeroForm({
   const [items, setItems] = useState<ListItems[]>([]);
   const [selectedItems] = useState<ListItems | null>(null);
   const [startingItems, setStartingItems] = useState<ListItems[]>([]);
+  const startingItemsIds = startingItems.map((i) => i._id);
 
   const [specials, setSpecials] = useState<string[]>([]);
   const [newSpecial, setNewSpecial] = useState<string>("");
@@ -51,27 +52,25 @@ export default function AddHeroForm({
   const [combat, setCombat] = useState<string[]>([]);
   const [newCombat, setNewCombat] = useState<string>("");
 
-  const insertArrays = () => {
-    const startingItemsIds = startingItems.map((i) => i._id);
-
-    setHero((prev) => {
-      if (!prev) return prev;
-
-      return {
-        ...prev,
-        traits: {
-          ...prev.traits,
-          special: specials,
-          combat: combat,
-        },
-        startingEquipment: startingItemsIds,
-      };
-    });
-  };
+  /*   useEffect(() => {
+    console.log(hero);
+  }, [hero]); */
 
   const postHero = async () => {
-    insertArrays();
-    const response = await api<string>("POST", "/gameitems/heroes", hero);
+    const heroWithArrays = {
+      ...hero,
+      traits: {
+        ...hero.traits,
+        special: specials,
+        combat: combat,
+      },
+      startingEquipment: startingItemsIds,
+    };
+    const response = await api<string>(
+      "POST",
+      "/gameitems/heroes",
+      heroWithArrays,
+    );
     setPostSuccess(response);
     setTimeout(() => {
       displayFormFalse();
@@ -254,37 +253,25 @@ export default function AddHeroForm({
                         ...prev,
                         traits: {
                           ...prev.traits,
-                          spellSchool: e.target.value,
+                          spellSchool: e.target.value || null,
                         },
                       };
                     })
                   }
                 >
+                  <option value="" disabled>
+                    Select a spell school
+                  </option>
                   {spellSchool.map((s) => (
-                    <option key={s}>{firstLetterToUpperCase(s)}</option>
+                    <option key={s} value={s}>
+                      {s}
+                    </option>
                   ))}
                 </select>
               </>
             )}
           </div>
           <div>
-            {specials.length > 0 && (
-              <ul>
-                {specials.map((i) => (
-                  <li key={i}>
-                    {firstLetterToUpperCase(i)}{" "}
-                    <i
-                      onClick={() => {
-                        const filtered = specials.filter((s) => s !== i);
-                        setSpecials(filtered);
-                      }}
-                    >
-                      -
-                    </i>
-                  </li>
-                ))}
-              </ul>
-            )}
             <label htmlFor="special">Special</label>
             <input
               id="special"
@@ -302,17 +289,15 @@ export default function AddHeroForm({
             >
               +
             </button>
-          </div>
-          <div>
-            {combat.length > 0 && (
+            {specials.length > 0 && (
               <ul>
-                {combat.map((i) => (
+                {specials.map((i) => (
                   <li key={i}>
                     {firstLetterToUpperCase(i)}{" "}
                     <i
                       onClick={() => {
-                        const filtered = combat.filter((s) => s !== i);
-                        setCombat(filtered);
+                        const filtered = specials.filter((s) => s !== i);
+                        setSpecials(filtered);
                       }}
                     >
                       -
@@ -321,6 +306,8 @@ export default function AddHeroForm({
                 ))}
               </ul>
             )}
+          </div>
+          <div>
             <label htmlFor="combat">Combat specials</label>
             <input
               id="combat"
@@ -338,6 +325,23 @@ export default function AddHeroForm({
             >
               +
             </button>
+            {combat.length > 0 && (
+              <ul>
+                {combat.map((i) => (
+                  <li key={i}>
+                    {firstLetterToUpperCase(i)}{" "}
+                    <i
+                      onClick={() => {
+                        const filtered = combat.filter((s) => s !== i);
+                        setCombat(filtered);
+                      }}
+                    >
+                      -
+                    </i>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
         <div>
@@ -433,6 +437,9 @@ export default function AddHeroForm({
             setStartingItems((startingItems) => [...startingItems, item]);
           }}
         >
+          <option value="" disabled>
+            Select a starting item
+          </option>
           {items.map((i) => (
             <option key={i.name}>{firstLetterToUpperCase(i.name)}</option>
           ))}

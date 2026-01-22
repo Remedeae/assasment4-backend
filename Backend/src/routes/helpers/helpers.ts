@@ -10,7 +10,7 @@ import { PlayerHeroModel } from "../../mongoDB/models/Player";
 import * as zodOutput from "../../types/validation/mongoOutput";
 import * as tsoutput from "../../types/validation/mongoOutput";
 import * as tsinput from "../../../../Shared/types/types";
-import { PlayerHeroSchema } from "../../../../Shared/types/base/playerSchema";
+import { InputPlayerHero } from "../../../../Shared/types/input";
 import { z, ZodObject } from "../../../../Shared/node_modules/zod";
 
 //constructs a Player hero from heroId ready for posting
@@ -42,7 +42,7 @@ export const constructPlayerHero = async (
     equipmentIds,
     spellIds,
   };
-  const validatedHero = validateData(hero, PlayerHeroSchema, errMsg[3]);
+  const validatedHero = validateData(hero, InputPlayerHero, errMsg[3]);
   return validatedHero;
 };
 
@@ -51,15 +51,17 @@ export const hydrateHeroes = async (heroes: tsoutput.BHeroOutput[]) => {
   const fullHeroes = await Promise.all(
     heroes.map(async (h) => {
       const spells = h.traits.spellSchool
-        ? await SpellModel.find({ school: h.traits.spellSchool })
+        ? await SpellModel.find({ school: h.traits.spellSchool }).lean()
         : [];
-      const items = ItemModel.find({ id: { $in: h.startingEquipment } });
-      return { hero: h, spells, items };
+      const items = await ItemModel.find({
+        _id: { $in: h.startingEquipment.map((id) => new Types.ObjectId(id)) },
+      }).lean();
+      return { hero: h, spells, equipment: items };
     }),
   );
   const validatedFullHeroes = validateData(
     fullHeroes,
-    z.array(zodOutput.BOutputFullPlayerHero),
+    z.array(zodOutput.BOutputFullHero),
     errMsg[0],
   );
   return validatedFullHeroes;
@@ -75,9 +77,9 @@ export const hydratePlayerHeroes = async (user: tsoutput.BPlayerOutput) => {
   const fullHeroes = await Promise.all(
     heroes.map(async (h) => {
       const [hero, spells, equipment] = await Promise.all([
-        HeroModel.findOne({ id: h.heroId }),
-        SpellModel.find({ id: { $in: h.spellIds } }),
-        ItemModel.find({ id: { $in: h.equipmentIds } }),
+        HeroModel.findOne({ _id: h.heroId }),
+        SpellModel.find({ _id: { $in: h.spellIds } }),
+        ItemModel.find({ _id: { $in: h.equipmentIds } }),
       ]);
       return { hero, spells, equipment };
     }),

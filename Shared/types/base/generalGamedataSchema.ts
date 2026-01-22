@@ -32,12 +32,12 @@ export const StatBlockSchema = z.object({
 export const ItemSchema = z.object({
   name: z.string(),
   type: z.array(z.string()),
-  description: z.string(),
-  modifier: z.string(),
-  tier: tierSchema,
-  equipHand: equipHandSchema,
-  weapontype: weaponTypeSchema,
-  price: z.number().positive(),
+  description: z.string().nullable().default(null),
+  modifier: z.string().nullable().default(null),
+  tier: tierSchema.nullable().default(null),
+  equipHand: equipHandSchema.nullable().default(null),
+  weapontype: weaponTypeSchema.nullable().default(null),
+  price: z.number().positive().nullable().default(null),
   quantity: z.number(),
 });
 
@@ -45,5 +45,5 @@ export const SpellSchema = z.object({
   name: z.string(),
   school: z.enum(spellSchool),
   type: z.enum(spellType),
-  description: z.string(),
+  description: z.string().nullable().default(null),
 });

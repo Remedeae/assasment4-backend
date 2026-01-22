@@ -6,24 +6,13 @@ import { mongoIdSchema } from "./base/mongoId";
 
 export const OutputItem = g.ItemSchema.extend({
   _id: mongoIdSchema,
-  description: z.string().nullable().default(null),
-  modifier: z.string().nullable().default(null),
-  tier: g.tierSchema.nullable().default(null),
-  equipHand: g.equipHandSchema.nullable().default(null),
-  weapontype: g.weaponTypeSchema.nullable().default(null),
-  price: z.number().positive().nullable().default(null),
 });
 
 export const OutputSpell = g.SpellSchema.extend({
-  description: z.string().nullable().default(null),
   _id: mongoIdSchema,
 });
 
 export const OutputHero = h.HeroSchema.extend({
-  image: z.string().nullable().default(null),
-  traits: h.HeroTraitsSchema.extend({
-    spellSchool: h.SpellSchoolSchema.nullable().default(null),
-  }),
   _id: mongoIdSchema,
   createdAt: z.date(),
 });

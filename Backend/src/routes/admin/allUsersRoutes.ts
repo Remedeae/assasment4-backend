@@ -8,7 +8,7 @@ import { deleteByID, updateById } from "../helpers/helpers";
 import { PlayerModel } from "../../mongoDB/models/Player";
 
 import { BOutputPlayer } from "../../types/validation/mongoOutput";
-import { PlayerSchema } from "../../../../Shared/types/base/playerSchema";
+import { InputPlayer } from "../../../../Shared/types/input";
 
 const router = Router();
 
@@ -53,7 +53,7 @@ router.put("/:id", async (req, res, next) => {
       id,
       "User",
       req.body,
-      PlayerSchema,
+      InputPlayer,
       PlayerModel,
     );
     res

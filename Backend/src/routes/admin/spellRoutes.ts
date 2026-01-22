@@ -3,7 +3,7 @@ import { SpellModel } from "../../mongoDB/models/GameData";
 import { BOutputSpell } from "../../types/validation/mongoOutput";
 import { validateData, errMsg } from "../../middleware/validatorHelpes";
 import z from "../../../../Shared/node_modules/zod";
-import { SpellSchema } from "../../../../Shared/types/base/generalGamedataSchema";
+import { InputSpell } from "../../../../Shared/types/input";
 import { deleteByID, updateById } from "../helpers/helpers";
 
 const router = Router();
@@ -26,7 +26,7 @@ router.get("", async (req, res, next) => {
 //post spell
 router.post("", async (req, res, next) => {
   try {
-    const validatedBody = validateData(req.body, SpellSchema, errMsg[3]);
+    const validatedBody = validateData(req.body, InputSpell, errMsg[3]);
     const createdSpell = await SpellModel.create(validatedBody);
     res.status(200).send(`Successfully created: ${createdSpell.name}`);
   } catch (error) {
@@ -55,7 +55,7 @@ router.put("/:id", async (req, res, next) => {
       id,
       "Spell",
       req.body,
-      SpellSchema,
+      InputSpell,
       SpellModel,
     );
     res

@@ -10,7 +10,7 @@ const HeroDescriptionSchema = z.object({
   dislikes: z.string(),
 });
 
-export const SpellSchoolSchema = z.enum(spellSchool);
+export const SpellSchoolSchema = z.enum(spellSchool).nullable().default(null);
 export const HeroTraitsSchema = z.object({
   spellcaster: z.boolean(),
   spellSchool: SpellSchoolSchema,
@@ -21,7 +21,7 @@ export const HeroTraitsSchema = z.object({
 export const HeroSchema = z.object({
   name: z.string(),
   title: z.string(),
-  image: z.string(),
+  image: z.string().nullable().default(null),
   description: HeroDescriptionSchema,
   traits: HeroTraitsSchema,
   stats: StatBlockSchema,

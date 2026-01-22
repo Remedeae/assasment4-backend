@@ -28,34 +28,12 @@ export default function AddItemForm({
     price: null,
   });
   const [inputTypes, setInputTypes] = useState<InputTypes[]>([]);
-  const [postSuccess, setPostSuccess] = useState<string | null>(null);
   const [customType, setCustomType] = useState<string>("");
+  const selectedTypes = inputTypes
+    .filter((t) => t.addToArray)
+    .map((t) => t.type);
 
-  const addCustomType = () => {
-    const newType: InputTypes = {
-      type: customType,
-      addToArray: true,
-    };
-    setInputTypes((inputTypes) => [...inputTypes, newType]);
-    setCustomType("");
-  };
-  const insertTypes = () => {
-    const types = inputTypes
-      .filter((t) => t.addToArray === true)
-      .map((t) => t.type);
-    setItem((prev) => ({
-      ...prev,
-      type: types,
-    }));
-  };
-  const postItem = async () => {
-    insertTypes();
-    const response = await api<string>("POST", "/gameitems/items", item);
-    setPostSuccess(response);
-    setTimeout(() => {
-      displayFormFalse();
-    }, 1500);
-  };
+  const [postSuccess, setPostSuccess] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchTypes = async () => {
@@ -68,6 +46,24 @@ export default function AddItemForm({
     };
     fetchTypes();
   }, []);
+
+  const addCustomType = () => {
+    const newType: InputTypes = {
+      type: customType,
+      addToArray: true,
+    };
+    setInputTypes((inputTypes) => [...inputTypes, newType]);
+    setCustomType("");
+  };
+
+  const postItem = async () => {
+    const addTypes = { ...item, type: selectedTypes };
+    const response = await api<string>("POST", "/gameitems/items", addTypes);
+    setPostSuccess(response);
+    setTimeout(() => {
+      displayFormFalse();
+    }, 3000);
+  };
 
   return (
     <div>
@@ -95,15 +91,15 @@ export default function AddItemForm({
               <input
                 type="checkbox"
                 checked={t.addToArray}
-                onChange={(e) =>
+                onChange={(e) => {
                   setInputTypes((prev) =>
                     prev.map((item) =>
                       item.type === t.type
                         ? { ...item, addToArray: e.target.checked }
-                        : item
-                    )
-                  )
-                }
+                        : item,
+                    ),
+                  );
+                }}
               />
             </div>
           ))}
@@ -111,6 +107,7 @@ export default function AddItemForm({
             {" "}
             <input
               type="text"
+              placeholder="Enter custom type"
               value={customType ?? ""}
               onChange={(e) => setCustomType(e.target.value)}
             />

@@ -3,7 +3,7 @@ import { ItemModel } from "../../mongoDB/models/GameData";
 import { BOutputItem } from "../../types/validation/mongoOutput";
 import { validateData, errMsg } from "../../middleware/validatorHelpes";
 import z from "../../../../Shared/node_modules/zod";
-import { ItemSchema } from "../../../../Shared/types/base/generalGamedataSchema";
+import { InputItem } from "../../../../Shared/types/input";
 import { deleteByID, updateById } from "../helpers/helpers";
 
 const router = Router();
@@ -45,7 +45,7 @@ router.get("/types", async (req, res, next) => {
 //post item
 router.post("", async (req, res, next) => {
   try {
-    const validatedBody = validateData(req.body, ItemSchema, errMsg[3]);
+    const validatedBody = validateData(req.body, InputItem, errMsg[3]);
     const createdItem = await ItemModel.create(validatedBody);
     res.status(200).send(`Successfully saved: ${createdItem}`);
   } catch (error) {
@@ -74,7 +74,7 @@ router.put("/:id", async (req, res, next) => {
       id,
       "Item",
       req.body,
-      ItemSchema,
+      InputItem,
       ItemModel,
     );
     res

@@ -13,9 +13,10 @@ import { PlayerHeroModel, PlayerModel } from "../../mongoDB/models/Player";
 import { ItemModel } from "../../mongoDB/models/GameData";
 
 import {
-  PlayerHeroSchema,
-  PlayerSchema,
-} from "../../../../Shared/types/base/playerSchema";
+  InputHero,
+  InputPlayer,
+  InputPlayerHero,
+} from "../../../../Shared/types/input";
 import { BOutputPlayer } from "../../types/validation/mongoOutput";
 
 const router = Router();
@@ -108,7 +109,7 @@ router.put("/addItem/:userId/:itemId", async (req, res, next) => {
 router.put("editUser/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    await updateById(id, "User", req.body, PlayerSchema, PlayerHeroModel);
+    await updateById(id, "User", req.body, InputPlayer, PlayerHeroModel);
     res.status(200).send("Player successfully updated");
   } catch (error) {
     next(error);
@@ -132,7 +133,7 @@ router.delete("/deleteHero/:id", async (req, res, next) => {
 router.put("/updateHero/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    await updateById(id, "Hero", req.body, PlayerHeroSchema, PlayerHeroModel);
+    await updateById(id, "Hero", req.body, InputPlayerHero, PlayerHeroModel);
     res.status(200).send(`Player Hero id: ${id} updated successfully`);
   } catch (error) {
     next(error);

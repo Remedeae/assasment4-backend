@@ -30,11 +30,12 @@ export default function GameItems() {
           </h2>
         ))}
       </div>
-      {!displayForm && (
-        <button
-          onClick={() => setDisplayForm(true)}
-        >{`Add new ${itemTypeDisplay}`}</button>
-      )}
+      <button onClick={() => setDisplayForm(!displayForm)}>
+        {displayForm
+          ? `Return to ${itemTypeDisplay} view`
+          : `Add new ${itemTypeDisplay}`}
+      </button>
+
       {itemTypeDisplay === "heroes" &&
         (displayForm ? (
           <AddHeroForm displayFormFalse={() => setDisplayForm(false)} />

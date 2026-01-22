@@ -13,7 +13,6 @@ import {
   hydratePlayerHeroes,
   updateById,
 } from "../helpers/helpers";
-import { PlayerSchema } from "../../../../Shared/types/base/playerSchema";
 import { csvBoolean } from "../../types/validation/csvValidation/csvHelpers";
 
 const router = Router();

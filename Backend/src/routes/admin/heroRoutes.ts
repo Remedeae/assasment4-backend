@@ -3,7 +3,7 @@ import { HeroModel } from "../../mongoDB/models/Hero";
 import { errMsg, validateData } from "../../middleware/validatorHelpes";
 import { BOutputHero } from "../../types/validation/mongoOutput";
 import z from "../../../../Shared/node_modules/zod";
-import { HeroSchema } from "../../../../Shared/types/base/heroDataSchema";
+import { InputHero } from "../../../../Shared/types/input";
 import { deleteByID, hydrateHeroes, updateById } from "../helpers/helpers";
 
 const router = Router();
@@ -11,7 +11,7 @@ const router = Router();
 //get all heroes
 router.get("", async (req, res, next) => {
   try {
-    const heroes = await HeroModel.find();
+    const heroes = await HeroModel.find().lean();
     const validatedHeroes = validateData(
       heroes,
       z.array(BOutputHero),
@@ -27,7 +27,7 @@ router.get("", async (req, res, next) => {
 //post hero by ID
 router.post("/", async (req, res, next) => {
   try {
-    const validatedBody = validateData(req.body, HeroSchema, errMsg[0]);
+    const validatedBody = validateData(req.body, InputHero, errMsg[0]);
     const newHero = await HeroModel.create(validatedBody);
     res.status(200).send(`Successfully created: ${newHero.name}`);
   } catch (error) {
@@ -51,7 +51,7 @@ router.delete("/:id", async (req, res, next) => {
 //update hero by ID
 router.put("/:id", async (req, res, next) => {
   const { id } = req.params;
-  const updateHero = updateById(id, "Hero", req.body, HeroSchema, HeroModel);
+  const updateHero = updateById(id, "Hero", req.body, InputHero, HeroModel);
   res.status(200).send(`Sucessfully updated ${updateHero}`);
   try {
   } catch (error) {
