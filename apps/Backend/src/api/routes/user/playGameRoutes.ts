@@ -1,9 +1,12 @@
 import { Router } from "express";
 import mongoose from "mongoose";
-import { PlayerHeroModel, PlayerModel } from "../../mongoDB/models/Player.js";
-import { HeroModel } from "../../mongoDB/models/Hero.js";
+import {
+  PlayerHeroModel,
+  PlayerModel,
+} from "../../../mongoDB/models/Player.js";
+import { HeroModel } from "../../../mongoDB/models/Hero.js";
 import { constructPlayerHero } from "../helpers/helpers.js";
-import { HttpError } from "../../middleware/errorHandler.js";
+import { HttpError } from "../../../middleware/errorHandler.js";
 
 const router = Router();
 

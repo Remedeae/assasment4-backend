@@ -8,17 +8,17 @@ import type { CorsOptions } from "cors";
 import { authMiddleware, requiresAdmin } from "./middleware/auth/auth.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 
-import allUserRoutes from "./routes/admin/allUsersRoutes.js";
-import heroRoutes from "./routes/admin/heroRoutes.js";
-import itemRoutes from "./routes/admin/itemRoutes.js";
-import spellRoutes from "./routes/admin/spellRoutes.js";
-import adminUserRoutes from "./routes/admin/userRoutes.js";
+import allUserRoutes from "./api/routes/admin/allUsersRoutes.js";
+import heroRoutes from "./api/routes/admin/heroRoutes.js";
+import itemRoutes from "./api/routes/admin/itemRoutes.js";
+import spellRoutes from "./api/routes/admin/spellRoutes.js";
+import adminUserRoutes from "./api/routes/admin/userRoutes.js";
 
-import signUpRoute from "./routes/signUpRoutes.js";
-import checkAuthRoute from "./routes/checkAuthRoute.js";
+import signUpRoute from "./api/routes/signUpRoutes.js";
+import checkAuthRoute from "./api/routes/checkAuthRoute.js";
 
-import playGameRoutes from "./routes/user/playGameRoutes.js";
-import userRoutes from "./routes/user/userRoutes.js";
+import playGameRoutes from "./api/routes/user/playGameRoutes.js";
+import userRoutes from "./api/routes/user/userRoutes.js";
 
 import { PORT, frontendURL } from "@heroapp/shared";
 
@@ -58,6 +58,6 @@ app.use("/game", requiresAuth(), playGameRoutes);
 app.use("/user", requiresAuth(), userRoutes);
 
 app.use(errorHandler);
-app.listen(PORT, () => {
+/* app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
-});
+}); */

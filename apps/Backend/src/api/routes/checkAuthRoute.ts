@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { LoggedUserSchema } from "@heroapp/shared";
-import { HttpError } from "../middleware/errorHandler.js";
+import { HttpError } from "../../middleware/errorHandler.js";
 
 const router = Router();
 

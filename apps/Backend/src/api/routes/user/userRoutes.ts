@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { PlayerModel } from "../../mongoDB/models/Player.js";
-import { errMsg, validateData } from "../../middleware/validatorHelpes.js";
-import { HttpError } from "../../middleware/errorHandler.js";
+import { PlayerModel } from "../../../mongoDB/models/Player.js";
+import { errMsg, validateData } from "../../../middleware/validatorHelpes.js";
+import { HttpError } from "../../../middleware/errorHandler.js";
 import {
   BOutputFullPlayer,
   BOutputPlayer,
-} from "../../types/validation/mongoOutput.js";
+} from "../../../types/validation/mongoOutput.js";
 import {
   //adminStatusCheck,
   deleteByID,
@@ -13,7 +13,7 @@ import {
   hydratePlayerHeroes,
   updateById,
 } from "../helpers/helpers.js";
-import { csvBoolean } from "../../types/validation/csvValidation/csvHelpers.js";
+import { csvBoolean } from "../../../types/validation/csvValidation/csvHelpers.js";
 
 const router = Router();
 

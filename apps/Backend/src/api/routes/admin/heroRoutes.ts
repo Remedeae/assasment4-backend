@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { HeroModel } from "../../mongoDB/models/Hero.js";
-import { errMsg, validateData } from "../../middleware/validatorHelpes.js";
-import { BOutputHero } from "../../types/validation/mongoOutput.js";
+import { HeroModel } from "../../../mongoDB/models/Hero.js";
+import { errMsg, validateData } from "../../../middleware/validatorHelpes.js";
+import { BOutputHero } from "../../../types/validation/mongoOutput.js";
 import z from "zod";
 import { InputHero } from "@heroapp/shared";
 import { deleteByID, hydrateHeroes, updateById } from "../helpers/helpers.js";

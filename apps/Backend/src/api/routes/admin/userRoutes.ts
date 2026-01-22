@@ -7,13 +7,16 @@ import {
   hydratePlayerHeroes,
   updateById,
 } from "../helpers/helpers.js";
-import { errMsg, validateData } from "../../middleware/validatorHelpes.js";
+import { errMsg, validateData } from "../../../middleware/validatorHelpes.js";
 
-import { PlayerHeroModel, PlayerModel } from "../../mongoDB/models/Player.js";
-import { ItemModel } from "../../mongoDB/models/GameData.js";
+import {
+  PlayerHeroModel,
+  PlayerModel,
+} from "../../../mongoDB/models/Player.js";
+import { ItemModel } from "../../../mongoDB/models/GameData.js";
 
 import { InputHero, InputPlayer, InputPlayerHero } from "@heroapp/shared";
-import { BOutputPlayer } from "../../types/validation/mongoOutput.js";
+import { BOutputPlayer } from "../../../types/validation/mongoOutput.js";
 
 const router = Router();
 
