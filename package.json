@@ -1,5 +1,10 @@
 {
   "devDependencies": {
     "@sonar/scan": "^4.3.4"
-  }
+  },
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
 }

@@ -1,0 +1,16 @@
+import { z } from "zod";
+import * as ip from "./input";
+import * as op from "./output";
+export type ItemInput = z.infer<typeof ip.InputItem>;
+export type ItemOutput = z.infer<typeof op.OutputItem>;
+export type SpellInput = z.infer<typeof ip.InputSpell>;
+export type SpellOutput = z.infer<typeof op.OutputSpell>;
+export type HeroInput = z.infer<typeof ip.InputHero>;
+export type HeroOutput = z.infer<typeof op.OutputHero>;
+export type FullHeroOutput = z.infer<typeof op.OutputFullHero>;
+export type PlayerInput = z.infer<typeof ip.InputPlayer>;
+export type PlayerOutput = z.infer<typeof op.OutputPlayer>;
+export type FullPlayerOutput = z.infer<typeof op.OutputFullPlayer>;
+export type PlayerHeroInput = z.infer<typeof ip.InputPlayerHero>;
+export type PlayerHeroOutput = z.infer<typeof op.OutputPlayerHero>;
+export type FullPlayerHeroOutput = z.infer<typeof op.OutputFullPlayerHero>;

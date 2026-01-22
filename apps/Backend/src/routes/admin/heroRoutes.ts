@@ -1,0 +1,62 @@
+import { Router } from "express";
+import { HeroModel } from "../../mongoDB/models/Hero";
+import { errMsg, validateData } from "../../middleware/validatorHelpes";
+import { BOutputHero } from "../../types/validation/mongoOutput";
+import z from "zod";
+import { InputHero } from "@heroapp/shared";
+import { deleteByID, hydrateHeroes, updateById } from "../helpers/helpers";
+
+const router = Router();
+
+//get all heroes
+router.get("", async (req, res, next) => {
+  try {
+    const heroes = await HeroModel.find().lean();
+    const validatedHeroes = validateData(
+      heroes,
+      z.array(BOutputHero),
+      errMsg[3],
+    );
+    const fullHeroes = await hydrateHeroes(validatedHeroes);
+    res.status(200).send(fullHeroes);
+  } catch (error) {
+    next(error);
+  }
+});
+
+//post hero by ID
+router.post("/", async (req, res, next) => {
+  try {
+    const validatedBody = validateData(req.body, InputHero, errMsg[0]);
+    const newHero = await HeroModel.create(validatedBody);
+    res.status(200).send(`Successfully created: ${newHero.name}`);
+  } catch (error) {
+    next(error);
+  }
+});
+
+//delete hero by ID
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const deletedHero = await deleteByID(id, "Hero", HeroModel);
+    res
+      .status(200)
+      .send(`${deletedHero?.name} with id ${id} successfully deleted`);
+  } catch (error) {
+    next(error);
+  }
+});
+
+//update hero by ID
+router.put("/:id", async (req, res, next) => {
+  const { id } = req.params;
+  const updateHero = updateById(id, "Hero", req.body, InputHero, HeroModel);
+  res.status(200).send(`Sucessfully updated ${updateHero}`);
+  try {
+  } catch (error) {
+    next(error);
+  }
+});
+
+export default router;
