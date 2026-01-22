@@ -40,9 +40,9 @@ app.use(cors(corsOptions));
 app.get("/", (req, res) => {
   const isAuthenticated = req.oidc.isAuthenticated();
   if (!isAuthenticated) {
-    res.redirect("http://localhost:5173/");
+    res.redirect(`${frontendURL}`);
   }
-  res.redirect("http://localhost:5173/home");
+  res.redirect(`${frontendURL}/home`);
 });
 
 app.use("/signup/user", signUpRoute);
