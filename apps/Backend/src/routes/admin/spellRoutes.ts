@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { SpellModel } from "../../mongoDB/models/GameData";
-import { BOutputSpell } from "../../types/validation/mongoOutput";
-import { validateData, errMsg } from "../../middleware/validatorHelpes";
+import { SpellModel } from "../../mongoDB/models/GameData.js";
+import { BOutputSpell } from "../../types/validation/mongoOutput.js";
+import { validateData, errMsg } from "../../middleware/validatorHelpes.js";
 import z from "zod";
 import { InputSpell } from "@heroapp/shared";
-import { deleteByID, updateById } from "../helpers/helpers";
+import { deleteByID, updateById } from "../helpers/helpers.js";
 
 const router = Router();
 

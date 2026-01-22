@@ -1,13 +1,13 @@
 import { Router } from "express";
 import z from "zod";
 
-import { HttpError } from "../../middleware/errorHandler";
-import { errMsg, validateData } from "../../middleware/validatorHelpes";
-import { deleteByID, updateById } from "../helpers/helpers";
+import { HttpError } from "../../middleware/errorHandler.js";
+import { errMsg, validateData } from "../../middleware/validatorHelpes.js";
+import { deleteByID, updateById } from "../helpers/helpers.js";
 
-import { PlayerModel } from "../../mongoDB/models/Player";
+import { PlayerModel } from "../../mongoDB/models/Player.js";
 
-import { BOutputPlayer } from "../../types/validation/mongoOutput";
+import { BOutputPlayer } from "../../types/validation/mongoOutput.js";
 import { InputPlayer } from "@heroapp/shared";
 
 const router = Router();

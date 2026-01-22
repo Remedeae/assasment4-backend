@@ -1,14 +1,14 @@
-import { errMsg, validateData } from "../../middleware/validatorHelpes";
-import { HttpError } from "../../middleware/errorHandler";
+import { errMsg, validateData } from "../../middleware/validatorHelpes.js";
+import { HttpError } from "../../middleware/errorHandler.js";
 
 import type mongoose from "mongoose";
 import { Model, Types } from "mongoose";
-import { HeroModel } from "../../mongoDB/models/Hero";
-import { SpellModel, ItemModel } from "../../mongoDB/models/GameData";
-import { PlayerHeroModel } from "../../mongoDB/models/Player";
+import { HeroModel } from "../../mongoDB/models/Hero.js";
+import { SpellModel, ItemModel } from "../../mongoDB/models/GameData.js";
+import { PlayerHeroModel } from "../../mongoDB/models/Player.js";
 
-import * as zodOutput from "../../types/validation/mongoOutput";
-import * as tsoutput from "../../types/validation/mongoOutput";
+import * as zodOutput from "../../types/validation/mongoOutput.js";
+import * as tsoutput from "../../types/validation/mongoOutput.js";
 import * as tsinput from "@heroapp/shared";
 import { z, ZodObject } from "zod";
 

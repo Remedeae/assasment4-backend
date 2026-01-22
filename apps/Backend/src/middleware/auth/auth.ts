@@ -1,8 +1,8 @@
 import "dotenv/config";
 import { auth } from "express-openid-connect";
 import type { Request, Response, NextFunction } from "express";
-import { envSchema } from "../../types/validation/envValidation";
-import { HttpError } from "../errorHandler";
+import { envSchema } from "../../types/validation/envValidation.js";
+import { HttpError } from "../errorHandler.js";
 
 import { backendURL } from "@heroapp/shared";
 

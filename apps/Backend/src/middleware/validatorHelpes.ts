@@ -1,5 +1,5 @@
 import z from "zod";
-import { HttpError } from "./errorHandler";
+import { HttpError } from "./errorHandler.js";
 
 type ErrorReturnSchema = {
   status: number;

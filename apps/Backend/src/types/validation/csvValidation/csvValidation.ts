@@ -1,5 +1,5 @@
 import { z } from "zod";
-import * as h from "./csvHelpers";
+import * as h from "./csvHelpers.js";
 import { equipHand, weaponType, spellSchool, spellType } from "@heroapp/shared";
 import { title } from "process";
 

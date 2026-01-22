@@ -1,13 +1,13 @@
-import connectDB from "../db";
-import { ItemModel, SpellModel } from "../models/GameData";
-import { HeroModel } from "../models/Hero";
-import { PlayerModel, PlayerHeroModel } from "../models/Player";
-import { readCsv } from "./readCsv";
-import { parseCSVRows } from "./validateCsv";
+import connectDB from "../db.js";
+import { ItemModel, SpellModel } from "../models/GameData.js";
+import { HeroModel } from "../models/Hero.js";
+import { PlayerModel, PlayerHeroModel } from "../models/Player.js";
+import { readCsv } from "./readCsv.js";
+import { parseCSVRows } from "./validateCsv.js";
 import {
   SpellCsvSchema,
   ItemCsvSchema,
-} from "../../types/validation/csvValidation/csvValidation";
+} from "../../types/validation/csvValidation/csvValidation.js";
 
 const seed = async () => {
   try {

@@ -1,11 +1,11 @@
-export * from "./types/base/generalGamedataSchema";
-export * from "./types/base/heroDataSchema";
-export * from "./types/base/mongoId";
-export * from "./types/base/playerSchema";
-export * from "./types/input";
-export * from "./types/output";
-export * from "./types/types";
-export * from "./types/authRes";
+export * from "./types/base/generalGamedataSchema.js";
+export * from "./types/base/heroDataSchema.js";
+export * from "./types/base/mongoId.js";
+export * from "./types/base/playerSchema.js";
+export * from "./types/input.js";
+export * from "./types/output.js";
+export type * from "./types/types.js";
+export * from "./types/authRes.js";
 
-export * from "./variables/url";
+export * from "./variables/url.js";
 export { z } from "zod";

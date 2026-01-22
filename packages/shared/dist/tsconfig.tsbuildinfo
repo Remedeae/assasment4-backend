@@ -1,1 +1,1 @@
-{"root":["../index.ts","../types/authres.ts","../types/input.ts","../types/output.ts","../types/types.ts","../types/base/generalgamedataschema.ts","../types/base/herodataschema.ts","../types/base/mongoid.ts","../types/base/playerschema.ts"],"version":"5.9.3"}
+{"root":["../index.ts","../types/authres.ts","../types/input.ts","../types/output.ts","../types/types.ts","../types/base/generalgamedataschema.ts","../types/base/herodataschema.ts","../types/base/mongoid.ts","../types/base/playerschema.ts","../variables/url.ts"],"version":"5.9.3"}

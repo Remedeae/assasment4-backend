@@ -1,24 +1,24 @@
 import "dotenv/config";
 import express from "express";
 import pkg from "express-openid-connect";
-import connectDB from "./mongoDB/db";
+import connectDB from "./mongoDB/db.js";
 import cors from "cors";
 import type { CorsOptions } from "cors";
 
-import { authMiddleware, requiresAdmin } from "./middleware/auth/auth";
-import { errorHandler } from "./middleware/errorHandler";
+import { authMiddleware, requiresAdmin } from "./middleware/auth/auth.js";
+import { errorHandler } from "./middleware/errorHandler.js";
 
-import allUserRoutes from "./routes/admin/allUsersRoutes";
-import heroRoutes from "./routes/admin/heroRoutes";
-import itemRoutes from "./routes/admin/itemRoutes";
-import spellRoutes from "./routes/admin/spellRoutes";
-import adminUserRoutes from "./routes/admin/userRoutes";
+import allUserRoutes from "./routes/admin/allUsersRoutes.js";
+import heroRoutes from "./routes/admin/heroRoutes.js";
+import itemRoutes from "./routes/admin/itemRoutes.js";
+import spellRoutes from "./routes/admin/spellRoutes.js";
+import adminUserRoutes from "./routes/admin/userRoutes.js";
 
-import signUpRoute from "./routes/signUpRoutes";
-import checkAuthRoute from "./routes/checkAuthRoute";
+import signUpRoute from "./routes/signUpRoutes.js";
+import checkAuthRoute from "./routes/checkAuthRoute.js";
 
-import playGameRoutes from "./routes/user/playGameRoutes";
-import userRoutes from "./routes/user/userRoutes";
+import playGameRoutes from "./routes/user/playGameRoutes.js";
+import userRoutes from "./routes/user/userRoutes.js";
 
 import { PORT, frontendURL } from "@heroapp/shared";
 
