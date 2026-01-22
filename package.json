@@ -6,5 +6,8 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "scripts": {
+    "build": "npm run build --workspace=@heroapp/shared && npm run build --workspace=@heroapp/frontend && npm run build --workspace=@heroapp/backend"
+  }
 }
