@@ -49,7 +49,7 @@ app.use("/signup/user", signUpRoute);
 app.use("/loggedUser", requiresAuth(), checkAuthRoute);
 
 app.use("/allUsers", requiresAuth(), requiresAdmin, allUserRoutes);
-app.use("/gameitems/heroes", /* requiresAuth(), requiresAdmin, */ heroRoutes);
+app.use("", requiresAuth(), requiresAdmin, heroRoutes);
 app.use("/gameitems/items", requiresAuth(), requiresAdmin, itemRoutes);
 app.use("/gameitems/spells", requiresAuth(), requiresAdmin, spellRoutes);
 app.use("/collection/admin", requiresAuth(), requiresAdmin, adminUserRoutes);

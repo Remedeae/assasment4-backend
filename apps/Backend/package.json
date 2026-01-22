@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --ext ts,js,json --exec tsx src/index.ts",
-    "seed": "tsx src/mongoDB/seed/seed.ts"
+    "seed": "tsx src/mongoDB/seed/seed.ts",
+    "build": "tsc -b"
   },
   "keywords": [],
   "author": "",
