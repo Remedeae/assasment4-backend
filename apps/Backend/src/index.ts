@@ -63,6 +63,8 @@ app.use("/api/game", requiresAuth(), playGameRoutes);
 app.use("/api/user", requiresAuth(), userRoutes);
 
 app.use(errorHandler);
+
+export default app;
 /* app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 }); */
