@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { ItemModel } from "../../../mongoDB/models/GameData.js";
-import { BOutputItem } from "../../../types/validation/mongoOutput.js";
-import { validateData, errMsg } from "../../../middleware/validatorHelpes.js";
+import { ItemModel } from "../../mongoDB/models/GameData.js";
+import { BOutputItem } from "../../types/validation/mongoOutput.js";
+import { validateData, errMsg } from "../../middleware/validatorHelpes.js";
 import z from "zod";
 import { InputItem } from "@heroapp/shared";
 import { deleteByID, updateById } from "../helpers/helpers.js";

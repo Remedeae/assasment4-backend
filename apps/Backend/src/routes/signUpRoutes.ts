@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { errMsg, validateData } from "../../middleware/validatorHelpes.js";
+import { errMsg, validateData } from "../middleware/validatorHelpes.js";
 import { InputPlayer } from "@heroapp/shared";
-import { PlayerModel } from "../../mongoDB/models/Player.js";
+import { PlayerModel } from "../mongoDB/models/Player.js";
 
 const router = Router();
 
