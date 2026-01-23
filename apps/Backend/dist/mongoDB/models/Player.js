@@ -1,0 +1,32 @@
+import mongoose, { Schema } from "mongoose";
+const PlayerHeroMongoSchema = new Schema({
+    heroId: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    spellIds: { type: [String], default: [] },
+    equipmentIds: { type: [String], default: [] },
+    createdAt: { type: Date, default: Date.now },
+});
+const PlayerMongoSchema = new Schema({
+    auth0Id: { type: String, required: true },
+    userName: {
+        type: String,
+        required: true,
+        unique: true,
+        lowercase: true,
+        trim: true,
+    },
+    email: { type: String, required: true },
+    inventory: new Schema({
+        heroes: { type: [String], default: [] },
+        items: { type: [String], default: [] },
+    }, { _id: false }),
+    levelsClear: { type: [String], default: [] },
+    team: { type: [String], default: [] },
+    createdAt: { type: Date, default: Date.now },
+});
+export const PlayerHeroModel = mongoose.model("PlayerHero", PlayerHeroMongoSchema);
+export const PlayerModel = mongoose.model("Player", PlayerMongoSchema);
+//# sourceMappingURL=Player.js.map
