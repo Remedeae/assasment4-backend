@@ -64,7 +64,7 @@ app.use("/api/user", requiresAuth(), userRoutes);
 
 app.use(errorHandler);
 
-export default app;
-/* app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`);
-}); */
+const port = Number(process.env.PORT) || PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server is running at http://localhost:${port}`);
+});
