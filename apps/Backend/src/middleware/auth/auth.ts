@@ -4,7 +4,8 @@ import type { Request, Response, NextFunction } from "express";
 import { envSchema } from "../../types/validation/envValidation.js";
 import { HttpError } from "../errorHandler.js";
 
-import { backendURL } from "@heroapp/shared";
+//import { backendURL } from "@heroapp/shared";
+const backendURL = "http://localhost:3000"
 
 export const env = envSchema.parse(process.env);
 

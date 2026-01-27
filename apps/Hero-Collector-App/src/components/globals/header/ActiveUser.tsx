@@ -12,7 +12,7 @@ export default function ActiveUser() {
   const displayAccess = isTrueAdmin ? "Admin" : null;
 
   return (
-    <div>
+    <div className="activeUser">
       <h2>
         {displayAccess} {firstLetterToUpperCase(displayLoggedIn)}
       </h2>

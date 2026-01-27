@@ -22,7 +22,12 @@ export default function GameItems() {
     );
   }
   return (
-    <div>
+    <div className="gameitems">
+      <button onClick={() => setDisplayForm(!displayForm)}>
+        {displayForm
+          ? `Return to ${itemTypeDisplay} view`
+          : `Add new ${itemTypeDisplay}`}
+      </button>
       <div>
         {itemTypes.map((i) => (
           <h2 key={i} onClick={() => setItemTypeDisplay(i)}>
@@ -30,11 +35,6 @@ export default function GameItems() {
           </h2>
         ))}
       </div>
-      <button onClick={() => setDisplayForm(!displayForm)}>
-        {displayForm
-          ? `Return to ${itemTypeDisplay} view`
-          : `Add new ${itemTypeDisplay}`}
-      </button>
 
       {itemTypeDisplay === "heroes" &&
         (displayForm ? (

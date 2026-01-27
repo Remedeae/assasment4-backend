@@ -40,24 +40,26 @@ export default function PlayerCollection(auth0Id: ID) {
   }, [auth0Id]);
 
   return (
-    <div>
-      <h1>Collection</h1>
-      <div>
-        <p>?</p>
-        <input
-          type="text"
-          placeholder="Search heroes..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-      </div>
+    <div className="collection">
+      <header>
+        <h1>Collection</h1>
+        <div>
+          <p>?</p>
+          <input
+            type="text"
+            placeholder="Search heroes..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+      </header>
       {heroes.length === 0 && (
         <h5>
           You have no heroes, play a <Link to="/game">Game</Link> to acuire one!
         </h5>
       )}
       {heroes.length > 0 && (
-        <ul>
+        <ul className="heroes">
           {heroes
             .filter((h) =>
               h.hero.name.toLowerCase().includes(search.toLowerCase()),
@@ -67,12 +69,13 @@ export default function PlayerCollection(auth0Id: ID) {
                 <MiniHeroCard
                   name={h.hero.name}
                   image={h.hero.image ?? placeholderPortray}
+                  title={h.hero.title}
                 />
               </li>
             ))}
         </ul>
       )}
-      <div>
+      <div className="displayHero">
         {displayHero && (
           <HeroCard
             hero={displayHero.hero}
@@ -92,6 +95,7 @@ export default function PlayerCollection(auth0Id: ID) {
                   <MiniHeroCard
                     name={t.hero.name}
                     image={t.hero.image || placeholderPortray}
+                    title={""}
                   />
                 </li>
               ))}

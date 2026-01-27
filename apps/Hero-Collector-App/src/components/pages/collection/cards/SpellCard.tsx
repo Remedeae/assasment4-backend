@@ -8,7 +8,7 @@ type SpellProp = Omit<SpellOutput, "_id"> & {
 export default function SpellCard(props: SpellProp) {
   if (!props.display) return null;
   return (
-    <ul>
+    <ul className="spellCard">
       <li>{props.name}</li>
       <li>
         {firstLetterToUpperCase(props.school)} -{" "}

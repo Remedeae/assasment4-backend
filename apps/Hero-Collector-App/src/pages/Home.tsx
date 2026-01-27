@@ -10,12 +10,8 @@ export default function Home() {
 
   if (!isLoggedIn) return <NoLogin />;
   return (
-    <div>
-      <div>
+      <div className="home">
         <ul>
-          <li>
-            <Link to="/home">Home</Link>
-          </li>
           <li>
             <Link to={`/collection/${user?.auth0Id}`}>Collection</Link>
           </li>
@@ -33,7 +29,6 @@ export default function Home() {
             </>
           )}
         </ul>
-      </div>
     </div>
   );
 }

@@ -8,15 +8,16 @@ export default function Header() {
   const setIsAdmin = useAdminToggle((s) => s.setIsAdmin);
 
   return (
-    <div>
+    <header>
       <Nav />
       <ActiveUser />
       {isTrueAdmin ? (
-        <button onClick={() => setIsAdmin(!isAdmin)}>
+        <button className="admintoggle"
+         onClick={() => setIsAdmin(!isAdmin)}>
           Swap to {!isAdmin && "Admin"}
           {isAdmin && "User"} view
         </button>
       ) : null}
-    </div>
+    </header>
   );
 }

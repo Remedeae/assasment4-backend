@@ -1,0 +1,10 @@
+.herocard {
+    display: flex;
+    flex-wrap: wrap;
+    & > * {
+        width: 48%;
+        padding: calc((50-width)/2);    } 
+    & h4, h5 {
+        width: 100%;
+    }
+}

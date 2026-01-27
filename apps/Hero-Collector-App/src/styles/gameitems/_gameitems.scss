@@ -1,0 +1,18 @@
+.gameitems {
+    display: flex;
+    flex-direction: column;
+    & .heroes, .items, .spells {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    & .heroes li {
+        width: 46%;
+    }
+    & .spells li {
+        width: 21%;
+    }
+    & .items {
+        width: 30%;
+    }
+}
+}

@@ -18,7 +18,7 @@ export default function AllSpells() {
   return (
     <>
       {spells?.length !== 0 ? (
-        <ul>
+        <ul className="spells">
           {spells.map((s) => (
             <li key={s._id}>
               <SpellCard

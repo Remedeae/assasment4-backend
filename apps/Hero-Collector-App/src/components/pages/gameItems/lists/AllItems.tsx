@@ -17,7 +17,7 @@ export default function AllItems() {
   return (
     <>
       {items?.length !== 0 ? (
-        <ul>
+        <ul className="items">
           {items.map((i) => (
             <li key={i._id}>
               <ItemCard display={true} item={i} />

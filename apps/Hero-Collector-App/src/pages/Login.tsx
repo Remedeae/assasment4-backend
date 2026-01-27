@@ -13,8 +13,11 @@ export default function Login() {
   }, [loggedIn, navigate]);
 
   return (
-    <div>
-      <h1>Welcome to the Hero Collector App!</h1>
+    <div className="login">
+      <div>
+        <h1>Welcome to the Hero Collector App!</h1>
+        <p>Home of the Dungeon Delvers Deluxe</p>
+      </div>
       <UserLogin />
     </div>
   );

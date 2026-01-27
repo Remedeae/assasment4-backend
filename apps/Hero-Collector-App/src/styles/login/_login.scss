@@ -1,0 +1,13 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    
+    & div {
+        display: inherit;
+    }
+    & 
+    & i {
+        font-size: calc(0.5*$font-size);
+        align-items: start;
+    }
+}

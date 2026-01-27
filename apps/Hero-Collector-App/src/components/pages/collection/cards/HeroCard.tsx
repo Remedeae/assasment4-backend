@@ -10,33 +10,32 @@ type HeroCardProp = Omit<FullPlayerHeroOutput, "_id" | "createdAt">;
 export default function HeroCard({ hero, spells, equipment }: HeroCardProp) {
   const [hoverItemId, setHoverItemId] = useState<string | null>(null);
 
-  return (
-    <>
-      <h5>Name: {hero.name}</h5>
-      <img src={hero.image ?? placeholderImg} alt={`Portray of ${hero.name}`} />
+  return    <div className="herocard">
+      <h4>Name: {hero.name}</h4>
       <h5 className="statblock">
         Brawn: {hero.stats.brawn} | Magic: {hero.stats.magic} | Lives:{" "}
         {hero.stats.lives} | Speed: {hero.stats.speed}
       </h5>
-      <ul>
-        <li>
-          <strong>Looks:</strong> {hero.description.looks}
-        </li>
-        <li>
-          <strong>Likes:</strong> {hero.description.likes}
-        </li>
-        <li>
-          <strong>Dislikes:</strong> {hero.description.dislikes}
-        </li>
-        <li>
-          <strong>Treasure:</strong> {hero.description.treasure}
-        </li>
-      </ul>
+        <ul className="description">
+          <li>
+            <strong>Looks:</strong> {hero.description.looks}
+          </li>
+          <li>
+            <strong>Likes:</strong> {hero.description.likes}
+          </li>
+          <li>
+            <strong>Dislikes:</strong> {hero.description.dislikes}
+          </li>
+          <li>
+            <strong>Treasure:</strong> {hero.description.treasure}
+          </li>
+        </ul>
+        <img src={hero.image ?? placeholderImg} alt={`Portray of ${hero.name}`} />
       <div>
         {hero.traits.special && (
           <>
             <strong>Special: </strong>
-            <ul>
+            <ul className="special">
               {hero.traits.special?.map((s) => (
                 <li key={s}>{s}</li>
               ))}
@@ -46,7 +45,7 @@ export default function HeroCard({ hero, spells, equipment }: HeroCardProp) {
         {hero.traits.combat && (
           <>
             <strong>Combat: </strong>
-            <ul>
+            <ul className="combat">
               {hero.traits.combat?.map((c) => (
                 <li key={c}>{c}</li>
               ))}
@@ -94,6 +93,7 @@ export default function HeroCard({ hero, spells, equipment }: HeroCardProp) {
           ))}
         </ul>
       </div>
-    </>
-  );
+    <div/>
+    </div>
+
 }

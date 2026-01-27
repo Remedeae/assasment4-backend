@@ -1,0 +1,10 @@
+.home {
+    & ul {
+        display: flex;
+        align-items: center;
+    }
+    & li {
+        font-size: calc($font-size*2);
+        font-weight: bold;
+    }
+}

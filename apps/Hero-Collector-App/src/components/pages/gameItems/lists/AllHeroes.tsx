@@ -17,7 +17,7 @@ export default function AllHeroes() {
   return (
     <>
       {heroes?.length !== 0 ? (
-        <ul>
+        <ul className="heroes">
           {heroes?.map((h) => {
             return (
               <li key={h.hero._id}>
@@ -26,7 +26,7 @@ export default function AllHeroes() {
                   hero={h.hero}
                   spells={h.spells}
                   equipment={h.equipment}
-                />
+                /> 
               </li>
             );
           })}

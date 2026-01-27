@@ -11,7 +11,7 @@ export default function Nav() {
     return null;
   }
   return (
-    <div>
+    <nav>
       <ul>
         <li>
           <Link to="/home">Home</Link>
@@ -33,6 +33,6 @@ export default function Nav() {
           </>
         )}
       </ul>
-    </div>
+    </nav>
   );
 }

@@ -10,7 +10,8 @@ export const api = async <T>(
   try {
     const response = await axios({
       method,
-      url: `${backendURL}${url}`,
+      url: `http://localhost:3000${url}`,
+      //url: `${backendURL}${url}`,
       data: body,
       withCredentials: true,
     });
