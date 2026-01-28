@@ -4,7 +4,7 @@ import { constructPlayerHero, deleteByID, hydratePlayerHeroes, updateById, } fro
 import { errMsg, validateData } from "../../middleware/validatorHelpes.js";
 import { PlayerHeroModel, PlayerModel } from "../../mongoDB/models/Player.js";
 import { ItemModel } from "../../mongoDB/models/GameData.js";
-import { InputHero, InputPlayer, InputPlayerHero } from "@heroapp/shared";
+import { InputPlayer, InputPlayerHero } from "@heroapp/shared";
 import { BOutputPlayer } from "../../types/validation/mongoOutput.js";
 const router = Router();
 //get user by ID

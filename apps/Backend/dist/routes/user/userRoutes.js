@@ -1,11 +1,8 @@
 import { Router } from "express";
 import { PlayerModel } from "../../mongoDB/models/Player.js";
 import { errMsg, validateData } from "../../middleware/validatorHelpes.js";
-import { HttpError } from "../../middleware/errorHandler.js";
 import { BOutputFullPlayer, BOutputPlayer, } from "../../types/validation/mongoOutput.js";
-import { 
-//adminStatusCheck,
-deleteByID, hydrateItems, hydratePlayerHeroes, updateById, } from "../helpers/helpers.js";
+import { hydrateItems, hydratePlayerHeroes, } from "../helpers/helpers.js";
 import { csvBoolean } from "../../types/validation/csvValidation/csvHelpers.js";
 const router = Router();
 //get user by auth0Id

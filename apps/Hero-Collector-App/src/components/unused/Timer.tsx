@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+/* import { useEffect, useState } from "react";
 
 type TimerProps = {
   toggleMsg1: string;
@@ -38,4 +38,4 @@ export default function Timer(props: TimerProps) {
       <button onClick={handleToggleTimer}>{timerStatusMsg}</button>
     </div>
   );
-}
+} */

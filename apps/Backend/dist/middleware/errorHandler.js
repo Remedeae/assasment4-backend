@@ -1,4 +1,3 @@
-import { ZodError } from "zod";
 export const formatZodError = (err) => {
     return err.issues.map((issue) => ({
         path: issue.path.join("."),
@@ -13,7 +12,9 @@ export class HttpError extends Error {
         Object.setPrototypeOf(this, new.target.prototype);
     }
 }
-export function errorHandler(err, req, res, next) {
+export function errorHandler(err, 
+//req: Request,
+res) {
     if (err instanceof HttpError) {
         res
             .status(err.status)

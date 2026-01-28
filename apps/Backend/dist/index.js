@@ -43,8 +43,9 @@ app.use("/api/collection/admin", requiresAuth(), requiresAdmin, adminUserRoutes)
 app.use("/api/game", requiresAuth(), playGameRoutes);
 app.use("/api/user", requiresAuth(), userRoutes);
 app.use(errorHandler);
+const port = Number(process.env.PORT) || PORT || 3000;
+app.listen(port, () => {
+    console.log(`Server is running at http://localhost:${port}`);
+});
 export default app;
-/* app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`);
-}); */
 //# sourceMappingURL=index.js.map

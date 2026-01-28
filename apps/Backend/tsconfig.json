@@ -1,34 +1,12 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    // File Layout
     "rootDir": "src",
     "outDir": "dist",
-
-    "module": "esnext",
-    "moduleResolution": "Node",
-    "baseUrl": ".",
-    "target": "es2020",
     "types": ["node"],
-    // Other Outputs
     "sourceMap": true,
     "declaration": true,
-    "declarationMap": true,
-
-    // Stricter Typechecking Options
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
-    "strict": true,
-    "esModuleInterop": true,
-    "jsx": "react-jsx",
-    "verbatimModuleSyntax": true,
-    "isolatedModules": true,
-    "noUncheckedSideEffectImports": true,
-    "moduleDetection": "force",
-    "skipLibCheck": true
+    "declarationMap": true
   },
-  "include": [
-    "src/**/*",
-    "../Shared/types/output.ts",
-    "src/types/validation/csvValidation"
-  ]
+  "include": ["src/**/*"]
 }

@@ -2,7 +2,8 @@ import "dotenv/config";
 import { auth } from "express-openid-connect";
 import { envSchema } from "../../types/validation/envValidation.js";
 import { HttpError } from "../errorHandler.js";
-import { backendURL } from "@heroapp/shared";
+//import { backendURL } from "@heroapp/shared";
+const backendURL = "http://localhost:3000";
 export const env = envSchema.parse(process.env);
 const config = {
     authRequired: false,

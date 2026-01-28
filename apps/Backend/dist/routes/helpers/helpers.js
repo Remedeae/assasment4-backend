@@ -1,13 +1,12 @@
 import { errMsg, validateData } from "../../middleware/validatorHelpes.js";
 import { HttpError } from "../../middleware/errorHandler.js";
-import { Model, Types } from "mongoose";
+import { Types } from "mongoose";
 import { HeroModel } from "../../mongoDB/models/Hero.js";
 import { SpellModel, ItemModel } from "../../mongoDB/models/GameData.js";
 import { PlayerHeroModel } from "../../mongoDB/models/Player.js";
 import * as zodOutput from "../../types/validation/mongoOutput.js";
-import * as tsoutput from "../../types/validation/mongoOutput.js";
 import * as tsinput from "@heroapp/shared";
-import { z, ZodObject } from "zod";
+import { z } from "zod";
 //constructs a Player hero from heroId ready for posting
 export const constructPlayerHero = async (heroId, session) => {
     const heroExists = await HeroModel.exists({ _id: heroId });

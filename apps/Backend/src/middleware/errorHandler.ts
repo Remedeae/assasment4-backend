@@ -1,4 +1,4 @@
-import type { Request, Response, NextFunction } from "express";
+import type { /* Request, */ Response /* NextFunction */ } from "express";
 import { ZodError } from "zod";
 
 export const formatZodError = (err: ZodError) => {
@@ -23,9 +23,9 @@ export class HttpError extends Error {
 
 export function errorHandler(
   err: unknown,
-  req: Request,
+  //req: Request,
   res: Response,
-  next: NextFunction,
+  //next: NextFunction,
 ) {
   if (err instanceof HttpError) {
     res

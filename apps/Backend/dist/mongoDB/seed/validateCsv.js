@@ -1,4 +1,3 @@
-import { z } from "zod";
 export const parseCSVRows = (schema, rows) => {
     const valid = [];
     const errors = [];

@@ -1,4 +1,4 @@
-import type { Request, Response, NextFunction } from "express";
+import type { Response } from "express";
 import { ZodError } from "zod";
 export declare const formatZodError: (err: ZodError) => {
     path: string;
@@ -9,5 +9,5 @@ export declare class HttpError extends Error {
     details?: unknown;
     constructor(status: number, message: string, details: unknown);
 }
-export declare function errorHandler(err: unknown, req: Request, res: Response, next: NextFunction): void;
+export declare function errorHandler(err: unknown, res: Response): void;
 //# sourceMappingURL=errorHandler.d.ts.map

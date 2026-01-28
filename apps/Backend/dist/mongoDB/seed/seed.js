@@ -1,10 +1,8 @@
 import connectDB from "../db.js";
-import { ItemModel, SpellModel } from "../models/GameData.js";
-import { HeroModel } from "../models/Hero.js";
-import { PlayerModel, PlayerHeroModel } from "../models/Player.js";
+import { ItemModel } from "../models/GameData.js";
 import { readCsv } from "./readCsv.js";
 import { parseCSVRows } from "./validateCsv.js";
-import { SpellCsvSchema, ItemCsvSchema, } from "../../types/validation/csvValidation/csvValidation.js";
+import { ItemCsvSchema, } from "../../types/validation/csvValidation/csvValidation.js";
 const seed = async () => {
     try {
         await connectDB();

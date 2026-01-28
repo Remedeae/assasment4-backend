@@ -1,4 +1,3 @@
-import z from "zod";
 import { HttpError } from "./errorHandler.js";
 export const validateData = (data, dataSchema, err) => {
     const valitedData = dataSchema.safeParse(data);
