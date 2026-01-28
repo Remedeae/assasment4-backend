@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { StatBlockSchema, spellSchool } from "./generalGamedataSchema";
-import { mongoIdSchema } from "./mongoId";
+import { StatBlockSchema, spellSchool } from "./generalGamedataSchema.js";
+import { mongoIdSchema } from "./mongoId.js";
 
 const HeroDescriptionSchema = z.object({
   looks: z.string(),
