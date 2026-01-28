@@ -66,7 +66,9 @@ app.use(errorHandler);
 
 const port = Number(process.env.PORT) || PORT || 3000;
 app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+  console.log(
+    `Server is running at http://backend-production-26ed.up.railway.app`,
+  );
 });
 
 export default app;
