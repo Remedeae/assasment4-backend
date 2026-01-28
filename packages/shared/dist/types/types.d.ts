@@ -1,6 +1,6 @@
 import { z } from "zod";
-import * as ip from "./input";
-import * as op from "./output";
+import * as ip from "./input.js";
+import * as op from "./output.js";
 export type ItemInput = z.infer<typeof ip.InputItem>;
 export type ItemOutput = z.infer<typeof op.OutputItem>;
 export type SpellInput = z.infer<typeof ip.InputSpell>;

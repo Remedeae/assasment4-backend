@@ -1,8 +1,8 @@
 import { z } from "zod";
-import * as g from "./base/generalGamedataSchema";
-import * as h from "./base/heroDataSchema";
-import * as p from "./base/playerSchema";
-import { mongoIdSchema } from "./base/mongoId";
+import * as g from "./base/generalGamedataSchema.js";
+import * as h from "./base/heroDataSchema.js";
+import * as p from "./base/playerSchema.js";
+import { mongoIdSchema } from "./base/mongoId.js";
 export const InputItem = g.ItemSchema.extend({
     quantity: z.number().default(1),
 });
