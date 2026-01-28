@@ -37,7 +37,7 @@ app.use(authMiddleware);
 app.use(express.json());
 app.use(cors(corsOptions));
 
-app.get("/api/", (req, res) => {
+app.get("/", (req, res) => {
   const isAuthenticated = req.oidc.isAuthenticated();
   if (!isAuthenticated) {
     res.redirect(`${frontendURL}`);
@@ -45,22 +45,17 @@ app.get("/api/", (req, res) => {
   res.redirect(`${frontendURL}/home`);
 });
 
-app.use("/api/signup/user", signUpRoute);
-app.use("/api/loggedUser", requiresAuth(), checkAuthRoute);
+app.use("/signup/user", signUpRoute);
+app.use("/loggedUser", requiresAuth(), checkAuthRoute);
 
-app.use("/api/allUsers", requiresAuth(), requiresAdmin, allUserRoutes);
-app.use("/api/gameitems/heroes", requiresAuth(), requiresAdmin, heroRoutes);
-app.use("/api/gameitems/items", requiresAuth(), requiresAdmin, itemRoutes);
-app.use("/api/gameitems/spells", requiresAuth(), requiresAdmin, spellRoutes);
-app.use(
-  "/api/collection/admin",
-  requiresAuth(),
-  requiresAdmin,
-  adminUserRoutes,
-);
+app.use("/allUsers", requiresAuth(), requiresAdmin, allUserRoutes);
+app.use("/gameitems/heroes", requiresAuth(), requiresAdmin, heroRoutes);
+app.use("/gameitems/items", requiresAuth(), requiresAdmin, itemRoutes);
+app.use("/gameitems/spells", requiresAuth(), requiresAdmin, spellRoutes);
+app.use("/collection/admin", requiresAuth(), requiresAdmin, adminUserRoutes);
 
-app.use("/api/game", requiresAuth(), playGameRoutes);
-app.use("/api/user", requiresAuth(), userRoutes);
+app.use("/game", requiresAuth(), playGameRoutes);
+app.use("/user", requiresAuth(), userRoutes);
 
 app.use(errorHandler);
 
