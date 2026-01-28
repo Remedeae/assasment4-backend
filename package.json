@@ -8,6 +8,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "npm run build --workspace=@heroapp/shared && npm run build --workspace=@heroapp/apps/Hero-Collector-App && npm run build --workspace=@heroapp/Backend"
+    "build": "npm run build --workspaces",
+    "start": "npm run start --workspace=apps/Backend"
   }
 }
