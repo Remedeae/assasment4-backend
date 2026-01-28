@@ -8,6 +8,6 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "npm run build --workspace=@heroapp/shared && npm run build --workspace=@heroapp/frontend && npm run build --workspace=@heroapp/backend"
+    "build": "npm run build --workspace=@heroapp/shared && npm run build --workspace=@heroapp/apps/Hero-Collector-App && npm run build --workspace=@heroapp/Backend"
   }
 }

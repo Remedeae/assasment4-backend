@@ -1,4 +1,4 @@
-import type { Response } from "express";
+import type { /* Request, */ Response } from "express";
 import { ZodError } from "zod";
 export declare const formatZodError: (err: ZodError) => {
     path: string;
