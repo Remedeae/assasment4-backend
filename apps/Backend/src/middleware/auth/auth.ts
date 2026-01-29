@@ -15,6 +15,12 @@ const config = {
   clientID: env.CLIENT_ID,
   clientSecret: env.CLIENT_SECRET,
   issuerBaseURL: env.ISSUE_BASE_URL,
+  session: {
+    cookie: {
+      sameSite: "none",
+      secure: true,
+    },
+  },
   authorizationParams: {
     response_type: "code",
     response_mode: "query",

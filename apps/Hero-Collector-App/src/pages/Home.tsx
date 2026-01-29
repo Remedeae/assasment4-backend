@@ -7,8 +7,6 @@ export default function Home() {
   const user = useAuthStore((s) => s.user);
   const isLocalAdmin = useAdminToggle((s) => s.isAdmin);
   const isLoggedIn = useAuthStore((s) => s.isAuthenticated);
-  console.log(user);
-  console.log(isLoggedIn);
 
   if (!isLoggedIn) return <NoLogin />;
   return (
