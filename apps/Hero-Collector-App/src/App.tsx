@@ -27,6 +27,7 @@ function App() {
           setAdmin(true);
         }
         setAuth(res);
+        console.log(res);
       } catch {
         clearAuth();
       }
