@@ -17,7 +17,7 @@ const config = {
   issuerBaseURL: env.ISSUE_BASE_URL,
   session: {
     cookie: {
-      sameSite: "none",
+      sameSite: "None",
       secure: true,
     },
   },
