@@ -46,7 +46,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/signup/user", signUpRoute);
-app.use("/loggedUser", requiresAuth(), checkAuthRoute);
+app.use("/loggedUser", checkAuthRoute);
 
 app.use("/allUsers", requiresAuth(), requiresAdmin, allUserRoutes);
 app.use("/gameitems/heroes", requiresAuth(), requiresAdmin, heroRoutes);
