@@ -38,11 +38,8 @@ app.use(express.json());
 app.use(cors(corsOptions));
 
 app.get("/", (req, res) => {
-  const isAuthenticated = req.oidc.isAuthenticated();
-  if (!isAuthenticated) {
-    res.redirect(`${frontendURL}`);
-  }
-  res.redirect(`${frontendURL}/home`);
+  const url = req.oidc.isAuthenticated() ? `${frontendURL}/home` : frontendURL;
+  res.redirect(url);
 });
 
 app.use("/signup/user", signUpRoute);
