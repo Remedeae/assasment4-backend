@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { LoggedUserSchema } from "@heroapp/shared";
+import logger from "../../logger";
 
 const router = Router();
 
@@ -16,6 +17,7 @@ router.get("", async (req, res, next) => {
       roles: rawUser?.["https://remedeae-hero-collector/roles"],
       auth0Id: rawUser?.sub,
     });
+    logger.info(`${formattedUser.userName} authenticated succeffully.`);
     res.status(200).send({ isAuthenticated, user: formattedUser });
   } catch (error) {
     next(error);

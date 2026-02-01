@@ -1,6 +1,8 @@
 import { Router } from "express";
 import z from "zod";
 
+import logger from "../../logger.js";
+
 import { HttpError } from "../../middleware/errorHandler.js";
 import { errMsg, validateData } from "../../middleware/validatorHelpes.js";
 import { deleteByID, updateById } from "../helpers/helpers.js";
@@ -37,9 +39,12 @@ router.delete("/:id", async (req, res, next) => {
     }
 
     const deleted = await deleteByID(id, "User", PlayerModel);
-    res
-      .status(200)
-      .send(`User ${deleted?.userName} with id: ${id} successfully deleted`);
+    logger.info({
+      message: `User ${user.userName} successfully deleted`,
+      auth0Id: user.auth0Id,
+      id: user._id,
+    });
+    res.status(200).send(`User ${deleted?.userName} successfully deleted`);
   } catch (error) {
     next(error);
   }
@@ -56,6 +61,7 @@ router.put("/:id", async (req, res, next) => {
       InputPlayer,
       PlayerModel,
     );
+    logger.info(`User ${updatedUser?.userName} has successfully been updated.`);
     res
       .status(200)
       .send(`User ${updatedUser?.userName} has successfully been updated.`);

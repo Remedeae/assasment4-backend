@@ -5,6 +5,8 @@ import { validateData, errMsg } from "../../middleware/validatorHelpes.js";
 import z from "zod";
 import { InputSpell } from "@heroapp/shared";
 import { deleteByID, updateById } from "../helpers/helpers.js";
+import logger from "../../logger.js";
+import { log } from "node:console";
 
 const router = Router();
 
@@ -28,6 +30,7 @@ router.post("", async (req, res, next) => {
   try {
     const validatedBody = validateData(req.body, InputSpell, errMsg[3]);
     const createdSpell = await SpellModel.create(validatedBody);
+    logger.info(`Created ${createdSpell}`);
     res.status(200).send(`Successfully created: ${createdSpell.name}`);
   } catch (error) {
     next(error);
@@ -39,6 +42,8 @@ router.delete("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const deletedSpell = await deleteByID(id, "Spell", SpellModel);
+    logger.info(`
+      Deleted: ${deletedSpell}`);
     res
       .status(200)
       .send({ message: `Spell ${deletedSpell?.name} successfully deleted.` });
@@ -58,9 +63,10 @@ router.put("/:id", async (req, res, next) => {
       InputSpell,
       SpellModel,
     );
+    logger.info(`Spell successfully updated to: ${updatedSpell}`);
     res
       .status(200)
-      .send({ message: `Spell successfully updated to : ${updatedSpell}` });
+      .send({ message: `${updatedSpell?.name} successfully updated.` });
   } catch (error) {
     next(error);
   }

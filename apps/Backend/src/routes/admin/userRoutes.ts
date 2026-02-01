@@ -14,6 +14,7 @@ import { ItemModel } from "../../mongoDB/models/GameData.js";
 
 import { InputHero, InputPlayer, InputPlayerHero } from "@heroapp/shared";
 import { BOutputPlayer } from "../../types/validation/mongoOutput.js";
+import logger from "../../logger.js";
 
 const router = Router();
 
@@ -67,7 +68,9 @@ router.post("/addHero/:userId/:heroId", async (req, res, next) => {
 
     await session.commitTransaction();
     session.endSession();
-
+    logger.info(
+      `${createdHero.heroId} added successfully to the user ${user?.userName}'s roster`,
+    );
     res
       .status(200)
       .send(
@@ -94,19 +97,9 @@ router.put("/addItem/:userId/:itemId", async (req, res, next) => {
       { runValidators: true },
     );
     if (!updated) {
+      logger.info(`User ${userId} not found`);
       return res.status(404).send(`User ${userId} not found`);
     }
-  } catch (error) {
-    next(error);
-  }
-});
-
-//edit user userId
-router.put("editUser/:id", async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    await updateById(id, "User", req.body, InputPlayer, PlayerHeroModel);
-    res.status(200).send("Player successfully updated");
   } catch (error) {
     next(error);
   }
@@ -117,6 +110,7 @@ router.delete("/deleteHero/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const deletedHero = await deleteByID(id, "Hero", PlayerHeroModel);
+    logger.info(`Player hero id: ${id} successfully deleted.`);
     res
       .status(200)
       .send({ message: `Player hero id: ${id} successfully deleted.` });
@@ -130,6 +124,7 @@ router.put("/updateHero/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     await updateById(id, "Hero", req.body, InputPlayerHero, PlayerHeroModel);
+    logger.info(`Player Hero id: ${id} updated successfully`);
     res.status(200).send(`Player Hero id: ${id} updated successfully`);
   } catch (error) {
     next(error);

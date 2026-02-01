@@ -5,6 +5,8 @@ import connectDB from "./mongoDB/db.js";
 import cors from "cors";
 import type { CorsOptions } from "cors";
 
+import logger from "./logger.js";
+
 import { authMiddleware, requiresAdmin } from "./middleware/auth/auth.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 
@@ -14,8 +16,10 @@ import itemRoutes from "./routes/admin/itemRoutes.js";
 import spellRoutes from "./routes/admin/spellRoutes.js";
 import adminUserRoutes from "./routes/admin/userRoutes.js";
 
-import signUpRoute from "./routes/signUpRoutes.js";
-import checkAuthRoute from "./routes/checkAuthRoute.js";
+import signUpRoute from "./routes/auth/signUpRoutes.js";
+import checkAuthRoute from "./routes/auth/checkAuthRoute.js";
+import loginRoute from "./routes/auth/login.js";
+import callbackroute from "./routes/auth/callback.js";
 
 import playGameRoutes from "./routes/user/playGameRoutes.js";
 import userRoutes from "./routes/user/userRoutes.js";
@@ -43,7 +47,9 @@ app.get("/", (req, res) => {
 });
 
 app.use("/signup/user", signUpRoute);
+app.use("/login", loginRoute);
 app.use("/loggedUser", checkAuthRoute);
+app.use("/callback", callbackroute);
 
 app.use("/allUsers", requiresAuth(), requiresAdmin, allUserRoutes);
 app.use("/gameitems/heroes", requiresAuth(), requiresAdmin, heroRoutes);
@@ -58,7 +64,7 @@ app.use(errorHandler);
 
 const port = Number(process.env.PORT) || PORT || 3000;
 app.listen(port, () => {
-  console.log(
+  logger.info(
     `Server is running at http://backend-production-26ed.up.railway.app`,
   );
 });

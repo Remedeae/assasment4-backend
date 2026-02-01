@@ -4,6 +4,7 @@ import { PlayerHeroModel, PlayerModel } from "../../mongoDB/models/Player.js";
 import { HeroModel } from "../../mongoDB/models/Hero.js";
 import { constructPlayerHero } from "../helpers/helpers.js";
 import { HttpError } from "../../middleware/errorHandler.js";
+import logger from "../../logger.js";
 
 const router = Router();
 
@@ -42,6 +43,9 @@ router.post("/:auth0Id", async (req, res, next) => {
       await session.commitTransaction();
       session.endSession();
 
+      logger.info(
+        `User ${auth0Id} has been rewarded ${heroTypeDoc.name.toString()}`,
+      );
       res
         .status(200)
         .send(

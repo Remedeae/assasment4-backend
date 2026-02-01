@@ -5,6 +5,7 @@ import { validateData, errMsg } from "../../middleware/validatorHelpes.js";
 import z from "zod";
 import { InputItem } from "@heroapp/shared";
 import { deleteByID, updateById } from "../helpers/helpers.js";
+import logger from "../../logger.js";
 
 const router = Router();
 
@@ -47,6 +48,7 @@ router.post("", async (req, res, next) => {
   try {
     const validatedBody = validateData(req.body, InputItem, errMsg[3]);
     const createdItem = await ItemModel.create(validatedBody);
+    logger.info(`Successfully created ${createdItem}`);
     res.status(200).send(`Successfully saved: ${createdItem}`);
   } catch (error) {
     next(error);
@@ -58,6 +60,7 @@ router.delete("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const deletedItem = await deleteByID(id, "Item", ItemModel);
+    logger.info(`Deleted ${deletedItem}`);
     res
       .status(200)
       .send({ message: `Item ${deletedItem?.name} successfully deleted.` });
@@ -77,9 +80,10 @@ router.put("/:id", async (req, res, next) => {
       InputItem,
       ItemModel,
     );
+    logger.info(`Item successfully updated to : ${updatedItem}`);
     res
       .status(200)
-      .send({ message: `Item successfully updated to : ${updatedItem}` });
+      .send({ message: `${updatedItem?.name} successfully updated.` });
   } catch (error) {
     next(error);
   }
