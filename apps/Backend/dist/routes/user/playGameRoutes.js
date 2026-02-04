@@ -4,6 +4,7 @@ import { PlayerHeroModel, PlayerModel } from "../../mongoDB/models/Player.js";
 import { HeroModel } from "../../mongoDB/models/Hero.js";
 import { constructPlayerHero } from "../helpers/helpers.js";
 import { HttpError } from "../../middleware/errorHandler.js";
+import logger from "../../logger.js";
 const router = Router();
 //post random reward hero to player by auth0Id
 router.post("/:auth0Id", async (req, res, next) => {
@@ -27,6 +28,7 @@ router.post("/:auth0Id", async (req, res, next) => {
             await PlayerModel.findOneAndUpdate({ auth0Id }, { $push: { "inventory.heroes": createdHero._id } }, { session });
             await session.commitTransaction();
             session.endSession();
+            logger.info(`User ${auth0Id} has been rewarded ${heroTypeDoc.name.toString()}`);
             res
                 .status(200)
                 .send(`Congratulations, you have been awarded with ${heroTypeDoc.name.toString()}`);

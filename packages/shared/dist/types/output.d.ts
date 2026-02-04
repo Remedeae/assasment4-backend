@@ -61,7 +61,7 @@ export declare const OutputPlayer: z.ZodObject<{
     email: z.ZodString;
     inventory: z.ZodObject<{
         heroes: z.ZodArray<z.ZodString>;
-        itemsIds: z.ZodArray<z.ZodString>;
+        items: z.ZodArray<z.ZodString>;
     }, z.core.$strip>;
     levelsClear: z.ZodArray<z.ZodString>;
     team: z.ZodArray<z.ZodString>;
@@ -142,7 +142,7 @@ export declare const OutputFullPlayer: z.ZodObject<{
         email: z.ZodString;
         inventory: z.ZodObject<{
             heroes: z.ZodArray<z.ZodString>;
-            itemsIds: z.ZodArray<z.ZodString>;
+            items: z.ZodArray<z.ZodString>;
         }, z.core.$strip>;
         levelsClear: z.ZodArray<z.ZodString>;
         team: z.ZodArray<z.ZodString>;

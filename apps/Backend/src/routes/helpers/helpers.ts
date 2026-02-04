@@ -95,7 +95,7 @@ export const hydratePlayerHeroes = async (user: tsoutput.BPlayerOutput) => {
 
 //adds items from the item Ids in player inventory
 export const hydrateItems = async (user: tsoutput.BPlayerOutput) => {
-  const itemIds: string[] = user.inventory.itemsIds;
+  const itemIds: string[] = user.inventory.items;
   const objectIds = itemIds.map((id) => new Types.ObjectId(id));
   const items = await ItemModel.find({ _id: { $in: objectIds } });
   const validatedItems = validateData(
@@ -114,7 +114,7 @@ export const updateById = async <S extends ZodObject<any>>(
   schema: S,
   Model: Model<any>,
 ) => {
-  const validatedBody = validateData(body, schema, errMsg[3]);
+  const validatedBody = validateData(body, schema.partial(), errMsg[3]);
   const updated = await Model.findByIdAndUpdate(
     id,
     { $set: validatedBody },

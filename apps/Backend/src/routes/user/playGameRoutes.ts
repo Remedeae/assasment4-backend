@@ -44,10 +44,10 @@ router.post("/:auth0Id", async (req, res, next) => {
       session.endSession();
 
       logger.info(
-        `User ${auth0Id} has been rewarded ${heroTypeDoc.name.toString()}`,
+        `User ${JSON.stringify(auth0Id)} has been rewarded ${JSON.stringify(heroTypeDoc.name.toString())}`,
       );
       res
-        .status(200)
+        .status(201)
         .send(
           `Congratulations, you have been awarded with ${heroTypeDoc.name.toString()}`,
         );

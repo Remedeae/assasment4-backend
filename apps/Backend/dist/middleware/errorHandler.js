@@ -1,9 +1,4 @@
-export const formatZodError = (err) => {
-    return err.issues.map((issue) => ({
-        path: issue.path.join("."),
-        message: issue.message,
-    }));
-};
+import logger from "../logger";
 export class HttpError extends Error {
     constructor(status, message, details) {
         super(message);
@@ -15,14 +10,23 @@ export class HttpError extends Error {
 export function errorHandler(err, 
 //req: Request,
 res) {
+    console.log("🔥 errorHandler reached", err);
     if (err instanceof HttpError) {
-        res
-            .status(err.status)
-            .send({ message: err.message, error: err.details ?? null });
+        const errorMsg = { message: err.message, error: err.details ?? null };
+        res.status(err.status).send(errorMsg);
+        if (err.status >= 500) {
+            logger.error(errorMsg);
+            return;
+        }
+        logger.warn({
+            message: err.message,
+            error: err.details,
+        });
         return;
     }
     if (err instanceof Error) {
         res.status(500).json(err.message);
+        logger.error(err.message);
         return;
     }
     res.status(500).json("Error unknown");

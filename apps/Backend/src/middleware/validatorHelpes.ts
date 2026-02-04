@@ -1,5 +1,12 @@
-import z from "zod";
+import z, { ZodError } from "zod";
 import { HttpError } from "./errorHandler.js";
+
+const formatZodError = (err: ZodError) => {
+  return err.issues.map((issue) => ({
+    path: issue.path.join("."),
+    message: issue.message,
+  }));
+};
 
 type ErrorReturnSchema = {
   status: number;
@@ -16,7 +23,7 @@ export const validateData = <S extends z.ZodTypeAny>(
     throw new HttpError(
       err?.status ?? 500,
       err?.msg ?? "Unknown error",
-      valitedData.error,
+      formatZodError(valitedData.error),
     );
   }
   return valitedData.data;

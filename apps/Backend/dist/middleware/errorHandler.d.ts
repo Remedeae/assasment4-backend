@@ -1,9 +1,4 @@
 import type { /* Request, */ Response } from "express";
-import { ZodError } from "zod";
-export declare const formatZodError: (err: ZodError) => {
-    path: string;
-    message: string;
-}[];
 export declare class HttpError extends Error {
     status: number;
     details?: unknown;

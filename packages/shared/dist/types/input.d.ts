@@ -56,6 +56,7 @@ export declare const InputPlayer: z.ZodObject<{
     userName: z.ZodString;
     email: z.ZodString;
     inventory: z.ZodObject<{
+        items: z.ZodArray<z.ZodString>;
         heroes: z.ZodDefault<z.ZodArray<z.ZodString>>;
         itemsIds: z.ZodDefault<z.ZodArray<z.ZodString>>;
     }, z.core.$strip>;

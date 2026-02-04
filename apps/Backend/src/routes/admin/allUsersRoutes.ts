@@ -23,6 +23,7 @@ router.get("", async (req, res, next) => {
       z.array(BOutputPlayer),
       errMsg[0],
     );
+    logger.info(`Successfully reterived ${validatedUsers.length} users`);
     res.status(200).send(validatedUsers);
   } catch (error) {
     next(error);
@@ -33,18 +34,13 @@ router.get("", async (req, res, next) => {
 router.delete("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const user = await PlayerModel.findById(id);
-    if (!user) {
-      throw new HttpError(404, "User not found", null);
-    }
-
     const deleted = await deleteByID(id, "User", PlayerModel);
     logger.info({
-      message: `User ${user.userName} successfully deleted`,
-      auth0Id: user.auth0Id,
-      id: user._id,
+      message: `User ${deleted.userName} successfully deleted`,
     });
-    res.status(200).send(`User ${deleted?.userName} successfully deleted`);
+    res
+      .status(200)
+      .json({ message: `User ${deleted.userName} successfully deleted` });
   } catch (error) {
     next(error);
   }
@@ -61,10 +57,10 @@ router.put("/:id", async (req, res, next) => {
       InputPlayer,
       PlayerModel,
     );
-    logger.info(`User ${updatedUser?.userName} has successfully been updated.`);
-    res
-      .status(200)
-      .send(`User ${updatedUser?.userName} has successfully been updated.`);
+    logger.info("User has successfully been updated", updatedUser);
+    res.status(200).send({
+      message: `User ${updatedUser?.userName} has successfully been updated.`,
+    });
   } catch (error) {
     next(error);
   }

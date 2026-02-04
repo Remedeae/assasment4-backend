@@ -1,8 +1,14 @@
 import { HttpError } from "./errorHandler.js";
+const formatZodError = (err) => {
+    return err.issues.map((issue) => ({
+        path: issue.path.join("."),
+        message: issue.message,
+    }));
+};
 export const validateData = (data, dataSchema, err) => {
     const valitedData = dataSchema.safeParse(data);
     if (!valitedData.success) {
-        throw new HttpError(err?.status ?? 500, err?.msg ?? "Unknown error", valitedData.error);
+        throw new HttpError(err?.status ?? 500, err?.msg ?? "Unknown error", formatZodError(valitedData.error));
     }
     return valitedData.data;
 };

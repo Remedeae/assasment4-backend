@@ -17,7 +17,9 @@ router.get("", async (req, res, next) => {
       roles: rawUser?.["https://remedeae-hero-collector/roles"],
       auth0Id: rawUser?.sub,
     });
-    logger.info(`${formattedUser.userName} authenticated succeffully.`);
+    logger.info(
+      `${JSON.stringify(formattedUser.userName)} authenticated succeffully.`,
+    );
     res.status(200).send({ isAuthenticated, user: formattedUser });
   } catch (error) {
     next(error);

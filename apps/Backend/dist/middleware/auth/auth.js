@@ -2,8 +2,7 @@ import "dotenv/config";
 import { auth } from "express-openid-connect";
 import { envSchema } from "../../types/validation/envValidation.js";
 import { HttpError } from "../errorHandler.js";
-//import { backendURL } from "@heroapp/shared";
-const backendURL = "http://localhost:3000";
+import { backendURL } from "@heroapp/shared";
 export const env = envSchema.parse(process.env);
 const config = {
     authRequired: false,
@@ -13,6 +12,12 @@ const config = {
     clientID: env.CLIENT_ID,
     clientSecret: env.CLIENT_SECRET,
     issuerBaseURL: env.ISSUE_BASE_URL,
+    session: {
+        cookie: {
+            sameSite: "None",
+            secure: true,
+        },
+    },
     authorizationParams: {
         response_type: "code",
         response_mode: "query",

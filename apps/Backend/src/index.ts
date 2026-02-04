@@ -24,7 +24,8 @@ import callbackroute from "./routes/auth/callback.js";
 import playGameRoutes from "./routes/user/playGameRoutes.js";
 import userRoutes from "./routes/user/userRoutes.js";
 
-import { PORT, frontendURL } from "@heroapp/shared";
+import { PORT, frontendURL, backendURL } from "@heroapp/shared";
+const isTest = process.env.JEST_WORKER_ID !== undefined;
 
 const corsOptions: CorsOptions = {
   origin: [frontendURL],
@@ -34,8 +35,6 @@ const corsOptions: CorsOptions = {
 
 const app = express();
 const { requiresAuth } = pkg;
-
-connectDB();
 
 app.use(authMiddleware);
 app.use(express.json());
@@ -62,11 +61,12 @@ app.use("/user", requiresAuth(), userRoutes);
 
 app.use(errorHandler);
 
-const port = Number(process.env.PORT) || PORT || 3000;
-app.listen(port, () => {
-  logger.info(
-    `Server is running at http://backend-production-26ed.up.railway.app`,
-  );
-});
+if (!process.env.JEST_WORKER_ID) {
+  connectDB();
+  const port = Number(process.env.PORT) || PORT || 3000;
+  app.listen(port, () => {
+    logger.info(`Server is running at ${backendURL}`);
+  });
+}
 
 export default app;

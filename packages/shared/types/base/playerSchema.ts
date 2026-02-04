@@ -8,7 +8,7 @@ export const PlayerHeroSchema = z.object({
 
 export const InventorySchema = z.object({
   heroes: z.array(z.string()),
-  itemsIds: z.array(z.string()),
+  items: z.array(z.string()),
 });
 export const PlayerSchema = z.object({
   auth0Id: z.string().min(1),

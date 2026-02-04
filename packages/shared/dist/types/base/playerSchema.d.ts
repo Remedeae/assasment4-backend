@@ -6,7 +6,7 @@ export declare const PlayerHeroSchema: z.ZodObject<{
 }, z.core.$strip>;
 export declare const InventorySchema: z.ZodObject<{
     heroes: z.ZodArray<z.ZodString>;
-    itemsIds: z.ZodArray<z.ZodString>;
+    items: z.ZodArray<z.ZodString>;
 }, z.core.$strip>;
 export declare const PlayerSchema: z.ZodObject<{
     auth0Id: z.ZodString;
@@ -14,7 +14,7 @@ export declare const PlayerSchema: z.ZodObject<{
     email: z.ZodString;
     inventory: z.ZodObject<{
         heroes: z.ZodArray<z.ZodString>;
-        itemsIds: z.ZodArray<z.ZodString>;
+        items: z.ZodArray<z.ZodString>;
     }, z.core.$strip>;
     levelsClear: z.ZodArray<z.ZodString>;
     team: z.ZodArray<z.ZodString>;

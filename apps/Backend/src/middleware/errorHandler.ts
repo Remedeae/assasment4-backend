@@ -1,13 +1,5 @@
 import type { /* Request, */ Response /* NextFunction */ } from "express";
-import { ZodError } from "zod";
 import logger from "../logger";
-
-export const formatZodError = (err: ZodError) => {
-  return err.issues.map((issue) => ({
-    path: issue.path.join("."),
-    message: issue.message,
-  }));
-};
 
 export class HttpError extends Error {
   status: number;
@@ -31,12 +23,19 @@ export function errorHandler(
   if (err instanceof HttpError) {
     const errorMsg = { message: err.message, error: err.details ?? null };
     res.status(err.status).send(errorMsg);
-    logger.info(errorMsg);
+    if (err.status >= 500) {
+      logger.error(errorMsg);
+      return;
+    }
+    logger.warn({
+      message: err.message,
+      error: err.details,
+    });
     return;
   }
   if (err instanceof Error) {
     res.status(500).json(err.message);
-    logger.info(err.message);
+    logger.error(err.message);
     return;
   }
   res.status(500).json("Error unknown");
