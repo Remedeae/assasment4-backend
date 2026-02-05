@@ -1,14 +1,12 @@
 import "dotenv/config";
 import { Router } from "express";
 import { frontendURL } from "@heroapp/shared";
-
 const router = Router();
-
 router.get("", (req, res) => {
-  if (!req.oidc.isAuthenticated()) {
-    return res.redirect(`${frontendURL}?error=login_failed`);
-  }
-  res.redirect(`${frontendURL}/home`);
+    if (!req.oidc.isAuthenticated()) {
+        return res.redirect(`${frontendURL}?error=login_failed`);
+    }
+    res.redirect(`${frontendURL}/home`);
 });
-
 export default router;
+//# sourceMappingURL=callback.js.map

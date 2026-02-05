@@ -28,9 +28,9 @@ router.post("/:auth0Id", async (req, res, next) => {
             await PlayerModel.findOneAndUpdate({ auth0Id }, { $push: { "inventory.heroes": createdHero._id } }, { session });
             await session.commitTransaction();
             session.endSession();
-            logger.info(`User ${auth0Id} has been rewarded ${heroTypeDoc.name.toString()}`);
+            logger.info(`User ${JSON.stringify(auth0Id)} has been rewarded ${JSON.stringify(heroTypeDoc.name.toString())}`);
             res
-                .status(200)
+                .status(201)
                 .send(`Congratulations, you have been awarded with ${heroTypeDoc.name.toString()}`);
         }
         catch (error) {

@@ -18,6 +18,7 @@ import callbackroute from "./routes/auth/callback.js";
 import playGameRoutes from "./routes/user/playGameRoutes.js";
 import userRoutes from "./routes/user/userRoutes.js";
 import { PORT, frontendURL, backendURL } from "@heroapp/shared";
+const isTest = process.env.JEST_WORKER_ID !== undefined;
 const corsOptions = {
     origin: [frontendURL],
     methods: ["GET", "POST", "PUT", "DELETE"],
@@ -25,7 +26,6 @@ const corsOptions = {
 };
 const app = express();
 const { requiresAuth } = pkg;
-console.log("BOOT NODE_ENV =", process.env.NODE_ENV);
 app.use(authMiddleware);
 app.use(express.json());
 app.use(cors(corsOptions));
@@ -45,7 +45,7 @@ app.use("/collection/admin", requiresAuth(), requiresAdmin, adminUserRoutes);
 app.use("/game", requiresAuth(), playGameRoutes);
 app.use("/user", requiresAuth(), userRoutes);
 app.use(errorHandler);
-if (process.env.NODE_ENV !== "test") {
+if (!process.env.JEST_WORKER_ID) {
     connectDB();
     const port = Number(process.env.PORT) || PORT || 3000;
     app.listen(port, () => {

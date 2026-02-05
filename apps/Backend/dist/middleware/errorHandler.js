@@ -10,7 +10,6 @@ export class HttpError extends Error {
 export function errorHandler(err, 
 //req: Request,
 res) {
-    console.log("🔥 errorHandler reached", err);
     if (err instanceof HttpError) {
         const errorMsg = { message: err.message, error: err.details ?? null };
         res.status(err.status).send(errorMsg);

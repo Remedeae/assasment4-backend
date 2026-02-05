@@ -29,6 +29,7 @@ router.get("/types", async (req, res, next) => {
             .map((t) => t.type)
             .flat()
             .filter((t, i, self) => i === self.indexOf(t));
+        logger.info(`Successfully reterived ${validtedTypes.length} types`);
         res.status(200).send(types);
     }
     catch (error) {
@@ -40,8 +41,8 @@ router.post("", async (req, res, next) => {
     try {
         const validatedBody = validateData(req.body, InputItem, errMsg[3]);
         const createdItem = await ItemModel.create(validatedBody);
-        logger.info(`Successfully created ${createdItem}`);
-        res.status(200).send(`Successfully saved: ${createdItem}`);
+        logger.info("Successfully created item", createdItem);
+        res.status(201).send(`Successfully created: ${createdItem.name}`);
     }
     catch (error) {
         next(error);
@@ -52,7 +53,7 @@ router.delete("/:id", async (req, res, next) => {
     try {
         const { id } = req.params;
         const deletedItem = await deleteByID(id, "Item", ItemModel);
-        logger.info(`Deleted ${deletedItem}`);
+        logger.info("Successfully deleted item", deletedItem);
         res
             .status(200)
             .send({ message: `Item ${deletedItem?.name} successfully deleted.` });
@@ -66,7 +67,7 @@ router.put("/:id", async (req, res, next) => {
     try {
         const { id } = req.params;
         const updatedItem = await updateById(id, "Item", req.body, InputItem, ItemModel);
-        logger.info(`Item successfully updated to : ${updatedItem}`);
+        logger.info("Item successfully updated", updatedItem);
         res
             .status(200)
             .send({ message: `${updatedItem?.name} successfully updated.` });

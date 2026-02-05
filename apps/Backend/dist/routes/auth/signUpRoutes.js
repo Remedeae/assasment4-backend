@@ -9,8 +9,8 @@ router.post("", async (req, res, next) => {
     try {
         const validatedUser = validateData(req.body, InputPlayer, errMsg[3]);
         const newUser = await PlayerModel.create(validatedUser);
-        logger.info(`User ${newUser?.userName} successfully created`);
-        res.status(200).send(`User ${newUser?.userName} successfully created`);
+        logger.info("Successfully created new user", newUser);
+        res.status(201).send(`User ${newUser?.userName} successfully created`);
     }
     catch (error) {
         next(error);

@@ -71,7 +71,7 @@ export const hydratePlayerHeroes = async (user) => {
 };
 //adds items from the item Ids in player inventory
 export const hydrateItems = async (user) => {
-    const itemIds = user.inventory.itemsIds;
+    const itemIds = user.inventory.items;
     const objectIds = itemIds.map((id) => new Types.ObjectId(id));
     const items = await ItemModel.find({ _id: { $in: objectIds } });
     const validatedItems = validateData(items, z.array(zodOutput.BOutputItem), errMsg[0]);
@@ -79,7 +79,7 @@ export const hydrateItems = async (user) => {
 };
 //content for a PUT function that validates and updates a DB entry based on mongoDB id
 export const updateById = async (id, type, body, schema, Model) => {
-    const validatedBody = validateData(body, schema, errMsg[3]);
+    const validatedBody = validateData(body, schema.partial(), errMsg[3]);
     const updated = await Model.findByIdAndUpdate(id, { $set: validatedBody }, { new: true });
     if (!updated) {
         throw new HttpError(404, `${type} with id ${id} not found.`, null);

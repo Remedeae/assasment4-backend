@@ -33,6 +33,7 @@ router.get("/heroes/:id", async (req, res, next) => {
         }
         const validatedUser = validateData(user, BOutputPlayer, errMsg[0]);
         const fullHeroes = await hydratePlayerHeroes(validatedUser);
+        logger.info(`Successfully retrived ${fullHeroes.length} heroes`);
         res.status(200).send(fullHeroes);
     }
     catch (error) {
@@ -51,9 +52,9 @@ router.post("/addHero/:userId/:heroId", async (req, res, next) => {
         const user = await PlayerModel.findByIdAndUpdate(userId, { $push: { "inventory.heroes": createdHero._id } }, { session });
         await session.commitTransaction();
         session.endSession();
-        logger.info(`${createdHero.heroId} added successfully to the user ${user?.userName}'s roster`);
+        logger.info(`${JSON.stringify(createdHero.heroId)} added successfully to the user ${JSON.stringify(user?.userName)}'s roster`);
         res
-            .status(200)
+            .status(201)
             .send(`${createdHero.heroId} added successfully to the user ${user?.userName}'s roster`);
     }
     catch (error) {
@@ -72,7 +73,7 @@ router.put("/addItem/:userId/:itemId", async (req, res, next) => {
             $push: { "inventory.items": itemId },
         }, { runValidators: true });
         if (!updated) {
-            logger.info(`User ${userId} not found`);
+            logger.info(`User ${JSON.stringify(userId)} not found`);
             return res.status(404).send(`User ${userId} not found`);
         }
     }
@@ -84,11 +85,13 @@ router.put("/addItem/:userId/:itemId", async (req, res, next) => {
 router.delete("/deleteHero/:id", async (req, res, next) => {
     try {
         const { id } = req.params;
-        const deletedHero = await deleteByID(id, "Hero", PlayerHeroModel);
-        logger.info(`Player hero id: ${id} successfully deleted.`);
+        const deleted = await deleteByID(id, "Hero", PlayerHeroModel);
+        logger.info(`Player hero id: ${JSON.stringify(deleted._id)} successfully deleted.`);
         res
             .status(200)
-            .send({ message: `Player hero id: ${id} successfully deleted.` });
+            .send({
+            message: `Player hero id: ${deleted._id} successfully deleted.`,
+        });
     }
     catch (error) {
         next(error);
@@ -98,9 +101,11 @@ router.delete("/deleteHero/:id", async (req, res, next) => {
 router.put("/updateHero/:id", async (req, res, next) => {
     try {
         const { id } = req.params;
-        await updateById(id, "Hero", req.body, InputPlayerHero, PlayerHeroModel);
-        logger.info(`Player Hero id: ${id} updated successfully`);
-        res.status(200).send(`Player Hero id: ${id} updated successfully`);
+        const updatedHero = await updateById(id, "Hero", req.body, InputPlayerHero, PlayerHeroModel);
+        logger.info(`Player Hero id: ${JSON.stringify(updatedHero?._id)} updated successfully`);
+        res.status(200).send({
+            message: `Player Hero id: ${updatedHero?._id} updated successfully`,
+        });
     }
     catch (error) {
         next(error);
