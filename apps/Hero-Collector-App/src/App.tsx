@@ -13,14 +13,11 @@ import { useAuthStore } from "./storage/authStore";
 import { useAdminToggle } from "./storage/adminToggleStore";
 import type { LoggedUserResponse } from "./types/storageTypes";
 import { api } from "../api/axios";
-import { useTokenFromUrl } from "./storage/getToken";
 
 function App() {
   const setAuth = useAuthStore((s) => s.setAuth);
   const clearAuth = useAuthStore((s) => s.clearAuth);
   const setAdmin = useAdminToggle((s) => s.setIsAdmin);
-
-  useTokenFromUrl();
 
   useEffect(() => {
     const checkAuth = async () => {
