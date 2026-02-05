@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
-const PORT = Number(process.env.PORT);
+const PORT = Number(process.env.PORT) || 5173;
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -16,7 +16,7 @@ export default defineConfig({
   },
   preview: {
     host: "0.0.0.0",
-    port: PORT - 1000,
+    port: PORT,
     allowedHosts: [".up.railway.app"],
   },
 });
