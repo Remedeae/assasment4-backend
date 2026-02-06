@@ -1,0 +1,28 @@
+@use "config" as *;
+* {
+  font: $font-main;
+  font-size: $font-size;
+  line-height: $line-height;
+  background-color: $color-light;
+  color: $color-main;
+}
+body > * {
+  width: 96%;
+}
+button {
+  border: none;
+  background-image: linear-gradient($color-accent, $color-medium);
+  color: $color-light;
+  border-radius: $font-size;
+  & :hover {
+    border: $color-main;
+    box-shadow:
+      1rem,
+      2rem,
+      1rem $color-medium;
+  }
+}
+li {
+  list-style: none;
+  padding: 3%;
+}

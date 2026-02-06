@@ -20,10 +20,12 @@ export const validateData = <S extends z.ZodTypeAny>(
 ): z.infer<S> => {
   const valitedData = dataSchema.safeParse(data);
   if (!valitedData.success) {
+    console.log(valitedData.error);
     throw new HttpError(
       err?.status ?? 500,
       err?.msg ?? "Unknown error",
       formatZodError(valitedData.error),
+      "validateData",
     );
   }
   return valitedData.data;

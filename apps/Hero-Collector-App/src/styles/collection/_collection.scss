@@ -1,16 +1,17 @@
+@use "../variables" as *;
 .collection {
+  display: flex;
+  flex-wrap: wrap;
+  & header {
     display: flex;
-    flex-wrap: wrap;
-    & header {
-        display: flex
-    }
-    &__displayHero {
-        width: 60%;
-    }
-    &__heroes {
-        width: 40%;
-    }
-    &__team {
-        width: 100%;
-    }
+  }
+  &__displayHero {
+    width: 60%;
+  }
+  &__heroes {
+    width: 40%;
+  }
+  &__team {
+    width: 100%;
+  }
 }

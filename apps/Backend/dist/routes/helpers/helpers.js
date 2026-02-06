@@ -64,8 +64,9 @@ export const hydratePlayerHeroes = async (user) => {
             SpellModel.find({ _id: { $in: h.spellIds } }),
             ItemModel.find({ _id: { $in: h.equipmentIds } }),
         ]);
-        return { hero, spells, equipment };
+        return { _id: h._id, createdAt: h.createdAt, hero, spells, equipment };
     }));
+    console.log(fullHeroes);
     const validatedFullHeroes = validateData(fullHeroes, z.array(zodOutput.BOutputFullPlayerHero), errMsg[0]);
     return validatedFullHeroes;
 };

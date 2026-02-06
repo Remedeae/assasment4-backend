@@ -24,7 +24,7 @@ import callbackroute from "./routes/auth/callback.js";
 import playGameRoutes from "./routes/user/playGameRoutes.js";
 import userRoutes from "./routes/user/userRoutes.js";
 
-import { PORT, frontendURL, backendURL } from "@heroapp/shared";
+import { frontendURL, backendURL } from "./variables/urls.js";
 const isTest = process.env.JEST_WORKER_ID !== undefined;
 
 const corsOptions: CorsOptions = {
@@ -63,7 +63,7 @@ app.use(errorHandler);
 
 if (!process.env.JEST_WORKER_ID) {
   connectDB();
-  const port = Number(process.env.PORT) || PORT || 3000;
+  const port = Number(process.env.PORT) || 3000;
   app.listen(port, () => {
     logger.info(`Server is running at ${backendURL}`);
   });

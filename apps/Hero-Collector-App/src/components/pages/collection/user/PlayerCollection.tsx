@@ -15,22 +15,21 @@ type ID = {
   auth0Id?: string;
 };
 
-export default function PlayerCollection(auth0Id: ID) {
+export default function PlayerCollection({ auth0Id }: ID) {
   const [user, setUser] = useState<PlayerOutput | null>(null);
   const [heroes, setHeroes] = useState<FullPlayerHeroOutput[]>([]);
   //const [items, setItems] = useState<ItemOutput[]>([]);
-  const [displayHeroId, setDisplayHeroId] = useState<string>(heroes[0]._id);
+  const [displayHeroId, setDisplayHeroId] = useState<string | null>(null);
   const displayHero = heroes.find((h) => h._id === displayHeroId);
 
   const [search, setSearch] = useState<string>("");
 
-  const placeholderPortray: string = "cat";
-
   useEffect(() => {
+    if (!auth0Id) return;
     const fetchData = async () => {
       const response = await api<FullPlayerOutput>(
         "get",
-        `/user/${auth0Id}/full`,
+        `/user/${auth0Id}/true`,
       );
       setUser(response.user);
       setHeroes(response.heroes);
@@ -38,10 +37,11 @@ export default function PlayerCollection(auth0Id: ID) {
     };
     fetchData();
   }, [auth0Id]);
+  if (!auth0Id) return <div>User not found</div>;
 
   return (
     <div className="collection">
-      <header>
+      <div className="collection__header">
         <h1>Collection</h1>
         <div>
           <p>?</p>
@@ -52,7 +52,7 @@ export default function PlayerCollection(auth0Id: ID) {
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-      </header>
+      </div>
       {heroes.length === 0 && (
         <h5>
           You have no heroes, play a <Link to="/game">Game</Link> to acuire one!
@@ -65,10 +65,10 @@ export default function PlayerCollection(auth0Id: ID) {
               h.hero.name.toLowerCase().includes(search.toLowerCase()),
             )
             .map((h) => (
-              <li key={h.hero._id} onClick={() => setDisplayHeroId(h.hero._id)}>
+              <li key={h._id} onClick={() => setDisplayHeroId(h._id)}>
                 <MiniHeroCard
                   name={h.hero.name}
-                  image={h.hero.image ?? placeholderPortray}
+                  image={h.hero.image}
                   title={h.hero.title}
                 />
               </li>
@@ -94,7 +94,7 @@ export default function PlayerCollection(auth0Id: ID) {
                 <li key={t.hero._id}>
                   <MiniHeroCard
                     name={t.hero.name}
-                    image={t.hero.image || placeholderPortray}
+                    image={t.hero.image}
                     title={""}
                   />
                 </li>

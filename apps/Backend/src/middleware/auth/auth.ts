@@ -3,7 +3,7 @@ import { auth } from "express-openid-connect";
 import type { Request, Response, NextFunction } from "express";
 import { envSchema } from "../../types/validation/envValidation.js";
 import { HttpError } from "../errorHandler.js";
-import { backendURL } from "@heroapp/shared";
+import { backendURL } from "../../variables/urls.js";
 
 export const env = envSchema.parse(process.env);
 
@@ -17,8 +17,8 @@ const config = {
   issuerBaseURL: env.ISSUE_BASE_URL,
   session: {
     cookie: {
-      sameSite: "None",
-      secure: true,
+      sameSite: "Lax",
+      secure: process.env.MODE === "production",
     },
   },
   authorizationParams: {

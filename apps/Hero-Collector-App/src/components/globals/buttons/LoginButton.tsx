@@ -1,5 +1,4 @@
-import { backendURL } from "@heroapp/shared";
-
+import { backendURL } from "../../../../api/urls.js";
 export default function LoginButton() {
   const handleLogin = () => {
     window.location.href = `${backendURL}/login`;

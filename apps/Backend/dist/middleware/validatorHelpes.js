@@ -8,7 +8,8 @@ const formatZodError = (err) => {
 export const validateData = (data, dataSchema, err) => {
     const valitedData = dataSchema.safeParse(data);
     if (!valitedData.success) {
-        throw new HttpError(err?.status ?? 500, err?.msg ?? "Unknown error", formatZodError(valitedData.error));
+        console.log(valitedData.error);
+        throw new HttpError(err?.status ?? 500, err?.msg ?? "Unknown error", formatZodError(valitedData.error), "validateData");
     }
     return valitedData.data;
 };

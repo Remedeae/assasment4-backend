@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { backendURL } from "@heroapp/shared";
+import { backendURL } from "../../variables/urls.js";
 
 const router = Router();
 

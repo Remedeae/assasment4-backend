@@ -1,31 +1,32 @@
-header{
-    display: flex;
-    justify-content: end;
-    & > * {
-        padding: 0 10%;
-    }
-& nav {
+@use "../variables" as *;
+header {
+  display: flex;
+  justify-content: end;
+  & > * {
+    padding: 0 10%;
+  }
+  & nav {
     justify-self: start;
     display: flex;
     flex-direction: row;
-}
-& ul {
+  }
+  & ul {
     display: inherit;
-}
-& li {
+  }
+  & li {
     font-weight: bold;
     padding: 0 10%;
-}
+  }
 
-& .activeUser {
+  & .activeUser {
     display: flex;
     flex-direction: column;
     align-items: end;
     & div {
-        display: inherit;
+      display: inherit;
     }
-}
-& .admintoggle {
-    background-color: (linear-gradient: #909090, purple);
-}
+  }
+  & .admintoggle {
+    background-color: linear-gradient(#909090, purple);
+  }
 }

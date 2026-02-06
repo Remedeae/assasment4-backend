@@ -1,7 +1,8 @@
+@use "../variables" as *;
 .heroCardMini {
+  display: flex;
+  & > div {
     display: flex;
-    & > div {
-        display: flex;
-        flex-direction: column;
-    }
+    flex-direction: column;
+  }
 }

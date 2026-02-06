@@ -6,9 +6,8 @@ import { useParams } from "react-router-dom";
 
 export default function Collection() {
   const auth0user = useAuthStore((s) => s.user);
-
+  const isTrueAdmin = useAuthStore((s) => s.isTrueAdmin);
   const isLocalAdmin = useAdminToggle((s) => s.isAdmin);
-  const isTrueAdmin: boolean = auth0user?.roles?.includes("admin") ?? false;
 
   const { auth0Id } = useParams();
   const isViewingOtherUser = auth0Id && auth0Id !== auth0user?.auth0Id;
@@ -26,7 +25,9 @@ export default function Collection() {
       {!isLocalAdmin && auth0user?.auth0Id && (
         <PlayerCollection auth0Id={auth0user?.auth0Id} />
       )}
-      {isTrueAdmin && auth0Id && <PlayerCollection auth0Id={auth0Id} />}
+      {isTrueAdmin && auth0Id && (
+        <PlayerCollection auth0Id={auth0Id ?? auth0user?.auth0Id} />
+      )}
     </div>
   );
 }

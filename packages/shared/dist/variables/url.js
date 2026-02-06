@@ -1,3 +1,5 @@
 export const PORT = 3000;
-export const backendURL = "https://backend-production-26ed.up.railway.app";
-export const frontendURL = "https://heroapp-production.up.railway.app";
+export const backendURL = "http://localhost:3000";
+//  "https://backend-production-26ed.up.railway.app";
+export const frontendURL = "http://localhost:5173";
+//"https://heroapp-production.up.railway.app";

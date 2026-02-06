@@ -7,5 +7,4 @@ export * from "./types/output.js";
 export type * from "./types/types.js";
 export * from "./types/authRes.js";
 
-export * from "./variables/url.js";
 export { z } from "zod";

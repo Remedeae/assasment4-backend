@@ -12,6 +12,18 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+* {
+  text-align: center;
+}
+
+img {
+  max-width: 30vw;
+  height: auto;
+}
+
+li {
+  list-style: none;
+}
 
 a {
   font-weight: 500;
@@ -36,9 +48,11 @@ h1 {
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+  border: 1px solid;
+  border-radius: 1rem;
+  width: 7rem;
+  text-align: center;
+  padding: 0.5rem;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
@@ -65,4 +79,48 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+header {
+  top: 0;
+  display: flex;
+  justify-content: space-around;
+}
+header > * {
+  display: inherit;
+  justify-content: inherit;
+}
+
+.activeUser {
+  width: 40vw;
+}
+
+.home ul {
+  display: flex;
+  justify-content: space-around;
+  width: 70vw;
+}
+.home li {
+  font-size: xx-large;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-around;
+  width: 60vw;
+}
+
+.collection {
+  display: flex;
+  flex-flow: wrap;
+}
+
+.heroCardMini,
+.itemCard,
+.spellCard {
+  max-width: 30vw;
+  border: 2px, white;
+}
+
+.heroCard {
+  max-width: 40vw;
 }
