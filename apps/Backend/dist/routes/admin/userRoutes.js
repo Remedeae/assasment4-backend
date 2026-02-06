@@ -52,10 +52,10 @@ router.post("/addHero/:userId/:heroId", async (req, res, next) => {
         const user = await PlayerModel.findByIdAndUpdate(userId, { $push: { "inventory.heroes": createdHero._id } }, { session });
         await session.commitTransaction();
         session.endSession();
-        logger.info(`${JSON.stringify(createdHero.heroId)} added successfully to the user ${JSON.stringify(user?.userName)}'s roster`);
+        logger.info(`${JSON.stringify(createdHero.heroId)} added successfully to the user ${JSON.stringify(user?.username)}'s roster`);
         res
             .status(201)
-            .send(`${createdHero.heroId} added successfully to the user ${user?.userName}'s roster`);
+            .send(`${createdHero.heroId} added successfully to the user ${user?.username}'s roster`);
     }
     catch (error) {
         next(error);
@@ -87,9 +87,7 @@ router.delete("/deleteHero/:id", async (req, res, next) => {
         const { id } = req.params;
         const deleted = await deleteByID(id, "Hero", PlayerHeroModel);
         logger.info(`Player hero id: ${JSON.stringify(deleted._id)} successfully deleted.`);
-        res
-            .status(200)
-            .send({
+        res.status(200).send({
             message: `Player hero id: ${deleted._id} successfully deleted.`,
         });
     }

@@ -15,9 +15,10 @@ export const InputHero = h.HeroSchema.extend({
     startingEquipment: z.array(mongoIdSchema).default([]),
 }).strip();
 export const InputPlayer = p.PlayerSchema.extend({
+    roles: z.array(z.string()).default(["user"]),
     inventory: p.InventorySchema.extend({
         heroes: z.array(z.string()).default([]),
-        itemsIds: z.array(z.string()).default([]),
+        items: z.array(z.string()).default([]),
     }),
     levelsClear: z.array(z.string()).default([]),
     team: z.array(z.string()).default([]),

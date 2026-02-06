@@ -5,7 +5,7 @@ export const mockDate = new Date();
 
 //user-----------------
 export const mockUser = {
-  userName: "Maya",
+  username: "Maya",
   auth0Id: "auth0|333",
   email: "m@b.com",
   inventory: {

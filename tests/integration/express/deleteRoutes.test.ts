@@ -42,7 +42,7 @@ describe("DELETE /allUsers/:id", () => {
 
     expect(res.status).toBe(200);
     expect(res.body.message).toBe(
-      `User ${outputMockUser.userName} successfully deleted`,
+      `User ${outputMockUser.username} successfully deleted`,
     );
     expect(PlayerModel.findByIdAndDelete).toHaveBeenCalledWith(
       mockObjectId.toString(),

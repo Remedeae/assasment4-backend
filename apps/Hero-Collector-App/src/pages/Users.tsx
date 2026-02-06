@@ -44,7 +44,7 @@ export default function User() {
               onClick={() => handleUserRedirect(user.auth0Id)}
             >
               <img src={userAvatar} alt="User Avatar" />
-              <h4>{user.userName}</h4>
+              <h4>{user.username}</h4>
               <h5>Joined: {new Date(user.createdAt).toDateString()}</h5>
             </li>
           ))}

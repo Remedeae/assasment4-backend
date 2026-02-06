@@ -53,12 +53,12 @@ export declare const InputHero: z.ZodObject<{
 }, z.core.$strip>;
 export declare const InputPlayer: z.ZodObject<{
     auth0Id: z.ZodString;
-    userName: z.ZodString;
+    username: z.ZodString;
     email: z.ZodString;
+    roles: z.ZodDefault<z.ZodArray<z.ZodString>>;
     inventory: z.ZodObject<{
-        items: z.ZodArray<z.ZodString>;
         heroes: z.ZodDefault<z.ZodArray<z.ZodString>>;
-        itemsIds: z.ZodDefault<z.ZodArray<z.ZodString>>;
+        items: z.ZodDefault<z.ZodArray<z.ZodString>>;
     }, z.core.$strip>;
     levelsClear: z.ZodDefault<z.ZodArray<z.ZodString>>;
     team: z.ZodDefault<z.ZodArray<z.ZodString>>;

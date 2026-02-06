@@ -10,8 +10,9 @@ export declare const InventorySchema: z.ZodObject<{
 }, z.core.$strip>;
 export declare const PlayerSchema: z.ZodObject<{
     auth0Id: z.ZodString;
-    userName: z.ZodString;
+    username: z.ZodString;
     email: z.ZodString;
+    roles: z.ZodArray<z.ZodString>;
     inventory: z.ZodObject<{
         heroes: z.ZodArray<z.ZodString>;
         items: z.ZodArray<z.ZodString>;

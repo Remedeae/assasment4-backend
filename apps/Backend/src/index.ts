@@ -45,7 +45,7 @@ app.get("/", (req, res) => {
   res.redirect(url);
 });
 
-app.use("/signup/user", signUpRoute);
+app.use("/auth0/register", signUpRoute);
 app.use("/login", loginRoute);
 app.use("/loggedUser", checkAuthRoute);
 app.use("/callback", callbackroute);

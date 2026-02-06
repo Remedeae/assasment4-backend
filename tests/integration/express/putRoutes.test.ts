@@ -31,7 +31,7 @@ describe("PUT /allUsers/:id", () => {
     jest.spyOn(PlayerModel, "findByIdAndUpdate").mockResolvedValue({
       _id: mockObjectId.toHexString(),
       auth0Id: "999hhh",
-      userName: "Marthas",
+      username: "Marthas",
     } as any);
 
     const res = await request(app)

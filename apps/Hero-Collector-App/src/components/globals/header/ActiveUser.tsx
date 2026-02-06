@@ -8,7 +8,7 @@ export default function ActiveUser() {
   const user: LoggedUser | null = useAuthStore((s) => s.user);
   const isTrueAdmin = useAuthStore((s) => s.isTrueAdmin);
 
-  const displayLoggedIn = user?.userName ?? "Logged out";
+  const displayLoggedIn = user?.username ?? "Logged out";
   const displayAccess = isTrueAdmin ? "Admin" : null;
 
   return (

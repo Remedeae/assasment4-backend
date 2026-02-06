@@ -28,7 +28,7 @@ export default function Header() {
         </button>
       ) : null}
       <button onClick={handleTest}>test refersh</button>
-      <h1>{test?.userName}</h1>
+      <h1>{test?.username}</h1>
     </header>
   );
 }

@@ -11,7 +11,7 @@ const PlayerHeroMongoSchema = new Schema({
 });
 const PlayerMongoSchema = new Schema({
     auth0Id: { type: String, required: true },
-    userName: {
+    username: {
         type: String,
         required: true,
         unique: true,
@@ -19,6 +19,7 @@ const PlayerMongoSchema = new Schema({
         trim: true,
     },
     email: { type: String, required: true },
+    roles: { type: [String], default: ["user"] },
     inventory: new Schema({
         heroes: { type: [String], default: [] },
         items: { type: [String], default: [] },

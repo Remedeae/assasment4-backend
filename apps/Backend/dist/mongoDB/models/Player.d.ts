@@ -91,8 +91,9 @@ export declare const PlayerHeroModel: mongoose.Model<{
 export declare const PlayerModel: mongoose.Model<{
     createdAt: NativeDate;
     auth0Id: string;
-    userName: string;
+    username: string;
     email: string;
+    roles: string[];
     levelsClear: string[];
     team: string[];
     inventory?: {
@@ -104,8 +105,9 @@ export declare const PlayerModel: mongoose.Model<{
 }, mongoose.Document<unknown, {}, {
     createdAt: NativeDate;
     auth0Id: string;
-    userName: string;
+    username: string;
     email: string;
+    roles: string[];
     levelsClear: string[];
     team: string[];
     inventory?: {
@@ -117,8 +119,9 @@ export declare const PlayerModel: mongoose.Model<{
 }, mongoose.DefaultSchemaOptions> & Omit<{
     createdAt: NativeDate;
     auth0Id: string;
-    userName: string;
+    username: string;
     email: string;
+    roles: string[];
     levelsClear: string[];
     team: string[];
     inventory?: {
@@ -134,8 +137,9 @@ export declare const PlayerModel: mongoose.Model<{
 }, mongoose.Schema<any, mongoose.Model<any, any, any, any, any, any, any>, {}, {}, {}, {}, mongoose.DefaultSchemaOptions, {
     createdAt: NativeDate;
     auth0Id: string;
-    userName: string;
+    username: string;
     email: string;
+    roles: string[];
     levelsClear: string[];
     team: string[];
     inventory?: {
@@ -145,8 +149,9 @@ export declare const PlayerModel: mongoose.Model<{
 }, mongoose.Document<unknown, {}, {
     createdAt: NativeDate;
     auth0Id: string;
-    userName: string;
+    username: string;
     email: string;
+    roles: string[];
     levelsClear: string[];
     team: string[];
     inventory?: {
@@ -158,8 +163,9 @@ export declare const PlayerModel: mongoose.Model<{
 }, mongoose.ResolveSchemaOptions<mongoose.DefaultSchemaOptions>> & Omit<{
     createdAt: NativeDate;
     auth0Id: string;
-    userName: string;
+    username: string;
     email: string;
+    roles: string[];
     levelsClear: string[];
     team: string[];
     inventory?: {
@@ -178,8 +184,9 @@ export declare const PlayerModel: mongoose.Model<{
     [x: string]: mongoose.SchemaDefinitionProperty<any, any, mongoose.Document<unknown, {}, {
         createdAt: NativeDate;
         auth0Id: string;
-        userName: string;
+        username: string;
         email: string;
+        roles: string[];
         levelsClear: string[];
         team: string[];
         inventory?: {
@@ -191,8 +198,9 @@ export declare const PlayerModel: mongoose.Model<{
     }, mongoose.ResolveSchemaOptions<mongoose.DefaultSchemaOptions>> & Omit<{
         createdAt: NativeDate;
         auth0Id: string;
-        userName: string;
+        username: string;
         email: string;
+        roles: string[];
         levelsClear: string[];
         team: string[];
         inventory?: {
@@ -209,8 +217,9 @@ export declare const PlayerModel: mongoose.Model<{
 }, {
     createdAt: NativeDate;
     auth0Id: string;
-    userName: string;
+    username: string;
     email: string;
+    roles: string[];
     levelsClear: string[];
     team: string[];
     inventory?: {
@@ -224,8 +233,9 @@ export declare const PlayerModel: mongoose.Model<{
 }>, {
     createdAt: NativeDate;
     auth0Id: string;
-    userName: string;
+    username: string;
     email: string;
+    roles: string[];
     levelsClear: string[];
     team: string[];
     inventory?: {

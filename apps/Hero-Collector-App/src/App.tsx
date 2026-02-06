@@ -8,7 +8,7 @@ import Game from "./pages/Game";
 import GameItems from "./pages/GameItems";
 import Users from "./pages/Users";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuthStore } from "./storage/authStore";
 import { useAdminToggle } from "./storage/adminToggleStore";
 import type { LoggedUserResponse } from "./types/storageTypes";
@@ -17,24 +17,31 @@ import { api } from "../api/axios";
 function App() {
   const setAuth = useAuthStore((s) => s.setAuth);
   const clearAuth = useAuthStore((s) => s.clearAuth);
-  const setAdmin = useAdminToggle((s) => s.setIsAdmin);
+  const setLocalAdmin = useAdminToggle((s) => s.setIsAdmin);
+
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const checkAuth = async () => {
       try {
         const res = await api<LoggedUserResponse>("get", "/loggedUser");
         if (res.user?.roles?.some((r) => r.toLowerCase() === "admin")) {
-          setAdmin(true);
+          setLocalAdmin(true);
         }
-        setAuth(res);
-        console.log(res);
+        if (res.isAuthenticated && res.user) {
+          setAuth(res);
+        } else {
+          clearAuth();
+        }
       } catch {
         clearAuth();
+      } finally {
+        setLoading(false);
       }
     };
     checkAuth();
-  }, [setAuth, clearAuth, setAdmin]);
-
+  }, [setAuth, clearAuth, setLocalAdmin]);
+  if (loading) return <div>Loading...</div>;
   return (
     <>
       <BrowserRouter>

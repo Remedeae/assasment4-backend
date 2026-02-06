@@ -12,8 +12,9 @@ export const InventorySchema = z.object({
 });
 export const PlayerSchema = z.object({
   auth0Id: z.string().min(1),
-  userName: z.string().min(1),
+  username: z.string().min(1),
   email: z.string(),
+  roles: z.array(z.string()),
   inventory: InventorySchema,
   levelsClear: z.array(z.string()), //names/ids for cleared levels - flags system???
   team: z.array(z.string()), //heroId in the inventory/heroes array that are selected

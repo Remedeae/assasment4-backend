@@ -61,8 +61,9 @@ export declare const BOutputHero: z.ZodObject<{
 export type BHeroOutput = z.infer<typeof BOutputHero>;
 export declare const BOutputPlayer: z.ZodObject<{
     auth0Id: z.ZodString;
-    userName: z.ZodString;
+    username: z.ZodString;
     email: z.ZodString;
+    roles: z.ZodArray<z.ZodString>;
     inventory: z.ZodObject<{
         heroes: z.ZodArray<z.ZodString>;
         items: z.ZodArray<z.ZodString>;
@@ -145,8 +146,9 @@ export type BFullPlayerHeroOutput = z.infer<typeof BOutputFullPlayerHero>;
 export declare const BOutputFullPlayer: z.ZodObject<{
     user: z.ZodObject<{
         auth0Id: z.ZodString;
-        userName: z.ZodString;
+        username: z.ZodString;
         email: z.ZodString;
+        roles: z.ZodArray<z.ZodString>;
         inventory: z.ZodObject<{
             heroes: z.ZodArray<z.ZodString>;
             items: z.ZodArray<z.ZodString>;

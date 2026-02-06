@@ -57,8 +57,9 @@ export declare const OutputHero: z.ZodObject<{
 }, z.core.$strip>;
 export declare const OutputPlayer: z.ZodObject<{
     auth0Id: z.ZodString;
-    userName: z.ZodString;
+    username: z.ZodString;
     email: z.ZodString;
+    roles: z.ZodArray<z.ZodString>;
     inventory: z.ZodObject<{
         heroes: z.ZodArray<z.ZodString>;
         items: z.ZodArray<z.ZodString>;
@@ -138,8 +139,9 @@ export declare const OutputFullPlayerHero: z.ZodObject<{
 export declare const OutputFullPlayer: z.ZodObject<{
     user: z.ZodObject<{
         auth0Id: z.ZodString;
-        userName: z.ZodString;
+        username: z.ZodString;
         email: z.ZodString;
+        roles: z.ZodArray<z.ZodString>;
         inventory: z.ZodObject<{
             heroes: z.ZodArray<z.ZodString>;
             items: z.ZodArray<z.ZodString>;
