@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { PlayerModel } from "../../mongoDB/models/Player";
+import { PlayerModel } from "../../mongoDB/models/Player.js";
 import { LoggedUserSchema } from "@heroapp/shared";
-import logger from "../../logger";
+import logger from "../../logger.js";
 const router = Router();
 router.get("", async (req, res, next) => {
     try {

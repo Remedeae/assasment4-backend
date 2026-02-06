@@ -6,7 +6,6 @@ import z from "zod";
 import { InputSpell } from "@heroapp/shared";
 import { deleteByID, updateById } from "../helpers/helpers.js";
 import logger from "../../logger.js";
-import { log } from "node:console";
 
 const router = Router();
 
