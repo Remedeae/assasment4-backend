@@ -1,15 +1,16 @@
 const env = import.meta.env;
+const mode = import.meta.env.MODE;
 
 export const frontendURL =
-  env.MODE === "development"
+  mode === "development"
     ? env.VITE_FRONTEND_URL_DEV
-    : env.MODE === "production"
+    : mode === "production"
       ? env.VITE_FRONTEND_URL_PROD
       : "http://localhost:5173";
 
 export const backendURL =
-  env.MODE === "development"
+  mode === "development"
     ? env.VITE_BACKEND_URL_DEV
-    : env.MODE === "production"
+    : mode === "production"
       ? env.VITE_BACKEND_URL_PROD
       : "http://localhost:3000";
