@@ -7,7 +7,6 @@ import Collection from "./pages/Collection";
 import Game from "./pages/Game";
 import GameItems from "./pages/GameItems";
 import Users from "./pages/Users";
-import { backendURL } from "../api/urls";
 
 import { useEffect, useState } from "react";
 import { useAuthStore } from "./storage/authStore";
@@ -42,8 +41,6 @@ function App() {
     };
     checkAuth();
   }, [setAuth, clearAuth, setLocalAdmin]);
-  console.log("MODE:", import.meta.env.MODE);
-  console.log("Backend URL:", backendURL);
   if (loading) return <div>Loading...</div>;
   return (
     <>

@@ -1,4 +1,4 @@
-export const frontendURL: string =
+/* export const frontendURL: string =
   process.env.MODE === "development"
     ? String(process.env.FRONTEND_URL_DEV)
     : process.env.MODE === "production"
@@ -10,4 +10,4 @@ export const backendURL: string =
     ? String(process.env.BACKEND_URL_DEV)
     : process.env.MODE === "production"
       ? String(process.env.BACKEND_URL_PROD)
-      : "http://localhost:3000";
+      : "http://localhost:3000"; */

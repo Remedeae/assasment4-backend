@@ -5,4 +5,5 @@ export * from "./types/base/playerSchema.js";
 export * from "./types/input.js";
 export * from "./types/output.js";
 export * from "./types/authRes.js";
+export * from "./variables/urls.js";
 export { z } from "zod";

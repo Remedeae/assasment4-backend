@@ -17,7 +17,7 @@ import loginRoute from "./routes/auth/login.js";
 import callbackroute from "./routes/auth/callback.js";
 import playGameRoutes from "./routes/user/playGameRoutes.js";
 import userRoutes from "./routes/user/userRoutes.js";
-import { frontendURL, backendURL } from "./variables/urls.js";
+import { frontendURL, backendURL } from "@heroapp/shared";
 const isTest = process.env.JEST_WORKER_ID !== undefined;
 const corsOptions = {
     origin: [frontendURL],

@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { Router } from "express";
-import { frontendURL } from "../../variables/urls.js";
+import { frontendURL } from "@heroapp/shared";
 
 const router = Router();
 

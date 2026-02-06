@@ -1,5 +1,5 @@
 import axios, { type Method } from "axios";
-import { backendURL } from "./urls";
+import { backendURL } from "@heroapp/shared";
 import { ApiError } from "./errorHandler";
 
 export const api = async <T>(
