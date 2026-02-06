@@ -1,4 +1,4 @@
-const dev = true;
+const dev = false;
 export const frontendURL = dev
     ? "http://localhost:5173"
     : "https://heroapp-production.up.railway.app";
