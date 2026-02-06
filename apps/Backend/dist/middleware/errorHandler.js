@@ -1,4 +1,4 @@
-import logger from "../logger";
+import logger from "../logger.js";
 export class HttpError extends Error {
     constructor(status, message, details) {
         super(message);
