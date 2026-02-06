@@ -12,4 +12,4 @@ export const backendURL =
     ? env.VITE_BACKEND_URL_DEV
     : env.VITE_MODE === "production"
       ? env.VITE_BACKEND_URL_PROD
-      : "http://localhost:3000";
+      : "https://backend-production-26ed.up.railway.app";
