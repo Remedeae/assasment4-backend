@@ -8,6 +8,7 @@ export const mockUser = {
   username: "Maya",
   auth0Id: "auth0|333",
   email: "m@b.com",
+  roles: ["admin", "player"],
   inventory: {
     heroes: [],
     items: [],

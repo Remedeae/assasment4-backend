@@ -27,7 +27,7 @@ import { mockObjectId } from "../mockData";
 
 //user-------------
 describe("PUT /allUsers/:id", () => {
-  test("Updates a user based in _id, zod validates and strips", async () => {
+  test("Updates a user based on _id, zod validates and strips", async () => {
     jest.spyOn(PlayerModel, "findByIdAndUpdate").mockResolvedValue({
       _id: mockObjectId.toHexString(),
       auth0Id: "999hhh",

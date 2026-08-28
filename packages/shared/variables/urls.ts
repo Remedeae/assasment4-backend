@@ -1,4 +1,4 @@
-const dev = true;
+export const dev = true;
 
 export const frontendURL = dev
   ? "http://localhost:5173"

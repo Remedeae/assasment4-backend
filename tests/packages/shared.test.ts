@@ -1,11 +1,15 @@
-import { frontendURL, backendURL } from "../../packages/shared/variables/url";
+import {
+  frontendURL,
+  backendURL,
+  dev,
+} from "../../packages/shared/variables/urls";
 
-test("test that back/frontend URLS doesn't lead to localhost", () => {
-  expect(frontendURL).not.toBe("http://localhost:5173");
-  expect(backendURL).not.toBe("http://localhost:3000");
-});
-
-test("Test if back/frontend URLs leads to railway", () => {
-  expect(frontendURL).toMatch(".up.railway.app");
-  expect(backendURL).toMatch(".up.railway.app");
+test("if dev is TRUE, back/frontend URL leads to local host, otherwise railway URLs are used", () => {
+  if (dev) {
+    expect(frontendURL).toBe("http://localhost:5173");
+    expect(backendURL).toBe("http://localhost:3000");
+  } else {
+    expect(frontendURL).toMatch(".up.railway.app");
+    expect(backendURL).toMatch(".up.railway.app");
+  }
 });

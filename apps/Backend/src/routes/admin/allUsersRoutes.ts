@@ -40,7 +40,7 @@ router.delete("/:id", async (req, res, next) => {
     });
     res
       .status(200)
-      .json({ message: `User ${deleted.userName} successfully deleted` });
+      .json({ message: `User ${deleted.username} successfully deleted` });
   } catch (error) {
     next(error);
   }
@@ -59,7 +59,7 @@ router.put("/:id", async (req, res, next) => {
     );
     logger.info("User has successfully been updated", updatedUser);
     res.status(200).send({
-      message: `User ${updatedUser?.userName} has successfully been updated.`,
+      message: `User ${updatedUser?.username} has successfully been updated.`,
     });
   } catch (error) {
     next(error);

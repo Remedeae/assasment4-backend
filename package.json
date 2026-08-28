@@ -1,7 +1,9 @@
 {
   "devDependencies": {
     "@sonar/scan": "^4.3.4",
+    "@types/jest": "^30.0.0",
     "@types/supertest": "^6.0.3",
+    "jest": "^30.5.0",
     "supertest": "^7.2.2"
   },
   "private": true,
@@ -16,7 +18,6 @@
   },
   "type": "module",
   "dependencies": {
-    "@types/jest": "^30.0.0",
-    "ts-jest": "^29.4.6"
+    "ts-jest": "^29.4.12"
   }
 }
