@@ -1,0 +1,50 @@
+@use "../variables" as *;
+
+.frame {
+  display: grid;
+  grid-template-columns: 3rem 1fr 3rem;
+  grid-template-rows: 1fr 1fr;
+  position: absolute;
+  width: 100%;
+  height: $nav-height;
+  z-index: 0;
+  pointer-events: none;
+
+  & img {
+    height: calc($nav-height * 0.5);
+    width: auto;
+  }
+
+  & .border-top {
+    max-width: 15%;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
+    align-self: start;
+  }
+
+  & .top-left-corner {
+    rotate: 90deg;
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  & .top-rigth-corner {
+    rotate: 180deg;
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+  }
+  & .bottom-left-corner {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: end;
+  }
+  & .bottom-right-corner {
+    rotate: -90deg;
+    grid-column: 3;
+    grid-row: 2;
+    align-self: end;
+    justify-self: end;
+  }
+}

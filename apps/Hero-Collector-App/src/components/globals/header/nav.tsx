@@ -14,9 +14,6 @@ export default function Nav() {
     <nav>
       <ul>
         <li>
-          <Link to="/home">Home</Link>
-        </li>
-        <li>
           <Link to={`/collection/${user?.auth0Id}`}>Collection</Link>
         </li>
         <li>

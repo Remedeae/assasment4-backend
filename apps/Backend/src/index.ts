@@ -41,7 +41,9 @@ app.use(express.json());
 app.use(cors(corsOptions));
 
 app.get("/", (req, res) => {
-  const url = req.oidc.isAuthenticated() ? `${frontendURL}/home` : frontendURL;
+  const url = req.oidc.isAuthenticated()
+    ? `${frontendURL}/collection/${req.oidc.user?.sub}`
+    : frontendURL;
   res.redirect(url);
 });
 

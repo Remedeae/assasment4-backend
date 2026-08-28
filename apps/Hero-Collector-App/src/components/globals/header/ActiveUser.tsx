@@ -13,9 +13,9 @@ export default function ActiveUser() {
 
   return (
     <div className="activeUser">
-      <h2>
+      <h4>
         {displayAccess} {firstLetterToUpperCase(displayLoggedIn)}
-      </h2>
+      </h4>
       {user ? <LogoutButton /> : <LoginButton />}
     </div>
   );

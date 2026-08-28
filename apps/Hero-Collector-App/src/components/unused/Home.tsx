@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import NoLogin from "../components/globals/noLogin";
-import { useAuthStore } from "../storage/authStore";
-import { useAdminToggle } from "../storage/adminToggleStore";
+import NoLogin from "../globals/noLogin";
+import { useAuthStore } from "../../storage/authStore";
+import { useAdminToggle } from "../../storage/adminToggleStore";
 
 export default function Home() {
   const user = useAuthStore((s) => s.user);

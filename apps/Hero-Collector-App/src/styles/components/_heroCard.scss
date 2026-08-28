@@ -4,7 +4,7 @@
   flex-wrap: wrap;
   & > * {
     width: 48%;
-    padding: calc((50-width) / 2);
+    padding: 1%;
   }
   & h4,
   h5 {

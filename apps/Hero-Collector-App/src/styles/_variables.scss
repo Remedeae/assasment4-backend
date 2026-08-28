@@ -1,10 +1,28 @@
-$font-main: helvetica;
-$font-side: helvetica;
+@font-face {
+  font-family: "PowerOfDragon";
+  src: url("../assets//Fonts/power-of-dragon/PowerofDragon-Regular.ttf")
+    format("truetype");
+}
+
+@font-face {
+  font-family: "DragonFire";
+  src: url("../assets/Fonts/dragon-fire/Dragon Fire.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Tropic";
+  src: url("../assets/Fonts/tropic-fantasy/Tropic Fantasy.ttf")
+    format("truetype");
+}
+$font-titel: "PowerOfDragon";
+$font-header: "DragonFire";
+$font-paragraph: "Tropic";
 
 $color-main: #000;
 $color-accent: #133b09;
 $color-light: #fff;
 $color-medium: #33983f;
 
-$font-size: 1rem;
-$line-height: 1,2%;
+$font-size: 1.8rem;
+$line-height: 1.2;
+
+$nav-height: 5rem;

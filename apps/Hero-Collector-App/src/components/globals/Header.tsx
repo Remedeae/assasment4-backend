@@ -2,6 +2,7 @@ import ActiveUser from "./header/ActiveUser";
 import Nav from "./header/nav";
 import { useAdminToggle } from "../../storage/adminToggleStore";
 import { useAuthStore } from "../../storage/authStore";
+import Frame from "./Frame";
 
 export default function Header() {
   const isTrueAdmin = useAuthStore((s) => s.isTrueAdmin);
@@ -10,14 +11,15 @@ export default function Header() {
 
   return (
     <header>
+      <Frame />
       <Nav />
-      <ActiveUser />
       {isTrueAdmin ? (
         <button className="admintoggle" onClick={() => setIsAdmin(!isAdmin)}>
           Swap to {!isAdmin && "Admin"}
           {isAdmin && "User"} view
         </button>
       ) : null}
+      <ActiveUser />
     </header>
   );
 }

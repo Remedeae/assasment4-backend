@@ -6,7 +6,7 @@ const router = Router();
 router.get("", (req, res) => {
   res.oidc.login({
     authorizationParams: {
-      redirect_uri: backendURL,
+      redirect_uri: `${backendURL}/callback`,
       response_type: "code",
     },
   });

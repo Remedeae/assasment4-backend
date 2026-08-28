@@ -63,84 +63,193 @@ html {
   scroll-behavior: smooth;
 }
 
-* {
-  font: helvetica;
-  font-size: 1rem;
-  line-height: 1, 2%;
-  background-color: #fff;
-  color: #000;
+@font-face {
+  font-family: "PowerOfDragon";
+  src: url("../assets//Fonts/power-of-dragon/PowerofDragon-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "DragonFire";
+  src: url("../assets/Fonts/dragon-fire/Dragon Fire.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Tropic";
+  src: url("../assets/Fonts/tropic-fantasy/Tropic Fantasy.ttf") format("truetype");
+}
+body {
+  display: flex;
+  justify-content: center;
 }
 
-body > * {
-  width: 96%;
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1900px;
+}
+
+* {
+  font-family: "DragonFire";
+  font-size: 1.8rem;
+  line-height: 1.2;
+  color: #000;
+  text-decoration: none;
+}
+
+p,
+em {
+  font-family: "Tropic";
+  font-size: 0.81rem;
+  padding: 2%;
+}
+
+em {
+  font-size: 0.864rem;
+  padding: 0;
+}
+
+sup {
+  font-family: "Tropic";
+  font-size: 0.36rem;
+  padding: 0;
+}
+
+h1 {
+  font-size: 3.42rem;
+  padding: 1rem;
+}
+
+h3 {
+  font-size: 1.44rem;
+}
+
+h4 {
+  font-size: 1.08rem;
 }
 
 button {
+  font-family: "Tropic";
+  font-size: 1.08rem;
+  min-height: 42px;
+  padding: 0.72rem;
+  margin: 1%;
   border: none;
   background-image: linear-gradient(#133b09, #33983f);
   color: #fff;
-  border-radius: 1rem;
+  border-radius: 1.8rem;
 }
-button :hover {
+button:hover {
   border: #000;
-  box-shadow: 1rem, 2rem, 1rem #33983f;
+  box-shadow: 0.2rem 0.3rem 0.2rem #133b09;
 }
 
 li {
   list-style: none;
-  padding: 3%;
 }
 
 .login {
   display: flex;
   flex-direction: column;
+  text-align: center;
+  padding: 1.2%;
 }
-.login div {
-  display: inherit;
+.login p {
+  max-width: 80%;
+  align-self: center;
 }
-.login .login i {
-  font-size: 0.5rem;
+.login h1 {
+  font-family: "PowerOfDragon";
+}
+.login span {
+  font-family: "PowerOfDragon";
+  font-size: 4.14rem;
+}
+.login .D {
+  font-feature-settings: "ss15" 1;
+}
+.login > div {
+  display: flex;
+  flex-direction: column;
+}
+.login i {
+  font-size: 0.9rem;
   align-items: start;
 }
 
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+}
 .home ul {
   display: flex;
-  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 .home li {
-  font-size: 2rem;
+  padding: 3%;
+}
+.home a {
+  font-size: 2.16rem;
   font-weight: bold;
 }
 
 header {
-  display: flex;
-  justify-content: end;
-}
-header > * {
-  padding: 0 10%;
+  display: grid;
+  grid-template-columns: 40% 1fr 40%;
+  grid-template-rows: 1fr 1fr;
+  width: 100vw;
+  min-height: 5rem;
+  background-color: #fff;
+  position: relative;
 }
 header nav {
-  justify-self: start;
-  display: flex;
-  flex-direction: row;
+  grid-column: 1/2;
+  grid-row: 1/3;
+  justify-items: center;
+  align-content: center;
 }
 header ul {
-  display: inherit;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  max-width: 70%;
 }
 header li {
-  font-weight: bold;
-  padding: 0 10%;
+  padding: 0 2%;
+  text-align: center;
+  line-height: 0;
+}
+header a {
+  font-size: 1.08rem;
+  text-decoration: none;
 }
 header .activeUser {
+  grid-column: 3/4;
+  grid-row: 1/3;
   display: flex;
-  flex-direction: column;
-  align-items: end;
+  justify-content: space-around;
+  align-items: center;
+  min-width: 30vw;
+  max-height: 5rem;
 }
-header .activeUser div {
-  display: inherit;
+header .activeUser * {
+  font-size: 0.9rem;
+  min-height: 42px;
 }
 header .admintoggle {
-  background-color: linear-gradient(#909090, purple);
+  grid-column: 2/3;
+  grid-row: 2/3;
+  justify-self: center;
+  width: 50%;
+  height: 50%;
+  background-image: linear-gradient(purple, pink);
+  font-size: 0.486rem;
+  padding: 0.2rem;
+}
+header .admintoggle:hover {
+  box-shadow: 0.2rem 0.3rem 0.2rem rgb(107, 42, 153);
 }
 
 .gameitems {
@@ -176,7 +285,7 @@ header .admintoggle {
 }
 .herocard > * {
   width: 48%;
-  padding: 25-width;
+  padding: 1%;
 }
 .herocard h4,
 .herocard h5 {
@@ -198,7 +307,7 @@ header .admintoggle {
 }
 .itemCard li {
   width: 48%;
-  padding: 25-width;
+  padding: 1%;
 }
 .itemCard .fullRow {
   width: 100%;
@@ -210,8 +319,14 @@ header .admintoggle {
 }
 
 .collection {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  height: calc(100vh - 5rem);
+  grid-template-columns: 1fr 45%;
+  grid-template-rows: 20% 1fr 20%;
+  padding: 1.5%;
+}
+.collection > * {
+  min-height: 0;
 }
 .collection header {
   display: flex;
@@ -224,4 +339,49 @@ header .admintoggle {
 }
 .collection__team {
   width: 100%;
+}
+
+.frame {
+  display: grid;
+  grid-template-columns: 3rem 1fr 3rem;
+  grid-template-rows: 1fr 1fr;
+  position: absolute;
+  width: 100%;
+  height: 5rem;
+  z-index: 0;
+  pointer-events: none;
+}
+.frame img {
+  height: 2.5rem;
+  width: auto;
+}
+.frame .border-top {
+  max-width: 15%;
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+  align-self: start;
+}
+.frame .top-left-corner {
+  rotate: 90deg;
+  grid-column: 1;
+  grid-row: 1;
+}
+.frame .top-rigth-corner {
+  rotate: 180deg;
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: end;
+}
+.frame .bottom-left-corner {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: end;
+}
+.frame .bottom-right-corner {
+  rotate: -90deg;
+  grid-column: 3;
+  grid-row: 2;
+  align-self: end;
+  justify-self: end;
 }/*# sourceMappingURL=index.css.map */

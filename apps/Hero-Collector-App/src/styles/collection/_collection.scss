@@ -1,7 +1,14 @@
 @use "../variables" as *;
 .collection {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  height: calc(100vh - $nav-height);
+  grid-template-columns: 1fr 45%;
+  grid-template-rows: 20% 1fr 20%;
+  padding: 1.5%;
+  & > * {
+    min-height: 0;
+  }
+
   & header {
     display: flex;
   }
