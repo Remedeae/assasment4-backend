@@ -1,24 +1,57 @@
 @use "../variables" as *;
 .collection {
   display: grid;
+  min-width: 100%;
   height: calc(100vh - $nav-height);
-  grid-template-columns: 1fr 45%;
+  grid-template-columns: 40% 1fr;
   grid-template-rows: 20% 1fr 20%;
   padding: 1.5%;
-  & > * {
-    min-height: 0;
-  }
 
-  & header {
+  & .header {
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    grid-column: 1/3;
+    grid-row: 1/2;
+    & h1 {
+      text-align: center;
+      padding: 0;
+    }
   }
-  &__displayHero {
-    width: 60%;
+  & .searchBar {
+    display: flex;
+    align-self: end;
+    grid-column: 1/3;
+    grid-row: 1/2;
+    height: calc($font-size * 1);
+    & input,
+    p {
+      font-size: calc($font-size * 0.4);
+      padding: 0.5%;
+    }
   }
-  &__heroes {
-    width: 40%;
+  & .displayHero {
+    grid-column: 2/ 3;
+    grid-row: 2/4;
+    width: 100%;
   }
-  &__team {
+  & .heroes {
+    grid-column: 1/ 2;
+    grid-row: 2/3;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+    overflow-y: scroll;
+    & li {
+      width: calc($font-size * 4);
+      height: calc($font-size * 1.6);
+      margin: 0.3rem;
+    }
+  }
+  & .team {
+    grid-column: 1/ 2;
+    grid-row: 3/4;
     width: 100%;
   }
 }

@@ -41,17 +41,17 @@ export default function PlayerCollection({ auth0Id }: ID) {
 
   return (
     <div className="collection">
-      <div className="collection__header">
+      <div className="header">
         <h1>Collection</h1>
-        <div>
-          <p>?</p>
-          <input
-            type="text"
-            placeholder="Search heroes..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
+      </div>
+      <div className="searchBar">
+        <p>?</p>
+        <input
+          type="text"
+          placeholder="Search heroes..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
       </div>
       {heroes.length === 0 && (
         <h5>
@@ -84,7 +84,7 @@ export default function PlayerCollection({ auth0Id }: ID) {
           />
         )}
       </div>
-      <div>
+      <div className="team">
         <h2>Team</h2>
         {user && user?.team.length > 0 && (
           <ul>
