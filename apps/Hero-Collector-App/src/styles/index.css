@@ -118,7 +118,7 @@ sup {
 }
 
 h1 {
-  font-size: 3.42rem;
+  font-size: 3.24rem;
   padding: 1rem;
 }
 
@@ -128,6 +128,10 @@ h3 {
 
 h4 {
   font-size: 1.08rem;
+}
+
+h5 {
+  font-size: 0.72rem;
 }
 
 button {
@@ -284,16 +288,65 @@ header .admintoggle:hover {
 }
 
 .herocard {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 2rem repeat(2, auto) 1rem 12%;
+  height: 100%;
 }
 .herocard > * {
-  width: 48%;
+  width: 100%;
   padding: 1%;
 }
-.herocard h4,
-.herocard h5 {
+.herocard h3 {
+  grid-column: 1/3;
+  grid-row: 1/2;
+  justify-self: center;
+  text-align: center;
+}
+.herocard li,
+.herocard strong,
+.herocard p {
+  font-size: 0.72rem;
+  line-height: 0.96;
+  padding: 0.5%;
+}
+.herocard .description {
+  grid-column: 1/2;
+  grid-row: 2/3;
   width: 100%;
+}
+.herocard .combat {
+  grid-column: 1/2;
+  grid-row: 3/6;
+}
+.herocard img {
+  grid-column: 2/3;
+  grid-row: 2/4;
+}
+.herocard h5 {
+  grid-column: 2/3;
+  grid-row: 4/5;
+  text-align: center;
+  align-self: center;
+}
+.herocard .startEqip {
+  grid-column: 2/3;
+  grid-row: 5/6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.herocard .startEqip ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+}
+.herocard .startEqip ul li {
+  padding-right: 0.4rem;
+}
+.herocard .startEqip strong {
+  text-align: center;
 }
 
 .heroCardMini {
@@ -343,14 +396,14 @@ header .admintoggle:hover {
   min-width: 100%;
   height: calc(100vh - 5rem);
   grid-template-columns: 40% 1fr;
-  grid-template-rows: 20% 1fr 20%;
+  grid-template-rows: 16% 1.08rem 1fr 20%;
   padding: 1.5%;
 }
 .collection .header {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  grid-column: 1/3;
+  grid-column: 1/2;
   grid-row: 1/2;
 }
 .collection .header h1 {
@@ -360,9 +413,9 @@ header .admintoggle:hover {
 .collection .searchBar {
   display: flex;
   align-self: end;
-  grid-column: 1/3;
-  grid-row: 1/2;
-  height: 1.8rem;
+  grid-column: 1/2;
+  grid-row: 2/3;
+  height: 1.08rem;
 }
 .collection .searchBar input,
 .collection .searchBar p {
@@ -371,12 +424,12 @@ header .admintoggle:hover {
 }
 .collection .displayHero {
   grid-column: 2/3;
-  grid-row: 2/4;
+  grid-row: 1/5;
   width: 100%;
 }
 .collection .heroes {
   grid-column: 1/2;
-  grid-row: 2/3;
+  grid-row: 3/4;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -390,8 +443,9 @@ header .admintoggle:hover {
 }
 .collection .team {
   grid-column: 1/2;
-  grid-row: 3/4;
+  grid-row: 4/5;
   width: 100%;
+  text-align: center;
 }
 
 .frame {

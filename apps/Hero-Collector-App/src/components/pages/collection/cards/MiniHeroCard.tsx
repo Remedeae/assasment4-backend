@@ -15,7 +15,7 @@ export default function MiniHeroCard(props: HeroCardProps) {
       />
       <div>
         <h5>{props.name}</h5>
-        <h4>{props.title}</h4>
+        <h4>- {props.title} -</h4>
       </div>
     </div>
   );
